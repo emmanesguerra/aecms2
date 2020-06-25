@@ -60,3 +60,18 @@ nav {
         }
     }
 }
+
+.admin-footer {
+    background-color: $brown-dark;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: .35rem;
+    
+    p {
+        font-size: 11px;
+        margin: 0;
+    }
+}

@@ -11,6 +11,12 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', '\Core\Controller\AEHomeController@index')->name('admin.home');
         Route::post('/logout', '\Core\Controller\AELoginController@logout')->name('admin.logout');
+
+        Route::prefix('settings')->group(function () {
+            Route::get('/', '\Core\Controller\Setting\SettingController@index')->name('setting.index');
+            Route::post('/', '\Core\Controller\Setting\SettingController@store')->name('setting.store');
+        });
+        
     });
     
 });

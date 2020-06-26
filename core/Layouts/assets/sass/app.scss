@@ -1,0 +1,135 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+nav {
+    background-color: $brown-dark;
+    
+    a.navbar-brand, a.nav-link {
+        color: orange;
+    }
+}
+
+.btn-primary {
+    background-color: orange;
+    color: #fff;
+}
+
+.left-panel {
+    
+    .card {
+        border: 1px solid $brown-light;
+        border-radius: 0;
+    
+        .card-header {
+            background-color: $brown-light;
+            border-radius: 0;
+            color: #fff;
+            padding: .5rem 1.25rem;
+        }
+    
+        .card-body {
+            padding: 0;
+            
+            .admin-menu {
+                padding: 0;
+                margin: 0;
+                
+                li {
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    border-bottom: 1px solid $brown-light;
+                    
+                    a {
+                        margin: .25rem 0;
+                        padding: 0 1.25rem;
+                        color: #000;
+                    }
+                }
+                
+                li:last-child {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+.main-panel {
+    margin-bottom: 3rem;
+    
+    .card {
+        border: 1px solid $brown-light;
+        border-radius: 0;
+    
+        .card-header {
+            background-color: $brown-light;
+            border-radius: 0;
+            color: #fff;
+            padding: .5rem 1.25rem;
+        }
+    }
+}
+
+.admin-footer {
+    background-color: $brown-dark;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: .35rem;
+    
+    p {
+        font-size: 11px;
+        margin: 0;
+    }
+}
+
+.ae-input-field {
+    border: 1px solid $brown-light;
+    border-radius: 0;
+    color: #000;
+    
+    .vue-treeselect__control {
+        border: 0;
+        
+        input {
+            color: #000;
+        }
+        
+        .vue-treeselect__placeholder {
+            color: #bdbdbd
+        }
+    }
+}
+   
+.ae-input-field:focus {
+    box-shadow: none;
+    border-color: $orange;
+} 
+
+.vue-treeselect--focused {
+    border-color: $orange;
+    
+    .vue-treeselect__control {
+        border: 0;
+    }
+}
+
+.vue-treeselect--focused:not(.vue-treeselect--open) .vue-treeselect__control {
+        border: 0 !important;
+        -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+::placeholder {
+    color: #bdbdbd !important;
+}

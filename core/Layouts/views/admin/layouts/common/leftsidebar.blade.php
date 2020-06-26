@@ -1,4 +1,4 @@
-<div class="col-md-3 left-panel">
+<section class="col-md-3 left-panel">
     <div class="card mb-4">
         <div class="card-header">Ae Menu</div>
 
@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card mb-4">
         <div class="card-header">User Menu</div>
 
         <div class="card-body">
@@ -28,4 +28,4 @@
             </ul>
         </div>
     </div>
-</div>
+</section>

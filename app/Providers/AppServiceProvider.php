@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
+use Core\Model\SystemConfig;
+use Core\Observers\SystemConfigObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        
+        SystemConfig::observe(SystemConfigObserver::class);
     }
 }

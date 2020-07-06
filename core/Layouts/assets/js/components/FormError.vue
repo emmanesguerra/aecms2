@@ -1,13 +1,13 @@
 <template>
-    <span class="help-block">
-        <span v-for="error in errors">
+    <span class="help-block text-danger">
+        <small v-for="error in errors">
             <span v-if="isString(error)">
                 {{ error }}
             </span>
             <span v-else  v-for="err in error">
                 {{ err }} <br />
             </span>
-        </span>    
+        </small>    
     </span>
 </template>
 

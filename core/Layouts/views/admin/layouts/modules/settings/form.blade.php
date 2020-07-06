@@ -8,8 +8,8 @@
             <form autocomplete="off" v-on:submit.prevent="onSubmit" id="settingsform">
                 <settings-form 
                     v-bind:info='{{ json_encode($data['model']) }}'
-                    v-bind:timezones='{{ json_encode($data['timezones']) }}'
-                    v-bind:tags='{{ json_encode($data['tags']) }}'>
+                    v-bind:settingindexurl="'{{ route('setting.index') }}'"
+                    v-bind:timezones='{{ json_encode($data['timezones']) }}' >
                 </settings-form>
             </form>
         </div>

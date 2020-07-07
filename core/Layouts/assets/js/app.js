@@ -8,6 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import Notifications from 'vue-notification';
+
+Vue.use(Notifications);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -34,3 +38,14 @@ Vue.component('settings-form', require('./components/Settings/Form.vue').default
 const app = new Vue({
     el: '#app',
 });
+
+
+window.processnoti = function (group, type, title, text) {
+    
+    Vue.notify({
+      group: group,
+      type: type,
+      title: title,
+      text: text
+    });
+}

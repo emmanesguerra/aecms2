@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "@riophae/vue-treeselect": "^0.4.0"
+        "@riophae/vue-treeselect": "^0.4.0",
+        "vue-notification": "^1.3.20"
     }
 }

@@ -139,16 +139,16 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6">
-                    <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-primary">Submit</button>
+                    <button data-toggle="modal" data-target="#settingsModal" type="button" class="btn btn-primary">Submit</button>
                     <button @click="reset" type="button" class="btn btn-secondary">Clear</button>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Continue Posting</h5>
+                        <h5 class="modal-title" id="settingsModalLabel">Continue Posting</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -197,10 +197,14 @@
                 var vm = this;     
                 axios.post(this.settingindexurl,this.mdata).then(function (response) {
                     vm.errors = {};
+                    processnoti('noti', 'success', '', response.data.message);
+                    $('#settingsModal').modal('hide');
                 }).catch(function (error) {
                     if (error.response) {         
                         vm.errors = error.response.data.errors; 
                     }
+                    $('#settingsModal').modal('hide');
+                    processnoti('noti', 'error', '', error.response.data.message);
                 });
             }
         }

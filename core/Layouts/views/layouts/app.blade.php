@@ -75,6 +75,8 @@
         <main class="py-4">
             @yield('content')
         </main>
+        
+        <notifications  position="bottom right" group="noti" />
     </div>
     
     @include('admin.layouts.common.footer')

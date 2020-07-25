@@ -16,6 +16,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/', '\Core\Controller\Setting\SettingController@index')->name('setting.index');
             Route::post('/', '\Core\Controller\Setting\SettingController@store')->name('setting.store');
         });
+
+        Route::prefix('users')->group(function () {
+            Route::get('/', '\Core\Controller\User\UserController@index')->name('user.index');
+            Route::get('/create', '\Core\Controller\User\UserController@create')->name('user.create');
+            Route::post('/', '\Core\Controller\User\UserController@store')->name('user.store');
+        });
         
     });
     

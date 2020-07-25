@@ -35,7 +35,7 @@ class SettingController extends Controller
             'email_bcc' => SystemConfigLibrary::retrieve('email_bcc'),
         ];
         
-        return view('admin.layouts.modules.settings.form')->with(compact('data'));
+        return view('admin.layouts.modules.setting.form')->with(compact('data'));
     }
 
     /**

@@ -2,9 +2,9 @@
 
 @section('module-content')
 <!-- Main content -->
-<section class="col-md-9 main-panel">
+<section class="main-panel">
     <div class="row">
-        <div class="card">
+        <div class="card" style="width: 100%">
             <div class="card-header">Settings</div> 
 
             <div class="card-body">

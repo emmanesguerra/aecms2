@@ -1,4 +1,4 @@
-<section class="col-md-3 left-panel">
+<section class="left-panel">
     <div class="card mb-3">
         <div class="card-header">Ae Menu</div>
 

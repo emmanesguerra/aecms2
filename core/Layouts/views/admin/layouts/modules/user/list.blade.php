@@ -2,7 +2,7 @@
 
 @section('module-content')
 <!-- Main content -->
-<section class="col-md-9 main-panel">
+<section class="main-panel">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
@@ -23,22 +23,13 @@
                                     <th class="text-nowrap">Last Name</th>
                                     <th>Email</th>
                                     <th class="text-nowrap">User Type</th>
+                                    <th class="text-nowrap">Date Created</th>
+                                    <th class="text-nowrap">Date Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>First Name</th>
-                                    <th>Middle Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>User Type</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

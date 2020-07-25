@@ -24,7 +24,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'model' => [],
+            'timezones' => []
+        ];
+        return view('admin.layouts.modules.user.form')->with(compact('data'));
     }
 
     /**

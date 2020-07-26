@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Validations;
+namespace Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

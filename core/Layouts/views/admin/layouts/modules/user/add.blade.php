@@ -1,0 +1,119 @@
+@extends('admin.home')
+
+@section('module-content')
+<!-- Main content -->
+<section class="main-panel">
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">Create new user</div> 
+            
+            @if (session('status-success'))
+            <div class="card-body">
+                <div class="alert alert-success text-left">
+                    {{ session('status-success') }}
+                </div>
+            </div>
+            @endif
+            
+            @if (session('status-failed'))
+            <div class="card-body">
+                <div class="alert alert-danger text-left">
+                    {{ session('status-failed') }}
+                </div>
+            </div>
+            @endif
+            
+            @if (count($errors) > 0)
+            <div class="card-body">
+                <div class="alert alert-danger text-left">
+                    <strong>Whoops!</strong> There were problems with the input: <br />
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+
+            <div class="card-body">
+                <form autocomplete="off" id="settingsform" action="{{ route('user.store') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-8">
+                            <div class="col-sm-12">
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-4">
+                                        <label class="@error('firstname') text-danger @enderror" for="firstname">First name *</label>
+                                        <input type="text" class="form-control ae-input-field @error('firstname') is-invalid @enderror " name="firstname" value="{{ old('firstname') }}" id="firstname" placeholder="First name">
+                                        @error('firstname') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                    <div  class="form-group  col-sm-4">
+                                        <label class="@error('middlename') text-danger @enderror" for="middlename">Middle name</label>
+                                        <input type="text" class="form-control ae-input-field @error('middlename') is-invalid @enderror " name="middlename" value="{{ old('middlename') }}" id="middlename" placeholder="Middle name">
+                                        @error('middlename') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                    <div  class="form-group  col-sm-4">
+                                        <label class="@error('lastname') text-danger @enderror" for="lastname">Last name</label>
+                                        <input type="text" class="form-control ae-input-field @error('lastname') is-invalid @enderror " name="lastname" value="{{ old('lastname') }}" id="lastname" placeholder="Last name">
+                                        @error('lastname') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-6">
+                                        <label class="@error('email') text-danger @enderror" for="email">Email *</label>
+                                        <input type="text" class="form-control ae-input-field @error('email') is-invalid @enderror " name="email" value="{{ old('email') }}" id="email" placeholder="Email">
+                                        @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                    <div  class="form-group  col-sm-6">
+                                        <label class="@error('usertype') text-danger @enderror" for="usertype">User Type *</label>
+                                        @error('usertype') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-6">
+                                        <label class="@error('password') text-danger @enderror" for="password">Password *</label>
+                                        <input type="text" class="form-control ae-input-field @error('password') is-invalid @enderror " name="password" value="{{ old('password') }}" id="password" placeholder="Password">
+                                        <p class="form-text text-info small">
+                                            Your password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.
+                                        </p>
+                                        @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                    <div  class="form-group  col-sm-6">
+                                        <label class="@error('password_confirmation') text-danger @enderror" for="password_confirmation">Re Password *</label>
+                                        <input type="text" class="form-control ae-input-field @error('password_confirmation') is-invalid @enderror " name="password_confirmation" value="{{ old('password_confirmation') }}" id="password_confirmation" placeholder="Re-type Password">
+                                        @error('password_confirmation') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button data-toggle="modal" data-target="#settingsModal" type="button" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary">Clear</button>
+                        </div>
+                        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="settingsModalLabel">Continue Posting</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Continue saving records?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <input  type="submit" class="btn btn-primary" value="Save changes" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection

@@ -1,12 +1,12 @@
 <?php
 
-namespace Core\Controller\Setting;
+namespace Core\Http\Controller\Setting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Core\Library\Modules\SystemConfigLibrary;
 use Core\Library\DropdownOptions;
-use Core\Validations\StoreSettingsRequest;
+use Core\Http\Requests\StoreSettingsRequest;
 
 class SettingController extends Controller
 {

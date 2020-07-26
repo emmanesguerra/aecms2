@@ -1,46 +1,20 @@
 <?php
 
-namespace Core\Controller;
+namespace Core\Http\Controller\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-use Core\Model\Page;
-
-class AEController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($params = null)
-    {
-        $url = '/' . $params;
-        
-        $page = Page::where('url', $url)->first();
-        
-        if($page) {
-            
-            $data = array(
-                'css' => $page->css,
-                'js' => $page->javascripts
-            );
-            
-            foreach($page->panels as $panel) {
-                if($panel->html_template) {
-                    $data[$panel->pivot->tags] = $panel->html_template;
-                } else {
-                    $module = new $panel->module_name;
-                    $fnname = $panel->fn_name;
-                    $data[$panel->pivot->tags] = $module->$fnname();
-                }
-            }
-            
-            return view('templates.' . str_replace('.blade.php', "", $page->template), $data);
-        } else {
-            echo 'not found';
-        }
+    public function index()
+    {        
+        return view('admin.layouts.modules.user.list');
     }
 
     /**
@@ -50,7 +24,11 @@ class AEController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'model' => [],
+            'timezones' => []
+        ];
+        return view('admin.layouts.modules.user.add')->with(compact('data'));
     }
 
     /**

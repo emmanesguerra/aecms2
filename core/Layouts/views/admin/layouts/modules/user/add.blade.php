@@ -40,7 +40,7 @@
                 <form autocomplete="off" id="settingsform" action="{{ route('user.store') }}" method="post">
                     @csrf
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-8">
+                        <div class="col-sm-12 col-md-12 col-lg-8">
                             <div class="col-sm-12">
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-4">
@@ -74,15 +74,18 @@
                                     <div  class="form-group  col-sm-6">
                                         <label class="@error('password') text-danger @enderror" for="password">Password *</label>
                                         <input type="text" class="form-control ae-input-field @error('password') is-invalid @enderror " name="password" value="{{ old('password') }}" id="password" placeholder="Password">
-                                        <p class="form-text text-info small">
-                                            Your password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.
-                                        </p>
                                         @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                     <div  class="form-group  col-sm-6">
                                         <label class="@error('password_confirmation') text-danger @enderror" for="password_confirmation">Re Password *</label>
                                         <input type="text" class="form-control ae-input-field @error('password_confirmation') is-invalid @enderror " name="password_confirmation" value="{{ old('password_confirmation') }}" id="password_confirmation" placeholder="Re-type Password">
                                         @error('password_confirmation') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                    
+                                    <div  class="form-group  col-sm-12">
+                                        <p class="form-text text-info small">
+                                            Your password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ namespace Core\Http\Controller\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Core\Http\Requests\StoreUserRequest;
 
 class UserController extends Controller
 {
@@ -37,9 +38,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        try {
+            User::create($request->only('firstname', 'lastname', 'middlename', 'email', 'password', 'usertype'));
+            
+            return redirect()->back()->with('status-success', 'New user created!');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**

@@ -60,10 +60,10 @@ class SettingController extends Controller
             foreach ($request->all() as $key => $value) {
                 SystemConfigLibrary::save($key, $value);
             }
-
-            return response(['message' => 'System settings have been configured'], 201);
-        } catch (Exception $ex) {
-            return response(['message' => $ex->message], 400);
+            
+            return redirect()->back()->with('status-success', 'System settings updated!');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }
 

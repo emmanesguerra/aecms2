@@ -11,28 +11,23 @@
             </div> 
 
             <div class="card-body">
-                <div class='nav-tabs-custom'>
-
-                    <div class="box-body">
-                        <table id="userlists" class="table table-striped table-bordered small">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th class="text-nowrap">First Name</th>
-                                    <th class="text-nowrap">Middle Name</th>
-                                    <th class="text-nowrap">Last Name</th>
-                                    <th>Email</th>
-                                    <th class="text-nowrap">User Type</th>
-                                    <th class="text-nowrap">Date Created</th>
-                                    <th class="text-nowrap">Date Updated</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <table id="userlists" class="table table-striped table-bordered small">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th class="text-nowrap">First Name</th>
+                            <th class="text-nowrap">Middle Name</th>
+                            <th class="text-nowrap">Last Name</th>
+                            <th>Email</th>
+                            <th class="text-nowrap">User Type</th>
+                            <th class="text-nowrap">Date Created</th>
+                            <th class="text-nowrap">Date Updated</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

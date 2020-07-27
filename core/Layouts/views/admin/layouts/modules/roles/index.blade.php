@@ -12,48 +12,60 @@
                     <a href="{{ route('roles.create') }}" class="float-right"> Create New Role</a>
                 @endcan
             </div>
-
-            @if ($message = Session::get('status-success'))
-            <div class="card-body">
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            </div>
-            @endif
             
             <div class="card-body">
-                
-                <table class="table table-bordered">
-                  <tr>
-                     <th>No</th>
-                     <th>Name</th>
-                     <th width="280px">Action</th>
-                  </tr>
-                    @foreach ($roles as $key => $role)
-                    <tr>
-                        <td>{{ ++$i }}</td>
-                        <td>{{ $role->name }}</td>
-                        <td>
-                            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-                            @can('role-edit')
-                                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
-                            @endcan
-                            @can('role-delete')
-                                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-                            @endcan
-                        </td>
-                    </tr>
-                    @endforeach
+                @if ($message = Session::get('status-success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+            
+                <table id="rolelists" class="table table-striped table-bordered small">
+                    <thead>
+                        <tr>
+                            <th width="5%">ID</th>
+                            <th width="15%">Name</th>
+                            <th width="5%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
                 </table>
-
-
-                {!! $roles->render() !!}
             </div>
         </div>
     </div>
 </section>
 
 
+@endsection
+
+@section('styles')
+<link href="{{ asset('DataTables-Bootstrap4/datatables.min.css') }}" rel="stylesheet">
+@endsection
+
+@section('javascript')
+<script src="{{ asset('DataTables-Bootstrap4/datatables.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        
+        $('#rolelists').DataTable({
+            processing: true,
+            "ajax": "{{ route('roles.data') }}",
+            "columns": [
+                {"data": "id"},
+                {"data": "name"},
+                {
+                    width: "5%",
+                    bSearchable: false,
+                    bSortable: false,
+                    mRender: function (data, type, full) {
+                        return "<a href='{{ route('roles.index') }}/" + full.id + "/edit'>Edit</a> | "
+                                + "<a href='{{ route('roles.index') }}/" + full.id + "'>View Details</a> | "
+                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                    }
+                }
+            ]
+        });
+    });
+</script>
 @endsection

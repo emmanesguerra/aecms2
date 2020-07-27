@@ -17,12 +17,11 @@ Route::prefix('admin')->group(function () {
             Route::post('/', '\Core\Http\Controller\Setting\SettingController@store')->name('settings.store');
         });
 
-        Route::prefix('users')->group(function () {
-            Route::get('/', '\Core\Http\Controller\User\UserController@index')->name('users.index');
-            Route::get('/create', '\Core\Http\Controller\User\UserController@create')->name('users.create');
-            Route::post('/', '\Core\Http\Controller\User\UserController@store')->name('users.store');
-        });
+        Route::resource('users','\Core\Http\Controller\User\UserController');
         
+        Route::prefix('roles')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\Role\RoleController@data')->name('roles.data');
+        });
         Route::resource('roles','\Core\Http\Controller\Role\RoleController');
     });
     

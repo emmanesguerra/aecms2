@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
+use Core\Library\DataTables;
 
 
 class RoleController extends Controller
@@ -37,6 +38,32 @@ class RoleController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Request $request)
+    {
+        $tablecols = [
+            1 => ['id'],
+            2 => ['name'],
+        ];
+        
+        $filteredmodel = DB::table('roles')
+            ->select(DB::raw("id, name")
+            );
+        
+        $modelcnt = $filteredmodel->count();
+        
+        $data = DataTables::DataTableFilters($filteredmodel, $request, $tablecols, $hasValue, $totalFiltered);
+        
+        return response(['data'=> $data,
+            'draw' => $request->draw,
+            'recordsTotal' => ($hasValue)? $data->count(): $modelcnt,
+            'recordsFiltered' => ($hasValue)? $totalFiltered: $modelcnt], 200);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +96,7 @@ class RoleController extends Controller
 
 
         return redirect()->route('roles.index')
-                        ->with('success','Role created successfully');
+                        ->with('status-success','Role created successfully');
     }
     /**
      * Display the specified resource.
@@ -132,7 +159,7 @@ class RoleController extends Controller
 
 
         return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+                        ->with('status-success','Role updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -144,6 +171,6 @@ class RoleController extends Controller
     {
         DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+                        ->with('status-success','Role deleted successfully');
     }
 }

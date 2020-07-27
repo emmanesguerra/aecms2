@@ -7,7 +7,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Create New User
-                <a href="{{ route('user.index') }}" class="float-right">Back</a>
+                <a href="{{ route('users.index') }}" class="float-right">Back</a>
             </div> 
             
             @if (session('status-success'))
@@ -40,7 +40,7 @@
             @endif
 
             <div class="card-body">
-                <form autocomplete="off" id="settingsform" action="{{ route('user.store') }}" method="post">
+                <form autocomplete="off" id="settingsform" action="{{ route('users.store') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-8">

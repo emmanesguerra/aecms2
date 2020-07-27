@@ -7,7 +7,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Users Management
-                <a href="{{ route('user.create') }}" class="float-right">Create New User</a>
+                <a href="{{ route('users.create') }}" class="float-right">Create New User</a>
             </div> 
 
             <div class="card-body">

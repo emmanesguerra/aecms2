@@ -13,14 +13,14 @@ Route::prefix('admin')->group(function () {
         Route::post('/logout', '\Core\Http\Controller\AELoginController@logout')->name('admin.logout');
 
         Route::prefix('settings')->group(function () {
-            Route::get('/', '\Core\Http\Controller\Setting\SettingController@index')->name('setting.index');
-            Route::post('/', '\Core\Http\Controller\Setting\SettingController@store')->name('setting.store');
+            Route::get('/', '\Core\Http\Controller\Setting\SettingController@index')->name('settings.index');
+            Route::post('/', '\Core\Http\Controller\Setting\SettingController@store')->name('settings.store');
         });
 
         Route::prefix('users')->group(function () {
-            Route::get('/', '\Core\Http\Controller\User\UserController@index')->name('user.index');
-            Route::get('/create', '\Core\Http\Controller\User\UserController@create')->name('user.create');
-            Route::post('/', '\Core\Http\Controller\User\UserController@store')->name('user.store');
+            Route::get('/', '\Core\Http\Controller\User\UserController@index')->name('users.index');
+            Route::get('/create', '\Core\Http\Controller\User\UserController@create')->name('users.create');
+            Route::post('/', '\Core\Http\Controller\User\UserController@store')->name('users.store');
         });
         
         Route::resource('roles','\Core\Http\Controller\Role\RoleController');

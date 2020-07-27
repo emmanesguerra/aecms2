@@ -66,8 +66,14 @@
                                         @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                     <div  class="form-group  col-sm-6">
-                                        <label class="@error('usertype') text-danger @enderror" for="usertype">User Type *</label>
-                                        @error('usertype') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                        <label class="@error('usertype_id') text-danger @enderror" for="usertype_id">User Type *</label>
+                                        <treeselect-form-multi
+                                            v-bind:value="{{ (Session::getOldInput('usertype_id')) ? json_encode(Session::getOldInput('usertype_id')): json_encode(null) }}"
+                                            v-bind:selectoptions="{{ json_encode($data['usertypes']) }}"
+                                            v-bind:haserror="{{ $errors->has('usertype_id') ? "true": "false" }}"
+                                            v-bind:fieldname="{{ json_encode('usertype_id') }}">
+                                        </treeselect-form-multi>
+                                        @error('usertype_id') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                                 <div class="form-row">

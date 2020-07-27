@@ -19,7 +19,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('treeselect-form', require('./components/Treeselect/Form.vue').default); 
+Vue.component('treeselect-form', require('./components/Treeselect/SingleDimensionalArray.vue').default); 
+Vue.component('treeselect-form-multi', require('./components/Treeselect/MultiDimensionalArray.vue').default); 
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

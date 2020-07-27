@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Schema;
 use Core\Model\SystemConfig;
 use Core\Observers\SystemConfigObserver;
 
+use Core\Model\User;
+use Core\Observers\UserObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         
         SystemConfig::observe(SystemConfigObserver::class);
+        User::observe(UserObserver::class);
     }
 }

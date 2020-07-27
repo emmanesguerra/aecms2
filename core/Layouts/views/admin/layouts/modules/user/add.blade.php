@@ -5,7 +5,10 @@
 <section class="main-panel">
     <div class="row">
         <div class="card" style="width: 100%">
-            <div class="card-header">Create new user</div> 
+            <div class="card-header">
+                Create New User
+                <a href="{{ route('user.index') }}" class="float-right">Back</a>
+            </div> 
             
             @if (session('status-success'))
             <div class="card-body">

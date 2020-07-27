@@ -5,7 +5,7 @@
 <section class="main-panel">
     <div class="row">
         <div class="card" style="width: 100%">
-            <div class="card-header">Settings</div> 
+            <div class="card-header">Site Management</div> 
             
             @if (session('status-success'))
             <div class="card-body">

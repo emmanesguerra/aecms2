@@ -6,8 +6,8 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Users
-                <a href="{{ route('user.create') }}" class="float-right small">Add User</a>
+                Users Management
+                <a href="{{ route('user.create') }}" class="float-right">Create New User</a>
             </div> 
 
             <div class="card-body">

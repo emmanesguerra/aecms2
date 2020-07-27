@@ -23,7 +23,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/', '\Core\Http\Controller\User\UserController@store')->name('user.store');
         });
         
-        Route::resource('roles','\Core\Http\Controller\RoleController');
+        Route::resource('roles','\Core\Http\Controller\Role\RoleController');
     });
     
 });

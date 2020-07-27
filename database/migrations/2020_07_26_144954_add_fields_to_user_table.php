@@ -14,6 +14,7 @@ class AddFieldsToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->unsignedInteger('id')->autoincrement()->change();
             $table->dropColumn('name');
             $table->string('firstname', 50)->after('id');
             $table->string('middlename', 50)->after('firstname');
@@ -32,6 +33,7 @@ class AddFieldsToUserTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->autoincrement()->change();
             $table->string('name')->after('id');
             $table->dropColumn('firstname');
             $table->dropColumn('middlename');

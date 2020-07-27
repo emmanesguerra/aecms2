@@ -24,12 +24,12 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => 'required|max:100',
-            'lastname' => 'required|max:100',
-            'middlename' => 'required|max:100',
+            'firstname' => 'required|max:50',
+            'lastname' => 'max:50',
+            'middlename' => 'max:50',
             'email' => 'required|unique:users,email|max:191',
             'password' => 'required|confirmed|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'usertype' => 'required|max:20'
+            'usertype_id' => 'required'
         ];
     }
 }

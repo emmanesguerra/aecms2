@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Core\Http\Requests\StoreUserRequest;
 
+use Core\Model\UserType;
+use Core\Model\User;
+
 class UserController extends Controller
 {
     /**
@@ -26,8 +29,7 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'model' => [],
-            'timezones' => []
+            'usertypes' => UserType::get(['id', 'type as label'])
         ];
         return view('admin.layouts.modules.user.add')->with(compact('data'));
     }
@@ -41,7 +43,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         try {
-            User::create($request->only('firstname', 'lastname', 'middlename', 'email', 'password', 'usertype'));
+            User::create($request->only('firstname', 'lastname', 'middlename', 'email', 'password', 'usertype_id'));
             
             return redirect()->back()->with('status-success', 'New user created!');
         } catch (\Exception $ex) {

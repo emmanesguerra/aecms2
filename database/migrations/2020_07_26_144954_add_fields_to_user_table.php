@@ -14,14 +14,12 @@ class AddFieldsToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('id')->autoincrement()->change();
             $table->dropColumn('name');
             $table->string('firstname', 50)->after('id');
-            $table->string('middlename', 50)->after('firstname');
-            $table->string('lastname', 50)->after('middlename');
-            $table->unsignedInteger('usertype_id')->after('password');
-            $table->unsignedInteger('created_by')->after('remember_token');
-            $table->unsignedInteger('updated_by')->nullable()->after('created_by');
+            $table->string('middlename', 50)->after('firstname')->nullable();
+            $table->string('lastname', 50)->after('middlename')->nullable();
+            $table->unsignedBigInteger('created_by')->after('remember_token');
+            $table->unsignedBigInteger('updated_by')->nullable()->after('created_by');
         });
     }
 
@@ -33,12 +31,10 @@ class AddFieldsToUserTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->autoincrement()->change();
             $table->string('name')->after('id');
             $table->dropColumn('firstname');
             $table->dropColumn('middlename');
             $table->dropColumn('lastname');
-            $table->dropColumn('usertype_id');
             $table->dropColumn('created_by');
             $table->dropColumn('updated_by');
         });

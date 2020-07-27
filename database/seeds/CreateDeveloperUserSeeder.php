@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Core\Model\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Hash;
 
 class CreateDeveloperUserSeeder extends Seeder
 {
@@ -20,8 +21,7 @@ class CreateDeveloperUserSeeder extends Seeder
         	'middlename' => 'Magtibay', 
         	'lastname' => 'Esguerra', 
         	'email' => 'admin@gmail.com',
-        	'password' => Illuminate\Support\Facades\Hash::make('namme'),
-        	'usertype_id' => 1,
+        	'password' => 'namme',
         	'created_by' => '1'
         ]);
   

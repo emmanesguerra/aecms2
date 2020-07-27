@@ -16,8 +16,8 @@ class CreateSystemConfigsTable extends Migration
         Schema::create('system_configs', function (Blueprint $table) {
             $table->string('keyword');
             $table->text('keyvalue')->nullable();
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             
             $table->primary(['keyword']);

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Core\Http\Requests\StoreUserRequest;
 
-use Core\Model\UserType;
+use Spatie\Permission\Models\Role;
 use Core\Model\User;
 
 class UserController extends Controller
@@ -29,7 +29,7 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'usertypes' => UserType::get(['id', 'type as label'])
+            'roles' => Role::get(['id', 'name as label'])
         ];
         return view('admin.layouts.modules.user.add')->with(compact('data'));
     }
@@ -43,9 +43,11 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         try {
-            User::create($request->only('firstname', 'lastname', 'middlename', 'email', 'password', 'usertype_id'));
+            $user = User::create($request->only('firstname', 'lastname', 'middlename', 'email', 'password'));
             
-            return redirect()->back()->with('status-success', 'New user created!');
+            $user->assignRole($request->input('roles'));
+            
+            return redirect()->route('users.index')->with('status-success', 'User created successfully');
         } catch (\Exception $ex) {
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }

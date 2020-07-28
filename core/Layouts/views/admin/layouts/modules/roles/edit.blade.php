@@ -6,7 +6,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Edit Role
+                Edit Role: {{ $role->name }}
                 <a href="{{ route('roles.index') }}" class="float-right">Back</a>
             </div> 
             

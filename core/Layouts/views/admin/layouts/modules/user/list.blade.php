@@ -82,9 +82,9 @@
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
-                        return "<a href='{{ route('roles.index') }}/" + full.id + "/edit'>Edit</a> | "
-                                + "<a href='{{ route('roles.index') }}/" + full.id + "'>View Details</a> | "
-                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                        return "<a href='{{ route('users.index') }}/" + full.id + "/edit'>Edit</a> | "
+                                + "<a href='{{ route('users.index') }}/" + full.id + "'>View Details</a> | "
+                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
                     }
                 }
             ]

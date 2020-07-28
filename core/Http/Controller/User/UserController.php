@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Core\Http\Requests\StoreUserRequest;
 
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Core\Model\User;
 use DB;
 use Core\Library\DataTables;
@@ -101,7 +102,17 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $role = $user->roles->first();
+        $rolePermissions = null;
+        if($role) {
+            $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
+                ->where("role_has_permissions.role_id",$role->id)
+                ->get();
+        }
+
+
+        return view('admin.layouts.modules.user.show',compact('user','role','rolePermissions'));
     }
 
     /**

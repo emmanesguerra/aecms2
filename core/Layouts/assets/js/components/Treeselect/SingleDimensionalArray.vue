@@ -3,8 +3,7 @@
                  v-model="modelvalue"
                  :name="fieldname"
                  :multiple="false"
-                 :options="options"
-                 placeholder="Select a timezone" /> 
+                 :options="options" /> 
 </template>
 
 <script>

@@ -38,25 +38,6 @@
     </div>
 </section>
 
-<div class="modal modal-danger fade in" id="modal-danger">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Danger!</h4>
-            </div>
-            <div class="modal-body">
-                <p>You are about to remove this user record (<strong id="idtobedeleted"></strong>) in the system. Do you wish to continue?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
-                <button onclick="proccessdata(user_id, `delete`)" type="button" class="btn btn-outline">Yes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @section('styles')
@@ -84,7 +65,7 @@
                     mRender: function (data, type, full) {
                         return "<a href='{{ route('users.index') }}/" + full.id + "/edit'>Edit</a> | "
                                 + "<a href='{{ route('users.index') }}/" + full.id + "'>View Details</a> | "
-                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
                     }
                 }
             ]

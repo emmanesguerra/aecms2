@@ -1,0 +1,37 @@
+<?php
+
+namespace Core\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateUserRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $userid = $this->route('user');
+        
+        return [
+            'firstname' => 'required|max:50',
+            'lastname' => 'max:50',
+            'middlename' => 'max:50',
+            'email' => 'required|email|unique:users,email,'.$userid,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ];
+    }
+}

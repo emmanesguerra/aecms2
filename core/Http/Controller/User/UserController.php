@@ -5,6 +5,7 @@ namespace Core\Http\Controller\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Core\Http\Requests\StoreUserRequest;
+use Core\Http\Requests\UpdateUserRequest;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -123,7 +124,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $role = $user->roles->first();
+        $data = [
+            'roles' => Role::get(['id', 'name as label'])
+        ];
+        return view('admin.layouts.modules.user.edit')->with(compact('data', 'user', 'role'));
     }
 
     /**
@@ -133,9 +139,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $user = User::find($id);
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+
+
+        $user->assignRole($request->input('roles'));
+
+
+        return redirect()->route('users.index')
+                        ->with('success','User updated successfully');
     }
 
     /**
@@ -146,6 +163,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('users.index')
+                        ->with('success','User deleted successfully');
     }
 }

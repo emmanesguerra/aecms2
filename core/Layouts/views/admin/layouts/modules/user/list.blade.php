@@ -23,11 +23,9 @@
                         <tr>
                             <th>ID</th>
                             <th class="text-nowrap">First Name</th>
-                            <th class="text-nowrap">Middle Name</th>
                             <th class="text-nowrap">Last Name</th>
                             <th>Email</th>
-                            <th class="text-nowrap">User Type</th>
-                            <th class="text-nowrap">Date Created</th>
+                            <th>Role</th>
                             <th class="text-nowrap">Date Updated</th>
                             <th>Action</th>
                         </tr>
@@ -69,7 +67,28 @@
 <script src="{{ asset('DataTables-Bootstrap4/datatables.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-        $('#userlists').DataTable();
+        $('#userlists').DataTable({
+            processing: true,
+            "ajax": "{{ route('users.data') }}",
+            "columns": [
+                {"data": "id"},
+                {"data": "firstname"},
+                {"data": "lastname"},
+                {"data": "email"},
+                {"data": "name"},
+                {"data": "updated_at"},
+                {
+                    width: "18%",
+                    bSearchable: false,
+                    bSortable: false,
+                    mRender: function (data, type, full) {
+                        return "<a href='{{ route('roles.index') }}/" + full.id + "/edit'>Edit</a> | "
+                                + "<a href='{{ route('roles.index') }}/" + full.id + "'>View Details</a> | "
+                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                    }
+                }
+            ]
+        });
     });
 </script>
 @endsection

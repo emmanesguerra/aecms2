@@ -8,6 +8,8 @@ use Core\Http\Requests\StoreUserRequest;
 
 use Spatie\Permission\Models\Role;
 use Core\Model\User;
+use DB;
+use Core\Library\DataTables;
 
 class UserController extends Controller
 {
@@ -19,6 +21,44 @@ class UserController extends Controller
     public function index()
     {        
         return view('admin.layouts.modules.user.list');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Request $request)
+    {
+        $tablecols = [
+            1 => ['users.id'],
+            2 => ['users.firstname'],
+            3 => ['users.lastname'],
+            4 => ['users.email'],
+            5 => ['roles.name'],
+            6 => ['users.updated_at'],
+        ];
+        
+        $filteredmodel = DB::table('users')
+                ->leftjoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+                ->leftjoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
+                ->select(DB::raw("users.id, 
+                    users.firstname, 
+                    users.lastname, 
+                    users.email, 
+                    roles.name,
+                    users.updated_at")
+            );
+        
+        $modelcnt = $filteredmodel->count();
+        
+        $data = DataTables::DataTableFilters($filteredmodel, $request, $tablecols, $hasValue, $totalFiltered);
+        
+        return response(['data'=> $data,
+            'draw' => $request->draw,
+            'recordsTotal' => ($hasValue)? $data->count(): $modelcnt,
+            'recordsFiltered' => ($hasValue)? $totalFiltered: $modelcnt], 200);
     }
 
     /**

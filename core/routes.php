@@ -17,6 +17,9 @@ Route::prefix('admin')->group(function () {
             Route::post('/', '\Core\Http\Controller\Setting\SettingController@store')->name('settings.store');
         });
 
+        Route::prefix('users')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\User\UserController@data')->name('users.data');
+        });
         Route::resource('users','\Core\Http\Controller\User\UserController');
         
         Route::prefix('roles')->group(function () {

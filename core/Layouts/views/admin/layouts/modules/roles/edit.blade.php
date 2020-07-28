@@ -9,9 +9,16 @@
                 Edit Role
                 <a href="{{ route('roles.index') }}" class="float-right">Back</a>
             </div> 
-
-            @if (count($errors) > 0)
+            
             <div class="card-body">
+            
+                @if (session('status-failed'))
+                <div class="alert alert-danger text-left">
+                    {{ session('status-failed') }}
+                </div>
+                @endif
+
+                @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> There were some problems with your input.<br><br>
                     <ul>
@@ -20,10 +27,8 @@
                     @endforeach
                     </ul>
                 </div>
-            </div>
-            @endif
-            
-            <div class="card-body">
+                @endif
+                
                 {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">

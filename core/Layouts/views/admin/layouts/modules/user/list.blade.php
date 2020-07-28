@@ -11,6 +11,13 @@
             </div> 
 
             <div class="card-body">
+            
+                @if (session('status-success'))
+                <div class="alert alert-success text-left">
+                    {{ session('status-success') }}
+                </div>
+                @endif
+                
                 <table id="userlists" class="table table-striped table-bordered small">
                     <thead>
                         <tr>

@@ -9,25 +9,16 @@
                 Create New User
                 <a href="{{ route('users.index') }}" class="float-right">Back</a>
             </div> 
-            
-            @if (session('status-success'))
+
             <div class="card-body">
-                <div class="alert alert-success text-left">
-                    {{ session('status-success') }}
-                </div>
-            </div>
-            @endif
             
-            @if (session('status-failed'))
-            <div class="card-body">
+                @if (session('status-failed'))
                 <div class="alert alert-danger text-left">
                     {{ session('status-failed') }}
                 </div>
-            </div>
-            @endif
-            
-            @if (count($errors) > 0)
-            <div class="card-body">
+                @endif
+
+                @if (count($errors) > 0)
                 <div class="alert alert-danger text-left">
                     <strong>Whoops!</strong> There were problems with the input: <br />
                     <ul>
@@ -36,10 +27,8 @@
                         @endforeach
                     </ul>
                 </div>
-            </div>
-            @endif
-
-            <div class="card-body">
+                @endif
+                
                 <form autocomplete="off" id="settingsform" action="{{ route('users.store') }}" method="post">
                     @csrf
                     <div class="row">
@@ -69,14 +58,14 @@
                                         @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                     <div  class="form-group  col-sm-6">
-                                        <label class="@error('usertype_id') text-danger @enderror" for="usertype_id">User Type *</label>
+                                        <label class="@error('roles') text-danger @enderror" for="roles">User Type *</label>
                                         <treeselect-form-multi
-                                            v-bind:value="{{ (Session::getOldInput('usertype_id')) ? json_encode(Session::getOldInput('usertype_id')): json_encode(null) }}"
-                                            v-bind:selectoptions="{{ json_encode($data['usertypes']) }}"
-                                            v-bind:haserror="{{ $errors->has('usertype_id') ? "true": "false" }}"
-                                            v-bind:fieldname="{{ json_encode('usertype_id') }}">
+                                            v-bind:value="{{ (Session::getOldInput('roles')) ? json_encode(Session::getOldInput('roles')): json_encode(null) }}"
+                                            v-bind:selectoptions="{{ json_encode($data['roles']) }}"
+                                            v-bind:haserror="{{ $errors->has('roles') ? "true": "false" }}"
+                                            v-bind:fieldname="{{ json_encode('roles') }}">
                                         </treeselect-form-multi>
-                                        @error('usertype_id') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                        @error('roles') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                                 <div class="form-row">

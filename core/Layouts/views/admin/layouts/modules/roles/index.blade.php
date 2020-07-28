@@ -9,15 +9,15 @@
             <div class="card-header">
                 Role Management
                 @can('role-create')
-                    <a href="{{ route('roles.create') }}" class="float-right"> Create New Role</a>
+                <a href="{{ route('roles.create') }}" class="float-right"> Create New Role</a>
                 @endcan
             </div>
             
             <div class="card-body">
-                @if ($message = Session::get('status-success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}</p>
-                    </div>
+                @if (session('status-success'))
+                <div class="alert alert-success text-left">
+                    {{ session('status-success') }}
+                </div>
                 @endif
             
                 <table id="rolelists" class="table table-striped table-bordered small">

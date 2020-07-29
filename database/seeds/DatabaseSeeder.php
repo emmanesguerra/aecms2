@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
          $this->call([
              PermissionTableSeeder::class,
              CreateDeveloperUserSeeder::class,
+             MolduleSeeder::class,
          ]);
     }
 }

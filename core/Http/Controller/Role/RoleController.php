@@ -19,10 +19,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:roles-list|roles-create|roles-edit|roles-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:roles-create', ['only' => ['create','store']]);
+         $this->middleware('permission:roles-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:roles-delete', ['only' => ['destroy']]);
     }
 
 
@@ -72,7 +72,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission = Permission::get();
+        $permission = Permission::get()->groupBy('module');
         return view('admin.layouts.modules.roles.create',compact('permission'));
     }
 
@@ -130,7 +130,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-        $permission = Permission::get();
+        $permission = Permission::get()->groupBy('module');
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();

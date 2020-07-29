@@ -41,10 +41,14 @@
                         <div class="form-group">
                             <strong>Permission:</strong>
                             <br/>
-                            @foreach($permission as $value)
-                                <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                                {{ $value->name }}</label>
-                            <br/>
+                            @foreach($permission as $module => $arr)
+                                <span><strong>{{$module}}:</strong></span>
+                                <div class="row"/>
+                                @foreach($arr as $value)
+                                    <div class="col-sm-3"><label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
+                                    {{ $value->name }}</label></div>
+                                @endforeach
+                                </div>
                             @endforeach
                         </div>
                     </div>

@@ -8,7 +8,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Role Management
-                @can('role-create')
+                @can('roles-create')
                 <a href="{{ route('roles.create') }}" class="float-right"> Create New Role</a>
                 @endcan
             </div>

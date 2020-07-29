@@ -39,12 +39,15 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Permission(s):</strong>
-                            <br/>
-                            @foreach($permission as $value)
-                                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                                {{ $value->name }}</label>
-                            <br/>
+                            <strong>Permission(s):</strong> <br/>
+                            @foreach($permission as $module => $arr)
+                                <span><strong>{{$module}}:</strong></span>
+                                <div class="row"/>
+                                @foreach($arr as $value)
+                                    <div class="col-sm-3"><label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+                                    {{ $value->name }}</label></div>
+                                @endforeach
+                                </div>
                             @endforeach
                         </div>
                     </div>

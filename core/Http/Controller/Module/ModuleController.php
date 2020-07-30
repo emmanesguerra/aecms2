@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Core\Http\Requests\StoreModuleRequest;
 use Core\Model\Module;
+use Core\Model\Content;
 use Spatie\Permission\Models\Permission;
 
 class ModuleController extends Controller
@@ -49,7 +50,10 @@ class ModuleController extends Controller
                 $this->CreatePermissions($module->module_name);
 
                 //create controller, model, observer, request and migration
-                $this->generateClassFiles($module->module_name);
+                $this->GenerateClassFiles($module->module_name);
+
+                //create contents
+                $this->CreateContentData($module->module_name, $request);
             }
             
             return redirect()->route('modules.index')->with('status-success', 'Module created successfully');
@@ -70,9 +74,11 @@ class ModuleController extends Controller
                 'name' => $clean . $permission, 'module' => $clean
             ]);
         }
+        
+        return;
     }
     
-    private function generateClassFiles($string)
+    private function GenerateClassFiles($string)
     {
         // strip out all whitespace and convert to lowercase
         $title = \Illuminate\Support\Str::title($string);
@@ -91,6 +97,32 @@ class ModuleController extends Controller
         Artisan::call("make:request", ['name' => 'Update'.$clean.'Request']);
         
         Artisan::call("make:migration", ['name' => $clean.'_table']);
+        
+        return;
+    }
+    
+    private function CreateContentData($moduleName, $request)
+    {
+        $title = \Illuminate\Support\Str::title($moduleName);
+        $clean = preg_replace('/\s*/', '', $title);
+        
+        Content::create([
+            "name" => $title . " Main",
+            "type" => "M",
+            "class_namespace" => "\App\Http\Controller\\" . $clean . "\\" . $clean . "Controller",
+            "method_name" => 'main'
+        ]);
+        
+        if($request->has('haspanel')) {
+            Content::create([
+                "name" => $title . " Panel",
+                "type" => "P",
+                "class_namespace" => "\App\Http\Controller\\" . $clean . "\\" . $clean . "Controller",
+                "method_name" => 'panel'
+            ]);
+        }
+        
+        return;
     }
 
     /**

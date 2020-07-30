@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Core\Http\Requests\StoreModuleRequest;
+use Core\Http\Requests\UpdateModuleRequest;
 use Core\Model\Module;
 use Core\Model\Content;
 use Core\Library\DataTables;
@@ -171,7 +172,9 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        //
+        $module = Module::find($id);
+        
+        return view('admin.layouts.modules.module.show')->with(compact('module'));
     }
 
     /**
@@ -182,7 +185,9 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $module = Module::find($id);
+        
+        return view('admin.layouts.modules.module.edit')->with(compact('module'));
     }
 
     /**
@@ -192,9 +197,21 @@ class ModuleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateModuleRequest $request, $id)
     {
-        //
+        try
+        {
+            $input = $request->all();
+
+            $module = Module::find($id);
+            $module->update($input);
+
+            return redirect()->route('modules.index')
+                            ->with('status-success','Module updated successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**

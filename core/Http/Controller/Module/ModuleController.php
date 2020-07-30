@@ -90,7 +90,7 @@ class ModuleController extends Controller
         
         Artisan::call("make:request", ['name' => 'Update'.$clean.'Request']);
         
-        Artisan::call("make:migration", ['name' => 'create_'.$clean.'_table']);
+        Artisan::call("make:migration", ['name' => $clean.'_table']);
     }
 
     /**

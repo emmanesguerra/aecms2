@@ -11,6 +11,9 @@ use Core\Observers\SystemConfigObserver;
 use Core\Model\User;
 use Core\Observers\UserObserver;
 
+use Core\Model\Module;
+use Core\Observers\ModuleObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -35,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
         
         SystemConfig::observe(SystemConfigObserver::class);
         User::observe(UserObserver::class);
+        Module::observe(ModuleObserver::class);
     }
 }

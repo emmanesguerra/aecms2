@@ -11,12 +11,12 @@ class SystemConfigObserver
     /**
      * Listen to the SystemConfig creating event.
      *
-     * @param  \App\SystemConfig  $config
+     * @param  \App\SystemConfig  $args
      * @return void
      */
-    public function creating(SystemConfig $config)
+    public function creating(SystemConfig $args)
     {
-        $config->created_by = Auth::id();
+        $args->created_by = Auth::id();
     }
     
     /**
@@ -25,8 +25,8 @@ class SystemConfigObserver
      * @param  \App\SystemConfig  $config
      * @return void
      */
-    public function updating(SystemConfig $config)
+    public function updating(SystemConfig $args)
     {
-        $config->updated_by = Auth::id();
+        $args->updated_by = Auth::id();
     }
 }

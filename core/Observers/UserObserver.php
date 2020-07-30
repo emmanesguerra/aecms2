@@ -11,22 +11,22 @@ class UserObserver
     /**
      * Listen to the User creating event.
      *
-     * @param  \Core\Model\User  $user
+     * @param  \Core\Model\User  $args
      * @return void
      */
-    public function creating(User $user)
+    public function creating(User $args)
     {
-        $user->created_by = Auth::id();
+        $args->created_by = Auth::id();
     }
     
     /**
      * Listen to the User updating event.
      *
-     * @param  \Core\Model\User  $user
+     * @param  \Core\Model\User  $args
      * @return void
      */
-    public function updating(User $user)
+    public function updating(User $args)
     {
-        $user->updated_by = Auth::id();
+        $args->updated_by = Auth::id();
     }
 }

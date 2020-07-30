@@ -8,24 +8,24 @@ use Illuminate\Support\Facades\Auth;
 class ModuleObserver
 {
     /**
-     * Listen to the SystemConfig creating event.
+     * Listen to the Module creating event.
      *
-     * @param  \Core\Model\Module  $module
+     * @param  \Core\Model\Module  $args
      * @return void
      */
-    public function creating(Module $module)
+    public function creating(Module $args)
     {
-        $module->created_by = Auth::id();
+        $args->created_by = Auth::id();
     }
     
     /**
-     * Listen to the SystemConfig updating event.
+     * Listen to the Module updating event.
      *
-     * @param  \Core\Model\Module  $module
+     * @param  \Core\Model\Module  $args
      * @return void
      */
-    public function updating(Module $module)
+    public function updating(Module $args)
     {
-        $module->updated_by = Auth::id();
+        $args->updated_by = Auth::id();
     }
 }

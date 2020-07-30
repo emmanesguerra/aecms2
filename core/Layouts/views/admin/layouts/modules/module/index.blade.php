@@ -23,8 +23,12 @@
                 <table id="moduleslists" class="table table-striped table-bordered small">
                     <thead>
                         <tr>
-                            <th width="5%">ID</th>
-                            <th width="15%">Name</th>
+                            <th >ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Index Url</th>
+                            <th>Icon</th>
+                            <th>Date Updated</th>
                             <th width="5%">Action</th>
                         </tr>
                     </thead>
@@ -48,7 +52,34 @@
 <script>
     $(document).ready(function () {
         
-        $('#moduleslists').DataTable();
+        $('#moduleslists').DataTable({
+            processing: true,
+            "ajax": "{{ route('modules.data') }}",
+            "columns": [
+                {"data": "id"},
+                {"data": "module_name"},
+                { width: "20%","data": "description"},
+                {"data": "route_index_url"},
+                {
+                    width: "10%",
+                    bSearchable: false,
+                    bSortable: false,
+                    mRender: function (data, type, full) {
+                        return "<i class='"+full.icon+"' ></i> <i>"+full.icon+"</i>"
+                    }
+                },
+                {"data": "updated_at"},
+                {
+                    width: "13%",
+                    bSearchable: false,
+                    bSortable: false,
+                    mRender: function (data, type, full) {
+                        return "<a href='{{ route('modules.index') }}/" + full.id + "/edit'>Edit</a> | "
+                                + "<a href='{{ route('modules.index') }}/" + full.id + "'>View Details</a>"
+                    }
+                }
+            ]
+        });
     });
 </script>
 @endsection

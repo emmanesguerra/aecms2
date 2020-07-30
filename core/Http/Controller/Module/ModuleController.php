@@ -5,9 +5,11 @@ namespace Core\Http\Controller\Module;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Core\Http\Requests\StoreModuleRequest;
 use Core\Model\Module;
 use Core\Model\Content;
+use Core\Library\DataTables;
 use Spatie\Permission\Models\Permission;
 
 class ModuleController extends Controller
@@ -20,6 +22,42 @@ class ModuleController extends Controller
     public function index()
     {
         return view('admin.layouts.modules.module.index');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Request $request)
+    {
+        $tablecols = [
+            1 => ['id'],
+            2 => ['module_name'],
+            3 => ['description'],
+            4 => ['route_index_url'],
+            5 => ['icon'],
+            6 => ['updated_at'],
+        ];
+        
+        $filteredmodel = DB::table('modules')
+                ->select(DB::raw("id, 
+                    module_name, 
+                    description, 
+                    route_index_url, 
+                    icon,
+                    updated_at")
+            );
+        
+        $modelcnt = $filteredmodel->count();
+        
+        $data = DataTables::DataTableFilters($filteredmodel, $request, $tablecols, $hasValue, $totalFiltered);
+        
+        return response(['data'=> $data,
+            'draw' => $request->draw,
+            'recordsTotal' => ($hasValue)? $data->count(): $modelcnt,
+            'recordsFiltered' => ($hasValue)? $totalFiltered: $modelcnt], 200);
     }
 
     /**

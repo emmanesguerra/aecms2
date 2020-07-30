@@ -26,6 +26,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Role\RoleController@data')->name('roles.data');
         });
         Route::resource('roles','\Core\Http\Controller\Role\RoleController');
+        
+        Route::prefix('modules')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\Module\ModuleController@data')->name('modules.data');
+        });
+        Route::resource('modules','\Core\Http\Controller\Module\ModuleController');
     });
     
 });

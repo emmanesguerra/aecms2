@@ -9,9 +9,9 @@ class UserObserver
 {
     //
     /**
-     * Listen to the SystemConfig creating event.
+     * Listen to the User creating event.
      *
-     * @param  \App\SystemConfig  $config
+     * @param  \Core\Model\User  $user
      * @return void
      */
     public function creating(User $user)
@@ -20,9 +20,9 @@ class UserObserver
     }
     
     /**
-     * Listen to the SystemConfig updating event.
+     * Listen to the User updating event.
      *
-     * @param  \App\SystemConfig  $config
+     * @param  \Core\Model\User  $user
      * @return void
      */
     public function updating(User $user)

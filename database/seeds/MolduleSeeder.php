@@ -15,21 +15,11 @@ class MolduleSeeder extends Seeder
     {
         //
         DB::table('modules')->insert([
-            'module_name' => 'Main Contents',
-            'description' => 'Manage the main contents of the website',
-            'permissions' => '["maincontents-list","maincontents-create","maincontents-edit","maincontents-delete"]',
+            'module_name' => 'Contents',
+            'description' => 'Manage the contents of the website',
+            'permissions' => '["contents-list","contents-create","contents-edit","contents-delete"]',
             'route_index_url' => 'maincontents.index',
             'icon' => 'fa-book',
-            'created_by' => 1,
-            'created_at' => \Carbon\Carbon::now(),
-        ]);
-        
-        DB::table('modules')->insert([
-            'module_name' => 'Panels',
-            'description' => 'Manage the panels of the website',
-            'permissions' => '["panels-list","panels-create","panels-edit","panels-delete"]',
-            'route_index_url' => 'panels.index',
-            'icon' => 'fa-sticky-note',
             'created_by' => 1,
             'created_at' => \Carbon\Carbon::now(),
         ]);

@@ -17,7 +17,6 @@ class CreateModulesTable extends Migration
             $table->id();
             $table->string('module_name', 50);
             $table->text('description')->nullable();
-            $table->text('permissions');
             $table->string('route_index_url', 50);
             $table->string('icon', 50);
             $table->unsignedBigInteger('created_by');

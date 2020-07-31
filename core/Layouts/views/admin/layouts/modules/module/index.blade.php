@@ -53,6 +53,7 @@
     $(document).ready(function () {
         
         $('#moduleslists').DataTable({
+            responsive: true,
             processing: true,
             "ajax": "{{ route('modules.data') }}",
             "columns": [
@@ -78,7 +79,12 @@
                                 + "<a href='{{ route('modules.index') }}/" + full.id + "'>View Details</a>"
                     }
                 }
-            ]
+            ],
+            // to fix error in responsive: true option
+            "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }]
         });
     });
 </script>

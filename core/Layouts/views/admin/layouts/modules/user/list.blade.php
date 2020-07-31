@@ -49,6 +49,7 @@
 <script>
     $(document).ready(function () {
         $('#userlists').DataTable({
+            responsive: true,
             processing: true,
             "ajax": "{{ route('users.data') }}",
             "columns": [
@@ -68,7 +69,12 @@
                                 + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
                     }
                 }
-            ]
+            ],
+            // to fix error in responsive: true option
+            "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }]
         });
     });
 </script>

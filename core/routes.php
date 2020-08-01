@@ -31,6 +31,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Module\ModuleController@data')->name('modules.data');
         });
         Route::resource('modules','\Core\Http\Controller\Module\ModuleController');
+        
+        Route::prefix('pages')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\Page\PageController@data')->name('pages.data');
+        });
+        Route::resource('pages','\Core\Http\Controller\Page\PageController');
     });
     
 });

@@ -65,6 +65,21 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'templates' => [
+            'driver' => 'local',
+            'root' => resource_path('views/templates'),
+        ],
+
+        'javascripts' => [
+            'driver' => 'local',
+            'root' => public_path('js/templates'),
+        ],
+
+        'css' => [
+            'driver' => 'local',
+            'root' => public_path('css/templates'),
+        ],
+
     ],
 
     /*

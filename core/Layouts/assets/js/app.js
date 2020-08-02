@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('treeselect-form', require('./components/Treeselect/SingleDimensionalArray.vue').default); 
 Vue.component('treeselect-form-multi', require('./components/Treeselect/MultiDimensionalArray.vue').default); 
+Vue.component('tinymce-form', require('./components/TinyMce/Form.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,6 +29,9 @@ Vue.component('treeselect-form-multi', require('./components/Treeselect/MultiDim
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+window.app = new Vue({
     el: '#app',
+    data: {
+        panels: []
+    },
 });

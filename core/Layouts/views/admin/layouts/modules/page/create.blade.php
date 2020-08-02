@@ -89,6 +89,10 @@
                                     @error('template') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
+                            
+                            <tinymce-form v-bind:model="panel"  v-for="panel in panels">
+                            </tinymce-form>
+                            
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -100,4 +104,18 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('styles')
+<style>
+.tox-tinymce {
+    border: 1px solid #665847 !important;
+}
+</style>
+@endsection
+
+@section('javascript')
+<script src="{{ asset('tinymce_5.4.1/js/tinymce/tinymce.min.js') }}"></script>
+<script>
+</script>
 @endsection

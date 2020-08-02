@@ -15,12 +15,8 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id');
-            $table->unsignedInteger('lft');
-            $table->unsignedInteger('rgt');
-            $table->unsignedInteger('lvl');
-            $table->string('url', '100');
-            $table->string('title', '50')->nullable();
+            $table->string('url', '100')->nullable();
+            $table->string('title', '50');
             $table->text('description')->nullable();
             $table->text('javascripts');
             $table->text('css');

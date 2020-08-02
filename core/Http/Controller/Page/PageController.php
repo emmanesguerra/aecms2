@@ -4,6 +4,9 @@ namespace Core\Http\Controller\Page;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Core\Http\Requests\StorePageRequest;
+use Core\Model\Page;
 
 class PageController extends Controller
 {
@@ -16,6 +19,26 @@ class PageController extends Controller
     {
         return view('admin.layouts.modules.page.index');
     }
+    
+    public function template(Request $request)
+    {
+        $file = Storage::disk('templates')->get($request->template);
+        
+        $pattern = '/\{!!(.*?)\!!}/';
+        preg_match_all ($pattern, $file, $matches);
+        
+        $resp = collect($matches[1])->map(function($panels) {
+             return [
+                     'panel' => trim(str_replace('$', '', $panels)),
+                     'name' => null,
+                     'html_template' => null,
+                     'isnew' => false,
+                     'selected' => null
+             ];
+        });
+        
+        return response(['data'=> $resp], 200);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +47,11 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        $files = Storage::disk('templates')->allFiles();
+        $scripts = Storage::disk('javascripts')->allFiles();
+        $styles = Storage::disk('css')->allFiles();
+        
+        return view('admin.layouts.modules.page.create')->with(compact('files', 'scripts', 'styles'));
     }
 
     /**
@@ -33,9 +60,18 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePageRequest $request)
     {
-        //
+        try
+        {
+            $data = [
+                'title' => ''
+            ];
+            
+            return redirect()->route('pages.index')->with('status-success', 'Page created successfully');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**

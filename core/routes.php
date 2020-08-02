@@ -34,6 +34,7 @@ Route::prefix('admin')->group(function () {
         
         Route::prefix('pages')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Page\PageController@data')->name('pages.data');
+            Route::get('/template', '\Core\Http\Controller\Page\PageController@template')->name('pages.template');
         });
         Route::resource('pages','\Core\Http\Controller\Page\PageController');
     });

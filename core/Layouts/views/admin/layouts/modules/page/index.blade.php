@@ -8,8 +8,8 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Page Management
-                @can('modules-create')
-                <span id="addnew" class="float-right text-primary" style="cursor: pointer"> Create New Page</span>
+                @can('pages-create')
+                <a href="{{ route('pages.create') }}" class="float-right"> Create New Page</a>
                 @endcan
             </div>
             
@@ -46,30 +46,8 @@
 @section('javascript')
 <script src="{{ asset('DataTables-Bootstrap4/datatables.min.js') }}"></script>
 <script>
-    
-    var save = function (counterid, parentid) {
-        
-    }
-    
     $(document).ready(function () {
         var pagedtable = $('#pageslists').DataTable();
-        
-        var counter = 1;
-        var iscreating = false;
-        $('#addnew').on( 'click', function () {
-            if(!iscreating) {
-                pagedtable.row.add([
-                    '   <div class="form-row">\n\
-                            <input id="ntitle-'+counter+'" type="text" class="form-control form-control-sm col-sm-5" placeholder="New Page" /> &nbsp; OR &nbsp; \n\
-                            <select id="otitle-'+counter+'" class="form-control form-control-sm col-sm-5"><option>Existing Page</option></select>\n\
-                        </div>',
-                    '<input id="url-'+counter+'" type="text" class="form-control form-control-sm">',
-                    '<button onclick="save('+counter+', 0)" type="button" class="btn btn-sm btn-primary">Save</button>']).draw( false );
-
-                counter++;
-                iscreating = true;
-            }
-        });
     });
 </script>
 @endsection

@@ -27,7 +27,7 @@ class AEController extends Controller
                 'js' => $page->javascripts
             );
             
-            foreach($page->panels as $panel) {
+            foreach($page->contents as $panel) {
                 if($panel->html_template) {
                     $data[$panel->pivot->tags] = $panel->html_template;
                 } else {

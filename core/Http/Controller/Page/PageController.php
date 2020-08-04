@@ -155,7 +155,26 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page = Page::find($id);
+        
+        $panels = $page->contents->map(function ($panel) {
+            return [
+                     'panel' => $panel->pivot->tags,
+                     'name' => $panel->id,
+                     'html_template' => $panel->html_template,
+                     'isnew' => false,
+                     'selected' => $panel->id
+             ];
+        });
+        
+        $files = Storage::disk('templates')->allFiles();
+        $scripts = Storage::disk('javascripts')->allFiles();
+        $styles = Storage::disk('css')->allFiles();
+        
+        $contents = Content::get(['id', 'name']);
+        $contents->push(['id' => 'NEW', 'name' => 'Create New'])->toArray();
+        
+        return view('admin.layouts.modules.page.edit')->with(compact('page', 'files', 'scripts', 'styles', 'contents', 'panels'));
     }
 
     /**
@@ -167,7 +186,34 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try
+        {
+            DB::beginTransaction();
+            
+            $page = Page::find($id);
+            $page->update($request->only('title', 'description', 'javascripts', 'css', 'template'));
+            
+            if($page) {
+                if($request->has('contents')) {
+                    $page->contents()->detach();
+                    foreach($request->contents as $tags => $data) {
+                        if(isset($data['selected_panel'])) {
+                            $contentId = $data['selected_panel'];
+                        } else {
+                            $content = Content::create(['name' => $data['name'], 'html_template' => $data['html_template'], 'type' => ($tags == 'Main') ? 'M': 'P']);
+                            $contentId = $content->id;
+                        }
+                        
+                        $page->contents()->attach($contentId, ['tags' => $tags]);
+                    }
+                }
+            }
+            DB::commit();
+            return redirect()->route('pages.index')->with('status-success', 'Page updated successfully');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**

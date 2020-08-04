@@ -20,7 +20,7 @@
         props: ['model', 'contents'],
         data () {
             return {
-                selected: null
+                selected: this.model.selected
             }
         },
         computed: {

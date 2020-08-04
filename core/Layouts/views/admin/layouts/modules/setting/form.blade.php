@@ -138,6 +138,7 @@
                                             v-bind:selectoptions="{{ json_encode($data['timezones']) }}"
                                             v-bind:haserror="{{ $errors->has('timezone') ? "true": "false" }}"
                                             v-bind:fieldname="{{ json_encode('timezone') }}"
+                                            v-bind:multiple="{{ json_encode(false) }}"
                                             v-bind:forpagetemplate="{{ json_encode(false) }}"
                                             v-bind:forpagetemplateurl="{{ json_encode(null) }}">
                                         </treeselect-form>

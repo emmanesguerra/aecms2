@@ -2,13 +2,13 @@
     <treeselect v-if="forpagetemplate"  v-bind:class="haserror ? 'ae-input-field is-invalid' : 'ae-input-field'" 
                  v-model="modelvalue"
                  :name="fieldname"
-                 :multiple="false"
+                 :multiple="multiple"
                  :options="options" 
                  @select="getTemplateUnescapedVariables"/> 
     <treeselect v-else  v-bind:class="haserror ? 'ae-input-field is-invalid' : 'ae-input-field'" 
                  v-model="modelvalue"
                  :name="fieldname"
-                 :multiple="false"
+                 :multiple="multiple"
                  :options="options" />
 </template>
 
@@ -17,7 +17,7 @@
     import '@riophae/vue-treeselect/dist/vue-treeselect.css';
 
     export default {
-        props: ['value', 'selectoptions', 'haserror', 'fieldname', 'forpagetemplate', 'forpagetemplateurl'],
+        props: ['value', 'selectoptions', 'haserror', 'fieldname', 'multiple', 'forpagetemplate', 'forpagetemplateurl'],
         data: function () {
             return {
                 modelvalue: this.value,

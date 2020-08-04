@@ -6,7 +6,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Create New Pages
+                Edit Page: {{ $page->title }}
                 <a href="{{ route('pages.index') }}" class="float-right">Back</a>
             </div> 
             
@@ -29,26 +29,26 @@
                 </div>
                 @endif
                 
-                {!! Form::open(array('route' => 'pages.store','method'=>'POST')) !!}
+                {!! Form::model($page, ['method' => 'PATCH','route' => ['pages.update', $page->id]]) !!}
+                {!! Form::hidden('id') !!}
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-10">
                         <div class="col-sm-12">
                             <div class="form-row">
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('title') text-danger @enderror" for="title">Title *</label>
-                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title') }}" id="title" placeholder="Title" required/>
+                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title', $page->title) }}" id="title" placeholder="Title" required/>
                                     @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('url') text-danger @enderror" for="url">Url *</label>
-                                    <input minlength="1" maxlength="100" type="text" class="form-control ae-input-field @error('url') is-invalid @enderror " name="url" value="{{ old('url') }}" id="url" placeholder="Url" required/>
-                                    @error('url') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    <span class="form-control ae-input-field">{{ $page->url }}</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-10">
                                     <label class="@error('description') text-danger @enderror" for="description">Description</label>
-                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description') }}" id="description" placeholder="Description">
+                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description', $page->description) }}" id="description" placeholder="Description">
                                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     <label class="@error('javascripts') text-danger @enderror" for="javascripts">Javascripts</label>
                                     {{old('javascripts')}}
                                     <treeselect-form 
-                                        v-bind:value="{{ (Session::getOldInput('javascripts')) ? json_encode(Session::getOldInput('javascripts')): json_encode(null) }}"
+                                        v-bind:value="{{ (Session::getOldInput('javascripts')) ? json_encode(Session::getOldInput('javascripts')): json_encode($page->javascripts) }}"
                                         v-bind:selectoptions="{{ json_encode($scripts) }}"
                                         v-bind:haserror="{{ $errors->has('javascripts') ? "true": "false" }}"
                                         v-bind:fieldname="{{ json_encode('javascripts[]') }}"
@@ -71,7 +71,7 @@
                                     <label class="@error('css') text-danger @enderror" for="css">Styles</label>
                                     {{old('css')}}
                                     <treeselect-form 
-                                        v-bind:value="{{ (Session::getOldInput('css')) ? json_encode(Session::getOldInput('css')): json_encode(null) }}"
+                                        v-bind:value="{{ (Session::getOldInput('css')) ? json_encode(Session::getOldInput('css')): json_encode($page->css) }}"
                                         v-bind:selectoptions="{{ json_encode($styles) }}"
                                         v-bind:haserror="{{ $errors->has('css') ? "true": "false" }}"
                                         v-bind:fieldname="{{ json_encode('css[]') }}"
@@ -87,7 +87,7 @@
                                     <label class="@error('template') text-danger @enderror" for="template">Html Template *</label>
                                     {{old('template')}}
                                     <treeselect-form 
-                                        v-bind:value="{{ (Session::getOldInput('template')) ? json_encode(Session::getOldInput('template')): json_encode(null) }}"
+                                        v-bind:value="{{ (Session::getOldInput('template')) ? json_encode(Session::getOldInput('template')): json_encode($page->template) }}"
                                         v-bind:selectoptions="{{ json_encode($files) }}"
                                         v-bind:haserror="{{ $errors->has('template') ? "true": "false" }}"
                                         v-bind:fieldname="{{ json_encode('template') }}"
@@ -123,10 +123,12 @@
     border: 1px solid #665847 !important;
 }
 </style>
+
 @endsection
 
 @section('javascript')
 <script src="{{ asset('tinymce_5.4.1/js/tinymce/tinymce.min.js') }}"></script>
 <script>
+    window.app.panels = {!! json_encode($panels) !!}
 </script>
 @endsection

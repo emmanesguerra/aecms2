@@ -23,6 +23,8 @@ Vue.component('treeselect-form', require('./components/Treeselect/SingleDimensio
 Vue.component('treeselect-form-multi', require('./components/Treeselect/MultiDimensionalArray.vue').default); 
 Vue.component('tinymce-form', require('./components/TinyMce/Form.vue').default);
 
+Vue.component('page-panel-form', require('./components/Page/Panel.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

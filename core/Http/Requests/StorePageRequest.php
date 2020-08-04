@@ -24,7 +24,11 @@ class StorePageRequest extends FormRequest
     public function rules()
     {
         return [
-            'nTitle' => 'required_if:oTitle,null'
+            'title' => 'required',
+            'url' => 'required',
+            'template' => 'required',
+            'contents.*.name' => 'sometimes|required',
+            'contents.*.selected_panel' => 'sometimes|required',
         ];
     }
     /**
@@ -35,7 +39,7 @@ class StorePageRequest extends FormRequest
     public function messages()
     {
         return [
-            'nTitle.required_if' => 'Please define a Title or select an existing page for this new page'
+            'contents.required' => 'Template contents are required.'
         ];
     }
 }

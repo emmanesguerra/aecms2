@@ -36,12 +36,12 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('title') text-danger @enderror" for="title">Title *</label>
-                                    <input type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title') }}" id="title" placeholder="Title">
+                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title') }}" id="title" placeholder="Title" required/>
                                     @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('url') text-danger @enderror" for="url">Url *</label>
-                                    <input type="text" class="form-control ae-input-field @error('url') is-invalid @enderror " name="url" value="{{ old('url') }}" id="url" placeholder="Url">
+                                    <input minlength="1" maxlength="100" type="text" class="form-control ae-input-field @error('url') is-invalid @enderror " name="url" value="{{ old('url') }}" id="url" placeholder="Url" required/>
                                     @error('url') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
@@ -60,7 +60,9 @@
                                         v-bind:value="{{ (Session::getOldInput('javascripts')) ? json_encode(Session::getOldInput('javascripts')): json_encode(null) }}"
                                         v-bind:selectoptions="{{ json_encode($scripts) }}"
                                         v-bind:haserror="{{ $errors->has('javascripts') ? "true": "false" }}"
-                                        v-bind:fieldname="{{ json_encode('javascripts') }}">
+                                        v-bind:fieldname="{{ json_encode('javascripts') }}"
+                                        v-bind:forpagetemplate="{{ json_encode(false) }}"
+                                        v-bind:forpagetemplateurl="{{ json_encode(null) }}">
                                     </treeselect-form>
                                     @error('javascripts') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
@@ -71,7 +73,9 @@
                                         v-bind:value="{{ (Session::getOldInput('css')) ? json_encode(Session::getOldInput('css')): json_encode(null) }}"
                                         v-bind:selectoptions="{{ json_encode($styles) }}"
                                         v-bind:haserror="{{ $errors->has('css') ? "true": "false" }}"
-                                        v-bind:fieldname="{{ json_encode('css') }}">
+                                        v-bind:fieldname="{{ json_encode('css') }}"
+                                        v-bind:forpagetemplate="{{ json_encode(false) }}"
+                                        v-bind:forpagetemplateurl="{{ json_encode(null) }}">
                                     </treeselect-form>
                                     @error('css') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
@@ -84,14 +88,18 @@
                                         v-bind:value="{{ (Session::getOldInput('template')) ? json_encode(Session::getOldInput('template')): json_encode(null) }}"
                                         v-bind:selectoptions="{{ json_encode($files) }}"
                                         v-bind:haserror="{{ $errors->has('template') ? "true": "false" }}"
-                                        v-bind:fieldname="{{ json_encode('template') }}">
+                                        v-bind:fieldname="{{ json_encode('template') }}"
+                                        v-bind:forpagetemplate="{{ json_encode(true) }}"
+                                        v-bind:forpagetemplateurl="'{!! route('pages.template') !!}'">
                                     </treeselect-form>
                                     @error('template') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             
-                            <tinymce-form v-bind:model="panel"  v-for="panel in panels">
-                            </tinymce-form>
+                            <page-panel-form v-for="panel in panels"
+                                        v-bind:model="panel"
+                                        v-bind:contents="{{ json_encode($contents) }}">
+                            </page-panel-form>
                             
                         </div>
                     </div>

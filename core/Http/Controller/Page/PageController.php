@@ -5,8 +5,10 @@ namespace Core\Http\Controller\Page;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Core\Http\Requests\StorePageRequest;
 use Core\Model\Page;
+use Core\Model\Content;
 
 class PageController extends Controller
 {
@@ -51,7 +53,10 @@ class PageController extends Controller
         $scripts = Storage::disk('javascripts')->allFiles();
         $styles = Storage::disk('css')->allFiles();
         
-        return view('admin.layouts.modules.page.create')->with(compact('files', 'scripts', 'styles'));
+        $contents = Content::get(['id', 'name']);
+        $contents->push(['id' => 'NEW', 'name' => 'Create New'])->toArray();
+        
+        return view('admin.layouts.modules.page.create')->with(compact('files', 'scripts', 'styles', 'contents'));
     }
 
     /**
@@ -64,12 +69,28 @@ class PageController extends Controller
     {
         try
         {
-            $data = [
-                'title' => ''
-            ];
+            DB::beginTransaction();
             
+            $page = Page::create($request->only('title', 'url', 'description', 'javascripts', 'css', 'template'));
+            
+            if($page) {
+                if($request->has('contents')) {
+                    foreach($request->contents as $tags => $data) {
+                        if(isset($data['selected_panel'])) {
+                            $contentId = $data['selected_panel'];
+                        } else {
+                            $content = Content::create(['name' => $data['name'], 'html_template' => $data['html_template'], 'type' => ($tags == 'Main') ? 'M': 'P']);
+                            $contentId = $content->id;
+                        }
+                        
+                        $page->contents()->attach($contentId, ['tags' => $tags]);
+                    }
+                }
+            }
+            DB::commit();
             return redirect()->route('pages.index')->with('status-success', 'Page created successfully');
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }

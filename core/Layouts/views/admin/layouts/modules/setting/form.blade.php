@@ -137,7 +137,9 @@
                                             v-bind:value="{{ (Session::getOldInput('timezone')) ? json_encode(Session::getOldInput('timezone')): json_encode($data['model']['timezone']) }}"
                                             v-bind:selectoptions="{{ json_encode($data['timezones']) }}"
                                             v-bind:haserror="{{ $errors->has('timezone') ? "true": "false" }}"
-                                            v-bind:fieldname="{{ json_encode('timezone') }}">
+                                            v-bind:fieldname="{{ json_encode('timezone') }}"
+                                            v-bind:forpagetemplate="{{ json_encode(false) }}"
+                                            v-bind:forpagetemplateurl="{{ json_encode(null) }}">
                                         </treeselect-form>
                                         @error('timezone') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>

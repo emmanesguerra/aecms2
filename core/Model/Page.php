@@ -7,6 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     protected $fillable = ['url', 'title', 'description', 'javascripts', 'css', 'template', 'template_html'];
+
+    public function getCssAttribute($value)
+    {
+        if(!empty($value)) {
+            return explode(',', $value);
+        }
+    }
+    
+    public function setCssAttribute($value)
+    {
+        if(!empty($value)) {
+            $this->attributes['css'] = implode(',', $value);
+        }
+    }
+    
+    public function getJavascriptsAttribute($value)
+    {
+        if(!empty($value)) {
+            return explode(',', $value);
+        }
+    }
+    
+    public function setJavascriptsAttribute($value)
+    {
+        if(!empty($value)) {
+            $this->attributes['javascripts'] = implode(',', $value);
+        } 
+    }
     
     /**
      * A page may be given various contents.

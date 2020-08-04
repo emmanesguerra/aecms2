@@ -23,8 +23,14 @@
                 <table id="pageslists" class="table table-striped table-bordered small">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Title</th>
                             <th>Url</th>
+                            <th>Description</th>
+                            <th>Javascripts</th>
+                            <th>CSS</th>
+                            <th>Template</th>
+                            <th class="text-nowrap">Date Updated</th>
                             <th width="15%">Action</th>
                         </tr>
                     </thead>
@@ -47,7 +53,29 @@
 <script src="{{ asset('DataTables-Bootstrap4/datatables.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-        var pagedtable = $('#pageslists').DataTable();
+        var pagedtable = $('#pageslists').DataTable({
+            processing: true,
+            "ajax": "{{ route('pages.data') }}",
+            "columns": [
+                {"data": "id"},
+                {"data": "title"},
+                {"data": "url"},
+                {"data": "description"},
+                {"data": "javascripts"},
+                {"data": "css"},
+                {"data": "template"},
+                {"data": "updated_at"},
+                {
+                    width: "5%",
+                    bSearchable: false,
+                    bSortable: false,
+                    mRender: function (data, type, full) {
+                        return "<a href='{{ route('pages.index') }}/" + full.id + "/edit'>Edit</a> | "
+                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("pages.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                    }
+                }
+            ]
+        });
     });
 </script>
 @endsection

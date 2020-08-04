@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Core\Http\Requests\StorePageRequest;
 use Core\Model\Page;
 use Core\Model\Content;
+use Core\Library\DataTables;
 
 class PageController extends Controller
 {
@@ -20,6 +21,46 @@ class PageController extends Controller
     public function index()
     {
         return view('admin.layouts.modules.page.index');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Request $request)
+    {
+        $tablecols = [
+            1 => ['id'],
+            2 => ['title'],
+            3 => ['url'],
+            4 => ['description'],
+            5 => ['javascripts'],
+            6 => ['css'],
+            7 => ['template'],
+            8 => ['updated_at'],
+        ];
+        
+        $filteredmodel = DB::table('pages')
+                ->select(DB::raw("id, 
+                    title, 
+                    url,
+                    description, 
+                    javascripts, 
+                    css,
+                    template,
+                    updated_at")
+            );
+        
+        $modelcnt = $filteredmodel->count();
+        
+        $data = DataTables::DataTableFilters($filteredmodel, $request, $tablecols, $hasValue, $totalFiltered);
+        
+        return response(['data'=> $data,
+            'draw' => $request->draw,
+            'recordsTotal' => ($hasValue)? $data->count(): $modelcnt,
+            'recordsFiltered' => ($hasValue)? $totalFiltered: $modelcnt], 200);
     }
     
     public function template(Request $request)
@@ -137,6 +178,8 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Page::find($id)->delete();
+        return redirect()->route('pages.index')
+                        ->with('success','Page deleted successfully');
     }
 }

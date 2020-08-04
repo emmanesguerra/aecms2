@@ -18,6 +18,6 @@ class Page extends Model
                 'page_has_contents',
                 'page_id',
                 'content_id'
-        );
+        )->withPivot('tags');
     }
 }

@@ -87,6 +87,7 @@ class RoleController extends Controller
     {
         try 
         {
+            DB::beginTransaction();
             $this->validate($request, [
                 'name' => 'required|unique:roles,name',
                 'permission' => 'required',
@@ -97,9 +98,11 @@ class RoleController extends Controller
             $role->syncPermissions($request->input('permission'));
 
 
+            DB::commit();
             return redirect()->route('roles.index')
                             ->with('status-success','Role created successfully');
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }
@@ -150,6 +153,7 @@ class RoleController extends Controller
     {
         try
         {
+            DB::beginTransaction();
             $this->validate($request, [
                 'name' => 'required',
                 'permission' => 'required',
@@ -161,9 +165,11 @@ class RoleController extends Controller
 
             $role->syncPermissions($request->input('permission'));
 
+            DB::commit();
             return redirect()->route('roles.index')
                             ->with('status-success','Role updated successfully');
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }

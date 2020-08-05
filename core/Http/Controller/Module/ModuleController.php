@@ -81,6 +81,7 @@ class ModuleController extends Controller
     {
         try
         {
+            DB::beginTransaction();
             //save to db
             $module = Module::create($request->only('module_name', 'description', 'route_index_url', 'icon'));
             
@@ -95,8 +96,10 @@ class ModuleController extends Controller
                 $this->CreateContentData($module->module_name, $request);
             }
             
+            DB::commit();
             return redirect()->route('modules.index')->with('status-success', 'Module created successfully');
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }
@@ -201,15 +204,18 @@ class ModuleController extends Controller
     {
         try
         {
+            DB::beginTransaction();
             $input = $request->all();
 
             $module = Module::find($id);
             $module->update($input);
 
+            DB::commit();
             return redirect()->route('modules.index')
                             ->with('status-success','Module updated successfully');
             
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }

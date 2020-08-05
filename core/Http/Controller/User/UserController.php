@@ -85,12 +85,15 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         try {
+            DB::beginTransaction();
             $user = User::create($request->only('firstname', 'lastname', 'middlename', 'email', 'password'));
             
             $user->assignRole($request->input('roles'));
             
+            DB::commit();
             return redirect()->route('users.index')->with('status-success', 'User created successfully');
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }
@@ -141,18 +144,26 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $input = $request->all();
+        try
+        {
+            DB::beginTransaction();
+            $input = $request->all();
 
-        $user = User::find($id);
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+            $user = User::find($id);
+            $user->update($input);
+            DB::table('model_has_roles')->where('model_id',$id)->delete();
 
 
-        $user->assignRole($request->input('roles'));
+            $user->assignRole($request->input('roles'));
 
 
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+            DB::commit();
+            return redirect()->route('users.index')
+                            ->with('status-success','User updated successfully');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**
@@ -163,8 +174,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        try
+        {
+            User::find($id)->delete();
+            return redirect()->route('users.index')
+                            ->with('status-success','User deleted successfully');
+        } catch (Exception $ex) {
+            return redirect()->route('users.index')
+                            ->with('status-failed', $ex->getMessage());
+        }
     }
 }

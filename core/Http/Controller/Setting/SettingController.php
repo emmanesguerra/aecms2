@@ -3,6 +3,7 @@
 namespace Core\Http\Controller\Setting;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Core\Library\Modules\SystemConfigLibrary;
 use Core\Library\DropdownOptions;
@@ -57,12 +58,15 @@ class SettingController extends Controller
     public function store(StoreSettingsRequest $request)
     {
         try {
+            DB::beginTransaction();
             foreach ($request->all() as $key => $value) {
                 SystemConfigLibrary::save($key, $value);
             }
             
+            DB::commit();
             return redirect()->back()->with('status-success', 'System settings updated!');
         } catch (\Exception $ex) {
+            DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
         }
     }

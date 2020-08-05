@@ -37,6 +37,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/template', '\Core\Http\Controller\Page\PageController@template')->name('pages.template');
         });
         Route::resource('pages','\Core\Http\Controller\Page\PageController');
+        
+        Route::prefix('menus')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\Menu\MenuController@data')->name('menus.data');
+        });
+        Route::resource('menus','\Core\Http\Controller\Menu\MenuController');
     });
     
 });

@@ -20,6 +20,9 @@ use Core\Observers\ContentObserver;
 use Core\Model\Page;
 use Core\Observers\PageObserver;
 
+use Core\Model\Menu;
+use Core\Observers\MenuObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -47,5 +50,6 @@ class AppServiceProvider extends ServiceProvider
         Module::observe(ModuleObserver::class);
         Content::observe(ContentObserver::class);
         Page::observe(PageObserver::class);
+        Menu::observe(MenuObserver::class);
     }
 }

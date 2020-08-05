@@ -24,7 +24,7 @@
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th width="20%">Action</th>
+                            <th width="30%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,54 +45,112 @@
 @section('javascript')
 <script src="{{ asset('DataTables-Bootstrap4/datatables.min.js') }}"></script>
 <script>
+        
+    var counter = 1;
+    var iscreating = false;
+    function createNewRow(parentid, lvl, isNew, element) {
+        if(!iscreating) {
+            var currentPage = menudtable.page();
+                        
+            var strtitle = "";
+            for (var i=0;i<lvl;i++) {
+                strtitle += "<i class='fas fa-long-arrow-alt-right'> </i> &nbsp;&nbsp;&nbsp;&nbsp;";
+            }
+            
+            var strinput = '<input id="ntitle-'+counter+'" type="text" class="form-control form-control-sm" placeholder="Menu Title" />';
+            if(!isNew) {
+                var options = "";
+                @foreach ($pages as $page)
+                    options += "<option value='{{$page->id}}'>{{$page->title}}</option>";
+                @endforeach
+                strinput = '<select id="pageid-'+counter+'" class="form-control form-control-sm">'+options+'</select>';
+            }
+            
+                        
+            menudtable.row.add({
+                'title': '<div class="form-inline">\n\
+                        '+strtitle + strinput +'\n\
+                        <div id="error-'+counter+'" class="col-sm-12 text-danger my-1"></div>\n\
+                    </div>',
+                'button': '<button onclick="saveRow('+counter+', '+parentid+')" type="button" class="btn btn-sm btn-primary">Save</button>\n\
+                 <button onclick="removeRow(this)" type="button" data-role="help" class="btn btn-sm btn-default">Cancel</button>'}).draw();
+
+            counter++;
+            iscreating = true;
+            
+
+            //move added row to desired index (here the row we clicked on)
+            var index = menudtable.row( $(element).closest('tr') ).index()+1,
+                rowCount = menudtable.data().length-1,
+                insertedRow = menudtable.row(rowCount).data(),
+                tempRow;
+
+            for (var i=rowCount;i>index;i--) {
+                tempRow = menudtable.row(i-1).data();
+                menudtable.row(i).data(tempRow);
+                menudtable.row(i-1).data(insertedRow);
+            }     
+            //refresh the current page
+            menudtable.page(currentPage).draw(true);
+        }
+    }
+    
     $(document).ready(function () {
-        var menudtable = $('#menulists').DataTable({
+        
+        menudtable = $('#menulists').DataTable({
             processing: true,
+            ordering: false,
+            paging: false,
+            bInfo : false,
             "ajax": "{{ route('menus.data') }}",
             "columns": [
-                {"data": "title"},
                 {
-                    width: "20%",
+                    bSearchable: false,
+                    bSortable: false,
+                    mRender: function (data, type, full) { 
+                        var strtitle = "";
+                        for (var i=1;i<full.lvl;i++) {
+                            strtitle += "<i class='fas fa-long-arrow-alt-right'></i>&nbsp;&nbsp;&nbsp;&nbsp;";
+                        }
+                        return strtitle + full.title;
+                    }
+                },
+                {
+                    width: "30%",
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
-                        return "<a href='{{ route('modules.index') }}/" + full.id + "/edit'>Edit</a> | "
-                                + "<a href='{{ route('modules.index') }}/" + full.id + "'>View Details</a>"
+                        if(full.button) {
+                            return full.button;
+                        } else {
+                            var str = "<span onclick='createNewRow("+full.id+","+full.lvl +" , false, this)' class='text-primary'>Add Sub Menu</span>";
+                            if((full.lft + 1) == full.rgt) {
+                                str += " | <span class='text-danger' >Remove Menu</span>"
+                            }
+                            return str;
+                        }
                     }
                 }
             ]
         });
         
-        var counter = 1;
-        var iscreating = false;
         $('#addnew').on( 'click', function () {
-            if(!iscreating) {
-                menudtable.row.add([
-                    '   <div class="form-row">\n\
-                            <input id="ntitle-'+counter+'" type="text" class="form-control form-control-sm" placeholder="Menu Title" /> \n\
-                            <div id="error-'+counter+'" class="col-sm-12 text-danger my-1"></div>\n\
-                        </div>',
-                    '<button onclick="saveRow('+counter+', 0)" type="button" class="btn btn-sm btn-primary">Save</button>\n\
-                     <button onclick="removeRow()" type="button" class="btn btn-sm btn-default">Cancel</button>']).draw( false );
-
-                counter++;
-                iscreating = true;
-            }
+            createNewRow(0, 0, true);
         });
     
-        removeRow = function () {
-            menudtable.row().remove().draw(false);
+        removeRow = function (element) {
+            menudtable.row($(element).closest('tr')).remove().draw(false);
             iscreating = false;
         }
     
         saveRow = function (counterid, parentid) {
             axios.post("{{ route('menus.store') }}", {
                 nTitle: $('#ntitle-'+counterid).val(),
+                pageId: $('#pageid-'+counterid).val(),
                 parentId: parentid
             }).then(function (response) {
-                console.log(response);
+                window.location = "{{ route('menus.index') }}";
             }).catch(function (error) {
-                console.log(error.response)
                 $('#error-'+counterid).html(error.response.data.errors.nTitle[0]);
             });
         }

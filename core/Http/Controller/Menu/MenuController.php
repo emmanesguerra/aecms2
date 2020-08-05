@@ -5,8 +5,10 @@ namespace Core\Http\Controller\Menu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Core\Http\Requests\StoreMenuRequest;
 use Core\Model\Menu;
+use Core\Model\Page;
 use Core\Library\HierarchicalDB;
 use Core\Library\DataTables;
 
@@ -19,7 +21,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        return view('admin.layouts.modules.menu.index');
+        $pages = \Core\Model\Page::get(['id', 'title']);
+        
+        return view('admin.layouts.modules.menu.index')->with(compact('pages'));
     }
 
     /**
@@ -36,8 +40,12 @@ class MenuController extends Controller
         
         $filteredmodel = DB::table('menus')
                 ->select(DB::raw("title, 
-                    parent_id")
-            );
+                    parent_id,
+                    lft,
+                    rgt,
+                    id,
+                    lvl")
+            )->orderBy('lft');
         
         $modelcnt = $filteredmodel->count();
         
@@ -69,6 +77,8 @@ class MenuController extends Controller
     {
         try
         {
+            DB::beginTransaction();
+            
             $parent = Menu::find($request->parentId);
             
             $hierarchyLib = new HierarchicalDB('menus');
@@ -83,7 +93,8 @@ class MenuController extends Controller
                 $lvl = 1;
             }
             $right = $left + 1;
-            $title = ($request->has('pageId')) ? Page::find($request->pageId)->title: $request->nTitle;
+            $page = Page::find($request->pageId);
+            $title = ($page) ? $page->title: $request->nTitle;
             
             Menu::create([
                 'title' => $title,
@@ -94,9 +105,14 @@ class MenuController extends Controller
                 'lvl' => $lvl
             ]);
             
+            DB::commit();
+            
+            Session::flash('status-success', 'New menu added');
+            
             return response(['response'=> 'Menu created'], 200);
             
         } catch (\Exception $ex) {
+            DB::rollback();
             return response(['response'=> $ex->getMessage()], 400);
         }
     }

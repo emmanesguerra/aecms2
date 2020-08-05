@@ -28,29 +28,29 @@ class HierarchicalDB {
     public function updateLftPlus($lft)
     {
         DB::table($this->table)
-                ->update('lft', DB::raw('lft+2'))
-                ->where('lft', '>=', $lft);
+                ->where('lft', '>=', $lft)
+                ->update(['lft' => DB::raw('lft+2')]);
     }
     
     public function updateRgtPlus($rgt)
     {
         DB::table($this->table)
-                ->update('rgt', DB::raw('rgt+2'))
-                ->where('rgt', '>=', $rgt);
+                ->where('rgt', '>=', $rgt)
+                ->update(['rgt' => DB::raw('rgt+2')]);
     }
     
     public function updateLftMinus($lft)
     {
         DB::table($this->table)
-                ->update('lft', DB::raw('lft-2'))
-                ->where('lft', '>=', $lft);
+                ->where('lft', '>=', $lft)
+                ->update(['lft' => DB::raw('lft-2')]);
     }
     
     public function updateRgtMinus($rgt)
     {
         DB::table($this->table)
-                ->update('rgt', DB::raw('rgt-2'))
-                ->where('rgt', '>=', $rgt);
+                ->where('rgt', '>=', $rgt)
+                ->update(['rgt' => DB::raw('rgt-2')]);
     }
     
     public function getLastRgt()

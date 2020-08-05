@@ -9,7 +9,7 @@
                 <li><a href="{{ route('roles.index') }}"><i class="fa fa-unlock-alt"></i>&nbsp;<span>Roles</span></a></li>
                 <li><a href="{{ route('modules.index') }}"><i class="fas fa-atom"></i>&nbsp;<span>Modules</span></a></li>
                 <li><a href="{{ route('pages.index') }}"><i class="fas fa-copy"></i>&nbsp;<span>Pages</span></a></li>
-                <li><a href="/"><i class="fa fa-bars"></i>&nbsp;<span>Menus</span></a></li>
+                <li><a href="{{ route('menus.index') }}"><i class="fa fa-bars"></i>&nbsp;<span>Menus</span></a></li>
             </ul>
         </div>
     </div>

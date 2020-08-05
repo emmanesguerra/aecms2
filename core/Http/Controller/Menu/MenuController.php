@@ -159,6 +159,30 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            DB::beginTransaction();
+            
+            $menu = Menu::find($id);
+            
+            if($menu) {
+                $hierarchyLib = new HierarchicalDB('menus');
+                $hierarchyLib->updateLftMinus($menu->rgt);
+                $hierarchyLib->updateRgtMinus($menu->rgt);
+                
+                $title = $menu->title;
+                
+                $menu->delete();
+            } 
+            
+            DB::commit();
+            return redirect()->route('menus.index')
+                        ->with('status-success', $title . ' has been removed');
+            
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return redirect()->route('menus.index')
+                        ->with('status-failed', $ex->getMessage());
+        }
     }
 }

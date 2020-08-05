@@ -23,6 +23,7 @@
                 <table id="menulists" class="table table-striped table-bordered small">
                     <thead>
                         <tr>
+                            <th width="5%">ID</th>
                             <th>Title</th>
                             <th width="30%">Action</th>
                         </tr>
@@ -68,6 +69,7 @@
             
                         
             menudtable.row.add({
+                'id': "",
                 'title': '<div class="form-inline">\n\
                         '+strtitle + strinput +'\n\
                         <div id="error-'+counter+'" class="col-sm-12 text-danger my-1"></div>\n\
@@ -95,6 +97,15 @@
         }
     }
     
+    function deleteRow(id) {
+        axios.delete("{{ route('menus.index') }}" + '/' + id)
+        .then(function (response) {
+            window.location = "{{ route('menus.index') }}";
+        }).catch(function (error) {
+            window.location = "{{ route('menus.index') }}";
+        });
+    }
+    
     $(document).ready(function () {
         
         menudtable = $('#menulists').DataTable({
@@ -104,6 +115,7 @@
             bInfo : false,
             "ajax": "{{ route('menus.data') }}",
             "columns": [
+                {"data": "id"},
                 {
                     bSearchable: false,
                     bSortable: false,
@@ -123,9 +135,9 @@
                         if(full.button) {
                             return full.button;
                         } else {
-                            var str = "<span onclick='createNewRow("+full.id+","+full.lvl +" , false, this)' class='text-primary'>Add Sub Menu</span>";
+                            var str = "<span onclick='createNewRow("+full.id+","+full.lvl +" , false, this)' class='text-primary' style='cursor:pointer'>Add Sub Menu</span>";
                             if((full.lft + 1) == full.rgt) {
-                                str += " | <span class='text-danger' >Remove Menu</span>"
+                                str += ' | <span onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("menus.index") }}\/' + full.id + '\')" class="text-danger"  style="cursor:pointer">Remove Menu</span>'
                             }
                             return str;
                         }

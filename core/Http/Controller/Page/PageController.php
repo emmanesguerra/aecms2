@@ -226,6 +226,6 @@ class PageController extends Controller
     {
         Page::find($id)->delete();
         return redirect()->route('pages.index')
-                        ->with('success','Page deleted successfully');
+                        ->with('status-success','Page deleted successfully');
     }
 }

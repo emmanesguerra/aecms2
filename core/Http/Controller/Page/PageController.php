@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Core\Http\Requests\StorePageRequest;
+use Core\Http\Requests\UpdatePageRequest;
 use Core\Model\Page;
 use Core\Model\Content;
 use Core\Library\DataTables;
@@ -184,7 +185,7 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePageRequest $request, $id)
     {
         try
         {

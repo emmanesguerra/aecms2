@@ -24,7 +24,12 @@ class UpdatePageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'required',
+            'title' => 'required',
+            'url' => 'required',
+            'template' => 'required',
+            'contents.*.name' => 'required_without:pageId',
+            'contents.*.selected_panel' => 'sometimes|required',
         ];
     }
 }

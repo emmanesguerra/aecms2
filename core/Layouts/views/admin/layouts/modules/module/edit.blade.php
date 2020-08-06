@@ -43,7 +43,7 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-10">
                                     <label class="@error('description') text-danger @enderror" for="description">Description</label>
-                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description', $module->description) }}" id="description" placeholder="Description">
+                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description', $module->description) }}" id="description" placeholder="Description" />
                                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div  class="form-group  col-sm-3">
                                     <label class="@error('icon') text-danger @enderror" for="icon">Menu Icon *</label>
-                                    <input type="text" class="form-control ae-input-field @error('icon') is-invalid @enderror " name="icon" value="{{ old('icon', $module->icon) }}" id="icon" placeholder="Menu Icon">
+                                    <input maxlength="50" type="text" class="form-control ae-input-field @error('icon') is-invalid @enderror " name="icon" value="{{ old('icon', $module->icon) }}" id="icon" placeholder="Menu Icon" required/>
                                     @error('icon') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>

@@ -36,26 +36,26 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('module_name') text-danger @enderror" for="module_name">Module name *</label>
-                                    <input type="text" class="form-control ae-input-field @error('module_name') is-invalid @enderror " name="module_name" value="{{ old('module_name') }}" id="module_name" placeholder="Module name">
+                                    <input maxlength="50" type="text" class="form-control ae-input-field @error('module_name') is-invalid @enderror " name="module_name" value="{{ old('module_name') }}" id="module_name" placeholder="Module name" required/>
                                     @error('module_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-10">
                                     <label class="@error('description') text-danger @enderror" for="description">Description</label>
-                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description') }}" id="description" placeholder="Description">
+                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description') }}" id="description" placeholder="Description" />
                                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-3">
                                     <label class="@error('route_index_url') text-danger @enderror" for="route_index_url">Route Name (index) *</label>
-                                    <input type="text" class="form-control ae-input-field @error('route_index_url') is-invalid @enderror " name="route_index_url" value="{{ old('route_index_url') }}" id="route_index_url" placeholder="Route Name">
+                                    <input maxlength="50" type="text" class="form-control ae-input-field @error('route_index_url') is-invalid @enderror " name="route_index_url" value="{{ old('route_index_url') }}" id="route_index_url" placeholder="Route Name" required/>
                                     @error('route_index_url') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-3">
                                     <label class="@error('icon') text-danger @enderror" for="icon">Menu Icon *</label>
-                                    <input type="text" class="form-control ae-input-field @error('icon') is-invalid @enderror " name="icon" value="{{ old('icon') }}" id="icon" placeholder="Menu Icon">
+                                    <input maxlength="50" type="text" class="form-control ae-input-field @error('icon') is-invalid @enderror " name="icon" value="{{ old('icon') }}" id="icon" placeholder="Menu Icon" required/>
                                     @error('icon') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>

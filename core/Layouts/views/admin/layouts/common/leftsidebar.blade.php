@@ -32,7 +32,7 @@
         <div class="card-body">
             <ul class="admin-menu">
                 <li><a href="/"><span>Contents</span><span class='raq'>&raquo;</span></a></li>
-                <li><a href="/"><span>Uploaded Files</span><span class='raq'>&raquo;</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.files') === 0) ? 'active' : '' }}" href="{{ route('admin.files.index') }}"><span>Uploaded Files</span><span class='raq'>&raquo;</span></a></li>
                 <li><a href="/"><span>Office Location</span><span class='raq'>&raquo;</span></a></li>
             </ul>
         </div>

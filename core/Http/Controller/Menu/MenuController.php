@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Core\Http\Requests\StoreMenuRequest;
+use Core\Model\Content;
 use Core\Model\Menu;
 use Core\Model\Page;
 use Core\Library\HierarchicalDB;
@@ -96,7 +97,7 @@ class MenuController extends Controller
             $page = Page::find($request->pageId);
             $title = ($page) ? $page->title: $request->nTitle;
             
-            Menu::create([
+            $menu = Menu::create([
                 'title' => $title,
                 'parent_id' => $request->parentId,
                 'page_id' => ($request->has('pageId')) ? $request->pageId: null,
@@ -104,6 +105,8 @@ class MenuController extends Controller
                 'rgt' => $right,
                 'lvl' => $lvl
             ]);
+            
+            $this->createContentPanel($menu);
             
             DB::commit();
             
@@ -115,6 +118,22 @@ class MenuController extends Controller
             DB::rollback();
             return response(['response'=> $ex->getMessage()], 400);
         }
+    }
+    
+    private function createContentPanel($menu)
+    {
+        if($menu) {
+            if(is_null($menu->page_id)) {
+                Content::create([
+                    'name' => $menu->title . ' Nav',
+                    'type' => 'N',
+                    'class_namespace' => '\Core\Http\Controller\Menu\MenuController',
+                    'method_name' => 'navi'
+                ]);
+            }
+        } 
+        
+        return;
     }
 
     /**
@@ -172,6 +191,8 @@ class MenuController extends Controller
                 
                 $title = $menu->title;
                 
+                $this->deleteContentPanel($menu);
+                
                 $menu->delete();
             } 
             
@@ -184,5 +205,21 @@ class MenuController extends Controller
             return redirect()->route('menus.index')
                         ->with('status-failed', $ex->getMessage());
         }
+    }
+    
+    private function deleteContentPanel($menu)
+    {
+        if(is_null($menu->page_id)) {
+            $content = Content::where([
+                'name' => $menu->title . ' Nav',
+                'type' => 'N'
+            ])->first();
+            
+            if($content) {
+                $content->delete();
+            }
+        }
+        
+        return;
     }
 }

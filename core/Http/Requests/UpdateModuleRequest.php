@@ -24,7 +24,6 @@ class UpdateModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'icon' => 'required|max:50'
         ];
     }
 }

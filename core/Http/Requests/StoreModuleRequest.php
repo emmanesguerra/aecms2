@@ -25,8 +25,7 @@ class StoreModuleRequest extends FormRequest
     {
         return [
             'module_name' => 'required|max:50',
-            'route_index_url' => 'required|max:50',
-            'icon' => 'required|max:50'
+            'route_index_url' => 'required|max:50'
         ];
     }
 }

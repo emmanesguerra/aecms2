@@ -42,6 +42,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Menu\MenuController@data')->name('menus.data');
         });
         Route::resource('menus','\Core\Http\Controller\Menu\MenuController');
+        
+        Route::prefix('files')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\UploadedFiles\FileController@data')->name('files.data');
+        });
+        Route::resource('files','\Core\Http\Controller\UploadedFiles\FileController');
     });
     
 });

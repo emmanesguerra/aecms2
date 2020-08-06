@@ -1,7 +1,7 @@
 @extends('admin.home')
 
 @section('module-content')
-<div class="col-md-9 main-panel">
+<section class="main-panel">
     <div class="card">
         <div class="card-header">Dashboard</div>
 
@@ -15,5 +15,5 @@
             You are logged in!
         </div>
     </div>
-</div>
+</section>
 @endsection

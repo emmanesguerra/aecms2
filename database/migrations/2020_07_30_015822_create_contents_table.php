@@ -23,6 +23,8 @@ class CreateContentsTable extends Migration
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+            
+            $table->index(['name', 'type']);
         });
     }
 

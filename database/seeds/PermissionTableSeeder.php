@@ -46,7 +46,31 @@ class PermissionTableSeeder extends Seeder
                'menus-create',
                'menus-edit',
                'menus-delete',
-           ]
+           ],
+            'maincontents' => [
+                'maincontents-list',
+                'maincontents-create',
+                'maincontents-edit',
+                'maincontents-delete',
+            ],
+            'panels' => [
+                'panels-list',
+                'panels-create',
+                'panels-edit',
+                'panels-delete',
+            ],
+            'files' => [
+                'files-list',
+                'files-create',
+                'files-edit',
+                'files-delete',
+            ],
+            'contact' => [
+                'contact-list',
+                'contact-create',
+                'contact-edit',
+                'contact-delete',
+            ],
         ];
 
 

@@ -46,17 +46,11 @@ class PermissionTableSeeder extends Seeder
                'menus-edit',
                'menus-delete',
            ],
-            'maincontents' => [
-                'maincontents-list',
-                'maincontents-create',
-                'maincontents-edit',
-                'maincontents-delete',
-            ],
-            'panels' => [
-                'panels-list',
-                'panels-create',
-                'panels-edit',
-                'panels-delete',
+            'contents' => [
+                'contents-list',
+                'contents-create',
+                'contents-edit',
+                'contents-delete',
             ],
             'files' => [
                 'files-list',

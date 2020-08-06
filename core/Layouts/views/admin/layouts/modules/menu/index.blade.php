@@ -117,7 +117,6 @@
             "columns": [
                 {"data": "id"},
                 {
-                    bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) { 
                         var strtitle = "";

@@ -60,7 +60,7 @@
             
             var strinput = '<input maxlength="46" id="ntitle-'+counter+'" type="text" class="form-control form-control-sm" placeholder="Menu Title"/>';
             if(!isNew) {
-                var options = "";
+                var options = "<option value='0'>Select a page</option>";
                 @foreach ($pages as $page)
                     options += "<option value='{{$page->id}}'>{{$page->title}}</option>";
                 @endforeach
@@ -162,7 +162,13 @@
             }).then(function (response) {
                 window.location = "{{ route('menus.index') }}";
             }).catch(function (error) {
-                $('#error-'+counterid).html(error.response.data.errors.nTitle[0]);
+                var strerror = "";
+                $.each(error.response.data.errors, function(index, err) {
+                    $.each(err, function(i, strerr) {
+                        strerror += strerr + "<br />";
+                    });
+                });
+                $('#error-'+counterid).html(strerror);
             });
         }
     });

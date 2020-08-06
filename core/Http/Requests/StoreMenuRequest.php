@@ -25,6 +25,7 @@ class StoreMenuRequest extends FormRequest
     {
         return [
             'nTitle' => 'required_without:pageId|unique:menus,title|max:46',
+            'pageId' => 'gt:0',
         ];
     }
     
@@ -39,6 +40,7 @@ class StoreMenuRequest extends FormRequest
             'nTitle.required_without' => 'This field is required',
             'nTitle.unique' => 'This title has already been taken',
             'nTitle.max' => 'This title may not be greater than 46 characters',
+            'pageId.gt' => 'Please select a page'
         ];
     }
 }

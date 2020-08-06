@@ -58,7 +58,7 @@
                 strtitle += "<i class='fas fa-long-arrow-alt-right'> </i> &nbsp;&nbsp;&nbsp;&nbsp;";
             }
             
-            var strinput = '<input id="ntitle-'+counter+'" type="text" class="form-control form-control-sm" placeholder="Menu Title" />';
+            var strinput = '<input maxlength="46" id="ntitle-'+counter+'" type="text" class="form-control form-control-sm" placeholder="Menu Title"/>';
             if(!isNew) {
                 var options = "";
                 @foreach ($pages as $page)

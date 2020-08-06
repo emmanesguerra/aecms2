@@ -24,7 +24,21 @@ class StoreMenuRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nTitle' => 'required_without:pageId|unique:menus,title|max:46',
+        ];
+    }
+    
+    /**
+    * Get the error messages for the defined validation rules.
+    *
+    * @return array
+    */
+    public function messages()
+    {
+        return [
+            'nTitle.required_without' => 'This field is required',
+            'nTitle.unique' => 'This title has already been taken',
+            'nTitle.max' => 'This title may not be greater than 46 characters',
         ];
     }
 }

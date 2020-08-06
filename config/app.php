@@ -180,6 +180,11 @@ return [
          */
 	Spatie\Permission\PermissionServiceProvider::class,
 	Collective\Html\HtmlServiceProvider::class,
+        
+        /*
+         * Image Providers
+         */
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -237,6 +242,10 @@ return [
          */
 	'Form' => Collective\Html\FormFacade::class,
 	'Html' => Collective\Html\HtmlFacade::class,
+        /*
+         * Images
+         */
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

@@ -40,6 +40,12 @@ class PermissionTableSeeder extends Seeder
                'pages-create',
                'pages-edit',
                'pages-delete',
+           ],
+           'menus' => [
+               'menus-list',
+               'menus-create',
+               'menus-edit',
+               'menus-delete',
            ]
         ];
 

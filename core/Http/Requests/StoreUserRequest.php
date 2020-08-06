@@ -28,7 +28,7 @@ class StoreUserRequest extends FormRequest
             'lastname' => 'max:50',
             'middlename' => 'max:50',
             'email' => 'required|unique:users,email|max:191',
-            'password' => 'required|confirmed|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'password' => 'required|confirmed|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/',
             'roles' => 'required'
         ];
     }

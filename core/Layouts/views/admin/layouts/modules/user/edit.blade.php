@@ -37,24 +37,24 @@
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-4">
                                         <label class="@error('firstname') text-danger @enderror" for="firstname">First name *</label>
-                                        <input type="text" class="form-control ae-input-field @error('firstname') is-invalid @enderror " name="firstname" value="{{ old('firstname', $user->firstname) }}" id="firstname" placeholder="First name">
+                                        <input maxlength="50" type="text" class="form-control ae-input-field @error('firstname') is-invalid @enderror " name="firstname" value="{{ old('firstname', $user->firstname) }}" id="firstname" placeholder="First name" required />
                                         @error('firstname') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                     <div  class="form-group  col-sm-4">
                                         <label class="@error('middlename') text-danger @enderror" for="middlename">Middle name</label>
-                                        <input type="text" class="form-control ae-input-field @error('middlename') is-invalid @enderror " name="middlename" value="{{ old('middlename', $user->middlename) }}" id="middlename" placeholder="Middle name">
+                                        <input maxlength="50" type="text" class="form-control ae-input-field @error('middlename') is-invalid @enderror " name="middlename" value="{{ old('middlename', $user->middlename) }}" id="middlename" placeholder="Middle name" />
                                         @error('middlename') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                     <div  class="form-group  col-sm-4">
                                         <label class="@error('lastname') text-danger @enderror" for="lastname">Last name</label>
-                                        <input type="text" class="form-control ae-input-field @error('lastname') is-invalid @enderror " name="lastname" value="{{ old('lastname', $user->lastname) }}" id="lastname" placeholder="Last name">
+                                        <input maxlength="50" type="text" class="form-control ae-input-field @error('lastname') is-invalid @enderror " name="lastname" value="{{ old('lastname', $user->lastname) }}" id="lastname" placeholder="Last name" />
                                         @error('lastname') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-6">
                                         <label class="@error('email') text-danger @enderror" for="email">Email *</label>
-                                        <input type="text" class="form-control ae-input-field @error('email') is-invalid @enderror " name="email" value="{{ old('email', $user->email) }}" id="email" placeholder="Email">
+                                        <input maxlength="191" type="text" class="form-control ae-input-field @error('email') is-invalid @enderror " name="email" value="{{ old('email', $user->email) }}" id="email" placeholder="Email" required />
                                         @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
-                            <button data-toggle="modal" data-target="#settingsModal" type="button" class="btn btn-primary">Submit</button>
+                            <input  type="submit" class="btn btn-primary" value="Submit" />
                         </div>
                         <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

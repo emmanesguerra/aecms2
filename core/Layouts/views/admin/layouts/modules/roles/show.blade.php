@@ -8,7 +8,7 @@
             <div class="card-header">
                 Displaying details of {{ $role->name }}
                 @can('roles-list')
-                <a href="{{ route('roles.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.roles.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
         

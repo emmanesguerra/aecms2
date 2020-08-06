@@ -5,22 +5,22 @@
         <div class="card-body">
             <ul class="admin-menu">
                 @can('settings-edit')
-                <li><a href="{{ route('settings.index') }}"><i class="fas fa-cog"></i>&nbsp;<span>Settings</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.settings') === 0) ? 'active' : '' }}" href="{{ route('admin.settings.index') }}"><span>Settings</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
                 @can('users-list')
-                <li><a href="{{ route('users.index') }}"><i class="far fa-address-book"></i>&nbsp;<span>Users</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.users') === 0) ? 'active' : '' }}" href="{{ route('admin.users.index') }}"><span>Users</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
                 @can('roles-list')
-                <li><a href="{{ route('roles.index') }}"><i class="fa fa-unlock-alt"></i>&nbsp;<span>Roles</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.roles') === 0) ? 'active' : '' }}" href="{{ route('admin.roles.index') }}"><span>Roles</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
                 @can('modules-list')
-                <li><a href="{{ route('modules.index') }}"><i class="fas fa-atom"></i>&nbsp;<span>Modules</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.modules') === 0) ? 'active' : '' }}" href="{{ route('admin.modules.index') }}"><span>Modules</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
                 @can('pages-list')
-                <li><a href="{{ route('pages.index') }}"><i class="fas fa-copy"></i>&nbsp;<span>Pages</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.pages') === 0) ? 'active' : '' }}" href="{{ route('admin.pages.index') }}"><span>Pages</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
                 @can('menus-list')
-                <li><a href="{{ route('menus.index') }}"><i class="fa fa-bars"></i>&nbsp;<span>Menus</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.menus') === 0) ? 'active' : '' }}" href="{{ route('admin.menus.index') }}"><span>Menus</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
             </ul>
         </div>
@@ -31,12 +31,9 @@
 
         <div class="card-body">
             <ul class="admin-menu">
-                <li><a href="/"><i class="fa fa-gears"></i> <span>Main Contents</span></a></li>
-                <li><a href="/"><i class="fa fa-user-o"></i> <span>Panels</span></a></li>
-                <li><a href="/"><i class="fa fa-unlock-alt"></i> <span>Contacts</span></a></li>
-                <li><a href="/"><i class="fa fa-cube"></i> <span>Sliders</span></a></li>
-                <li><a href="/"><i class="fa fa-file-o"></i> <span>Galleries</span></a></li>
-                <li><a href="/"><i class="fa fa-bars"></i> <span>Testimonies</span></a></li>
+                <li><a href="/"><span>Contents</span><span class='raq'>&raquo;</span></a></li>
+                <li><a href="/"><span>Uploaded Files</span><span class='raq'>&raquo;</span></a></li>
+                <li><a href="/"><span>Office Location</span><span class='raq'>&raquo;</span></a></li>
             </ul>
         </div>
     </div>

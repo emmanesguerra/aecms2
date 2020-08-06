@@ -1,16 +1,16 @@
 <?php
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function() {
         return redirect()->route('admin.login');
     });
-    Route::get('/login', '\Core\Http\Controller\AELoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', '\Core\Http\Controller\AELoginController@login')->name('admin.login.post');
+    Route::get('/login', '\Core\Http\Controller\AELoginController@showLoginForm')->name('login');
+    Route::post('/login', '\Core\Http\Controller\AELoginController@login')->name('login.post');
     
     
     Route::middleware(['auth'])->group(function () {
-        Route::get('/dashboard', '\Core\Http\Controller\AEHomeController@index')->name('admin.home');
-        Route::post('/logout', '\Core\Http\Controller\AELoginController@logout')->name('admin.logout');
+        Route::get('/dashboard', '\Core\Http\Controller\AEHomeController@index')->name('home');
+        Route::post('/logout', '\Core\Http\Controller\AELoginController@logout')->name('logout');
 
         Route::prefix('settings')->group(function () {
             Route::get('/', '\Core\Http\Controller\Setting\SettingController@index')->name('settings.index');

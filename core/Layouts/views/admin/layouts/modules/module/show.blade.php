@@ -8,7 +8,7 @@
             <div class="card-header">
                 Displaying details of {{ $module->module_name }}
                 @can('modules-list')
-                <a href="{{ route('modules.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.modules.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
         

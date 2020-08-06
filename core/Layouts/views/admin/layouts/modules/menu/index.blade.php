@@ -98,11 +98,11 @@
     }
     
     function deleteRow(id) {
-        axios.delete("{{ route('menus.index') }}" + '/' + id)
+        axios.delete("{{ route('admin.menus.index') }}" + '/' + id)
         .then(function (response) {
-            window.location = "{{ route('menus.index') }}";
+            window.location = "{{ route('admin.menus.index') }}";
         }).catch(function (error) {
-            window.location = "{{ route('menus.index') }}";
+            window.location = "{{ route('admin.menus.index') }}";
         });
     }
     
@@ -113,7 +113,7 @@
             ordering: false,
             paging: false,
             bInfo : false,
-            "ajax": "{{ route('menus.data') }}",
+            "ajax": "{{ route('admin.menus.data') }}",
             "columns": [
                 {"data": "id"},
                 {
@@ -140,7 +140,7 @@
                             @endcan
                             @can('menus-delete')
                             if((full.lft + 1) == full.rgt) {
-                                str += ' | <span onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("menus.index") }}\/' + full.id + '\')" class="text-danger"  style="cursor:pointer">Remove Menu</span>'
+                                str += ' | <span onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("admin.menus.index") }}\/' + full.id + '\')" class="text-danger"  style="cursor:pointer">Remove Menu</span>'
                             }
                             @endcan
                             return str;
@@ -160,12 +160,12 @@
         }
     
         saveRow = function (counterid, parentid) {
-            axios.post("{{ route('menus.store') }}", {
+            axios.post("{{ route('admin.menus.store') }}", {
                 nTitle: $('#ntitle-'+counterid).val(),
                 pageId: $('#pageid-'+counterid).val(),
                 parentId: parentid
             }).then(function (response) {
-                window.location = "{{ route('menus.index') }}";
+                window.location = "{{ route('admin.menus.index') }}";
             }).catch(function (error) {
                 var strerror = "";
                 $.each(error.response.data.errors, function(index, err) {

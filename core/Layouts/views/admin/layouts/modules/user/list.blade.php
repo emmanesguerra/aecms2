@@ -8,7 +8,7 @@
             <div class="card-header">
                 Users Management
                 @can('users-create')
-                <a href="{{ route('users.create') }}" class="float-right">Create New User</a>
+                <a href="{{ route('admin.users.create') }}" class="float-right">Create New User</a>
                 @endcan
             </div> 
 
@@ -53,7 +53,7 @@
         $('#userlists').DataTable({
             responsive: true,
             processing: true,
-            "ajax": "{{ route('users.data') }}",
+            "ajax": "{{ route('admin.users.data') }}",
             "columns": [
                 {"data": "id"},
                 {"data": "firstname"},
@@ -68,13 +68,13 @@
                     mRender: function (data, type, full) {
                         var straction = "";
                         @can('users-edit')
-                            straction += "<a href='{{ route('users.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                            straction += "<a href='{{ route('admin.users.index') }}/" + full.id + "/edit'>Edit</a> | ";
                         @endcan
                         @can('users-list')
-                            straction +=  "<a href='{{ route('users.index') }}/" + full.id + "'>View Details</a>";
+                            straction +=  "<a href='{{ route('admin.users.index') }}/" + full.id + "'>View Details</a>";
                         @endcan
                         @can('users-delete')
-                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("admin.users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
                         @endcan
                         return straction;
                     }

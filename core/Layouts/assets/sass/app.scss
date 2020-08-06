@@ -58,9 +58,23 @@ nav {
                     border-bottom: 1px solid $brown-light;
                     
                     a {
+                        display: block;
                         margin: .25rem 0;
                         padding: 0 1.25rem;
                         color: #000;
+                        
+                        &.active,
+                        &:hover {
+                            .raq {
+                                display: block
+                            }
+                        }
+                        
+                        .raq {
+                            float: right;
+                            display: none;
+                            font-size: 16px;
+                        }
                     }
                 }
                 

@@ -99,7 +99,7 @@ class RoleController extends Controller
 
 
             DB::commit();
-            return redirect()->route('roles.index')
+            return redirect()->route('admin.roles.index')
                             ->with('status-success','Role created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
@@ -166,7 +166,7 @@ class RoleController extends Controller
             $role->syncPermissions($request->input('permission'));
 
             DB::commit();
-            return redirect()->route('roles.index')
+            return redirect()->route('admin.roles.index')
                             ->with('status-success','Role updated successfully');
         } catch (\Exception $ex) {
             DB::rollback();
@@ -184,7 +184,7 @@ class RoleController extends Controller
         try
         {
             DB::table("roles")->where('id',$id)->delete();
-            return redirect()->route('roles.index')
+            return redirect()->route('admin.roles.index')
                             ->with('status-success','Role deleted successfully');
         } catch (\Exception $ex) {
             return redirect()->back()->with('status-failed', $ex->getMessage());

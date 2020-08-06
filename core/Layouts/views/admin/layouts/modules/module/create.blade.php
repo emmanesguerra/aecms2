@@ -8,7 +8,7 @@
             <div class="card-header">
                 Create New Module
                 @can('modules-list')
-                <a href="{{ route('modules.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.modules.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
             
@@ -31,7 +31,7 @@
                 </div>
                 @endif
                 
-                {!! Form::open(array('route' => 'modules.store','method'=>'POST')) !!}
+                {!! Form::open(array('route' => 'admin.modules.store','method'=>'POST')) !!}
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-8">
                         <div class="col-sm-12">

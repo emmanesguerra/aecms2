@@ -103,7 +103,7 @@ class ModuleController extends Controller
             }
             
             DB::commit();
-            return redirect()->route('modules.index')->with('status-success', 'Module created successfully');
+            return redirect()->route('admin.modules.index')->with('status-success', 'Module created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
@@ -217,7 +217,7 @@ class ModuleController extends Controller
             $module->update($input);
 
             DB::commit();
-            return redirect()->route('modules.index')
+            return redirect()->route('admin.modules.index')
                             ->with('status-success','Module updated successfully');
             
         } catch (\Exception $ex) {

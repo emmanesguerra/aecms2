@@ -9,7 +9,7 @@
             <div class="card-header">
                 Role Management
                 @can('roles-create')
-                <a href="{{ route('roles.create') }}" class="float-right"> Create New Role</a>
+                <a href="{{ route('admin.roles.create') }}" class="float-right"> Create New Role</a>
                 @endcan
             </div>
             
@@ -50,7 +50,7 @@
         
         $('#rolelists').DataTable({
             processing: true,
-            "ajax": "{{ route('roles.data') }}",
+            "ajax": "{{ route('admin.roles.data') }}",
             "columns": [
                 {"data": "id"},
                 {"data": "name"},
@@ -61,13 +61,13 @@
                     mRender: function (data, type, full) {
                         var straction = "";
                         @can('roles-edit')
-                            straction += "<a href='{{ route('roles.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                            straction += "<a href='{{ route('admin.roles.index') }}/" + full.id + "/edit'>Edit</a> | ";
                         @endcan
                         @can('roles-list')
-                            straction +=  "<a href='{{ route('roles.index') }}/" + full.id + "'>View Details</a>";
+                            straction +=  "<a href='{{ route('admin.roles.index') }}/" + full.id + "'>View Details</a>";
                         @endcan
                         @can('roles-delete')
-                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("admin.roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
                         @endcan
                         return straction;
                     }

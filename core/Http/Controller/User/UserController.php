@@ -99,7 +99,7 @@ class UserController extends Controller
             $user->assignRole($request->input('roles'));
             
             DB::commit();
-            return redirect()->route('users.index')->with('status-success', 'User created successfully');
+            return redirect()->route('admin.users.index')->with('status-success', 'User created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
@@ -166,7 +166,7 @@ class UserController extends Controller
 
 
             DB::commit();
-            return redirect()->route('users.index')
+            return redirect()->route('admin.users.index')
                             ->with('status-success','User updated successfully');
         } catch (\Exception $ex) {
             DB::rollback();
@@ -185,10 +185,10 @@ class UserController extends Controller
         try
         {
             User::find($id)->delete();
-            return redirect()->route('users.index')
+            return redirect()->route('admin.users.index')
                             ->with('status-success','User deleted successfully');
         } catch (Exception $ex) {
-            return redirect()->route('users.index')
+            return redirect()->route('admin.users.index')
                             ->with('status-failed', $ex->getMessage());
         }
     }

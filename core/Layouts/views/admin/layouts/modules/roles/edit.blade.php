@@ -8,7 +8,7 @@
             <div class="card-header">
                 Edit Role: {{ $role->name }}
                 @can('roles-list')
-                <a href="{{ route('roles.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.roles.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
             
@@ -31,7 +31,7 @@
                 </div>
                 @endif
                 
-                {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+                {!! Form::model($role, ['method' => 'PATCH','route' => ['admin.roles.update', $role->id]]) !!}
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">

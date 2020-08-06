@@ -9,7 +9,7 @@
             <div class="card-header">
                 Module Management
                 @can('modules-create')
-                <a href="{{ route('modules.create') }}" class="float-right"> Create New Module</a>
+                <a href="{{ route('admin.modules.create') }}" class="float-right"> Create New Module</a>
                 @endcan
             </div>
             
@@ -55,7 +55,7 @@
         $('#moduleslists').DataTable({
             responsive: true,
             processing: true,
-            "ajax": "{{ route('modules.data') }}",
+            "ajax": "{{ route('admin.modules.data') }}",
             "columns": [
                 {"data": "id"},
                 {"data": "module_name"},
@@ -77,10 +77,10 @@
                     mRender: function (data, type, full) {
                         var straction = "";
                         @can('modules-edit')
-                            straction += "<a href='{{ route('modules.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                            straction += "<a href='{{ route('admin.modules.index') }}/" + full.id + "/edit'>Edit</a> | ";
                         @endcan
                         @can('modules-list')
-                            straction +=  "<a href='{{ route('modules.index') }}/" + full.id + "'>View Details</a>";
+                            straction +=  "<a href='{{ route('admin.modules.index') }}/" + full.id + "'>View Details</a>";
                         @endcan
                         return straction;
                     }

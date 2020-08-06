@@ -8,7 +8,7 @@
             <div class="card-header">
                 Edit Module: {{ $module->module_name }}
                 @can('modules-list')
-                <a href="{{ route('modules.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.modules.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
             
@@ -31,7 +31,7 @@
                 </div>
                 @endif
                 
-                {!! Form::model($module, ['method' => 'PATCH','route' => ['modules.update', $module->id]]) !!}
+                {!! Form::model($module, ['method' => 'PATCH','route' => ['admin.modules.update', $module->id]]) !!}
                 {!! Form::hidden('id') !!}
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-8">

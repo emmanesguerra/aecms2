@@ -204,12 +204,12 @@ class MenuController extends Controller
             } 
             
             DB::commit();
-            return redirect()->route('menus.index')
+            return redirect()->route('admin.menus.index')
                         ->with('status-success', $title . ' has been removed');
             
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->route('menus.index')
+            return redirect()->route('admin.menus.index')
                         ->with('status-failed', $ex->getMessage());
         }
     }

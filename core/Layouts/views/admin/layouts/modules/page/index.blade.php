@@ -9,7 +9,7 @@
             <div class="card-header">
                 Page Management
                 @can('pages-create')
-                <a href="{{ route('pages.create') }}" class="float-right"> Create New Page</a>
+                <a href="{{ route('admin.pages.create') }}" class="float-right"> Create New Page</a>
                 @endcan
             </div>
             
@@ -55,7 +55,7 @@
     $(document).ready(function () {
         var pagedtable = $('#pageslists').DataTable({
             processing: true,
-            "ajax": "{{ route('pages.data') }}",
+            "ajax": "{{ route('admin.pages.data') }}",
             "columns": [
                 {"data": "id"},
                 {"data": "title"},
@@ -72,10 +72,10 @@
                     mRender: function (data, type, full) {
                         var straction = "";
                         @can('pages-edit')
-                            straction += "<a href='{{ route('pages.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                            straction += "<a href='{{ route('admin.pages.index') }}/" + full.id + "/edit'>Edit</a> | ";
                         @endcan
                         @can('pages-delete')
-                            straction += '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("pages.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                            straction += '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("admin.pages.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
                         @endcan
                         return straction;
                     }

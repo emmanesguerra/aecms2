@@ -8,7 +8,7 @@
             <div class="card-header">
                 Edit Page: {{ $page->title }}
                 @can('pages-list')
-                <a href="{{ route('pages.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.pages.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
             
@@ -31,7 +31,7 @@
                 </div>
                 @endif
                 
-                {!! Form::model($page, ['method' => 'PATCH','route' => ['pages.update', $page->id]]) !!}
+                {!! Form::model($page, ['method' => 'PATCH','route' => ['admin.pages.update', $page->id]]) !!}
                 {!! Form::hidden('id') !!}
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-10">
@@ -95,7 +95,7 @@
                                         v-bind:fieldname="{{ json_encode('template') }}"
                                         v-bind:multiple="{{ json_encode(false) }}"
                                         v-bind:forpagetemplate="{{ json_encode(true) }}"
-                                        v-bind:forpagetemplateurl="'{!! route('pages.template') !!}'">
+                                        v-bind:forpagetemplateurl="'{!! route('admin.pages.template') !!}'">
                                     </treeselect-form>
                                     @error('template') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>

@@ -37,7 +37,7 @@
             @endif
             
             <div class="card-body">
-                <form autocomplete="off" id="settingsform" action="{{ route('settings.store') }}" method="post">
+                <form autocomplete="off" id="settingsform" action="{{ route('admin.settings.store') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">

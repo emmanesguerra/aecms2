@@ -137,7 +137,7 @@ class PageController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('pages.index')->with('status-success', 'Page created successfully');
+            return redirect()->route('admin.pages.index')->with('status-success', 'Page created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
@@ -217,7 +217,7 @@ class PageController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('pages.index')->with('status-success', 'Page updated successfully');
+            return redirect()->route('admin.pages.index')->with('status-success', 'Page updated successfully');
         } catch (\Exception $ex) {
             DB::rollback();
             return redirect()->back()->with('status-failed', $ex->getMessage());
@@ -235,7 +235,7 @@ class PageController extends Controller
         try
         {
             Page::find($id)->delete();
-            return redirect()->route('pages.index')
+            return redirect()->route('admin.pages.index')
                             ->with('status-success','Page deleted successfully');
         } catch (\Exception $ex) {
             return redirect()->back()->with('status-failed', $ex->getMessage());

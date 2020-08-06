@@ -80,6 +80,20 @@ return [
             'root' => public_path('css/templates'),
         ],
 
+        'temporary' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/temporary'),
+            'url' => env('APP_URL').'/temporary',
+            'visibility' => 'public',
+        ],
+
+        'adminuploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/adminuploads'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

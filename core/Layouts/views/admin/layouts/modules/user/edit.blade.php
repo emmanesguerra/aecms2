@@ -7,7 +7,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Edit User: {{ $user->firstname }} {{ $user->lastname }}
+                @can('users-list')
                 <a href="{{ route('users.index') }}" class="float-right">Back</a>
+                @endcan
             </div> 
 
             <div class="card-body">
@@ -77,7 +79,9 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
+                            @can('users-edit')
                             <input  type="submit" class="btn btn-primary" value="Submit" />
+                            @endcan
                         </div>
                     </div>
                 {!! Form::close() !!}

@@ -70,8 +70,14 @@
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
-                        return "<a href='{{ route('pages.index') }}/" + full.id + "/edit'>Edit</a> | "
-                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("pages.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                        var straction = "";
+                        @can('pages-edit')
+                            straction += "<a href='{{ route('pages.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @endcan
+                        @can('pages-delete')
+                            straction += '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("pages.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @endcan
+                        return straction;
                     }
                 }
             ]

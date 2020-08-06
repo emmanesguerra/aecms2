@@ -11,6 +11,12 @@ use Core\Http\Requests\StoreSettingsRequest;
 
 class SettingController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:settings-list|settings-edit', ['only' => ['index','store']]);
+         $this->middleware('permission:settings-edit', ['only' => ['store']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *

@@ -15,6 +15,13 @@ use Core\Library\DataTables;
 
 class MenuController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:menus-list|menus-create|menus-edit|menus-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:menus-create', ['only' => ['create','store']]);
+         $this->middleware('permission:menus-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:menus-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

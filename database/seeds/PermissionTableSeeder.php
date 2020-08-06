@@ -32,8 +32,7 @@ class PermissionTableSeeder extends Seeder
            'modules' => [
                'modules-list',
                'modules-create',
-               'modules-edit',
-               'modules-delete',
+               'modules-edit'
            ],
            'pages' => [
                'pages-list',

@@ -6,8 +6,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Show User
+                Displaying details of {{ $user->firstname }} {{ $user->lastname }}
+                @can('users-list')
                 <a href="{{ route('users.index') }}" class="float-right">Back</a>
+                @endcan
             </div> 
         
             <div class="card-body">

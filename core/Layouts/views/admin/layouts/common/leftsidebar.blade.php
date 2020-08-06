@@ -4,12 +4,24 @@
 
         <div class="card-body">
             <ul class="admin-menu">
+                @can('settings-edit')
                 <li><a href="{{ route('settings.index') }}"><i class="fas fa-cog"></i>&nbsp;<span>Settings</span></a></li>
+                @endcan
+                @can('users-list')
                 <li><a href="{{ route('users.index') }}"><i class="far fa-address-book"></i>&nbsp;<span>Users</span></a></li>
+                @endcan
+                @can('roles-list')
                 <li><a href="{{ route('roles.index') }}"><i class="fa fa-unlock-alt"></i>&nbsp;<span>Roles</span></a></li>
+                @endcan
+                @can('modules-list')
                 <li><a href="{{ route('modules.index') }}"><i class="fas fa-atom"></i>&nbsp;<span>Modules</span></a></li>
+                @endcan
+                @can('pages-list')
                 <li><a href="{{ route('pages.index') }}"><i class="fas fa-copy"></i>&nbsp;<span>Pages</span></a></li>
+                @endcan
+                @can('menus-list')
                 <li><a href="{{ route('menus.index') }}"><i class="fa fa-bars"></i>&nbsp;<span>Menus</span></a></li>
+                @endcan
             </ul>
         </div>
     </div>

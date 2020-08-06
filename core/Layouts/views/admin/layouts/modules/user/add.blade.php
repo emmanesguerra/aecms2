@@ -7,7 +7,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Create New User
+                @can('users-list')
                 <a href="{{ route('users.index') }}" class="float-right">Back</a>
+                @endcan
             </div> 
 
             <div class="card-body">
@@ -88,7 +90,9 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
+                            @can('users-create')
                             <button data-toggle="modal" data-target="#settingsModal" type="button" class="btn btn-primary">Proceed</button>
+                            @endcan
                         </div>
                         <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

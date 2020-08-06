@@ -75,8 +75,14 @@
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
-                        return "<a href='{{ route('modules.index') }}/" + full.id + "/edit'>Edit</a> | "
-                                + "<a href='{{ route('modules.index') }}/" + full.id + "'>View Details</a>"
+                        var straction = "";
+                        @can('modules-edit')
+                            straction += "<a href='{{ route('modules.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @endcan
+                        @can('modules-list')
+                            straction +=  "<a href='{{ route('modules.index') }}/" + full.id + "'>View Details</a>";
+                        @endcan
+                        return straction;
                     }
                 }
             ],

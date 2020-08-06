@@ -6,8 +6,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Show Module
+                Displaying details of {{ $module->module_name }}
+                @can('modules-list')
                 <a href="{{ route('modules.index') }}" class="float-right">Back</a>
+                @endcan
             </div> 
         
             <div class="card-body">

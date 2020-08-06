@@ -8,7 +8,7 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Menus Management
-                @can('modules-create')
+                @can('menus-create')
                 <span id="addnew" class="float-right text-primary" style="cursor: pointer"> Create Menu</span>
                 @endcan
             </div>
@@ -134,10 +134,15 @@
                         if(full.button) {
                             return full.button;
                         } else {
-                            var str = "<span onclick='createNewRow("+full.id+","+full.lvl +" , false, this)' class='text-primary' style='cursor:pointer'>Add Sub Menu</span>";
+                            var str = "";
+                            @can('menus-create')
+                            str += "<span onclick='createNewRow("+full.id+","+full.lvl +" , false, this)' class='text-primary' style='cursor:pointer'>Add Sub Menu</span>";
+                            @endcan
+                            @can('menus-delete')
                             if((full.lft + 1) == full.rgt) {
                                 str += ' | <span onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("menus.index") }}\/' + full.id + '\')" class="text-danger"  style="cursor:pointer">Remove Menu</span>'
                             }
+                            @endcan
                             return str;
                         }
                     }

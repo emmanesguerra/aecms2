@@ -15,6 +15,12 @@ use Spatie\Permission\Models\Permission;
 
 class ModuleController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:modules-list|modules-create|modules-edit', ['only' => ['index','store']]);
+         $this->middleware('permission:modules-create', ['only' => ['create','store']]);
+         $this->middleware('permission:modules-edit', ['only' => ['edit','update']]);
+    }
     /**
      * Display a listing of the resource.
      *

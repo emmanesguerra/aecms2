@@ -59,9 +59,17 @@
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
-                        return "<a href='{{ route('roles.index') }}/" + full.id + "/edit'>Edit</a> | "
-                                + "<a href='{{ route('roles.index') }}/" + full.id + "'>View Details</a> | "
-                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                        var straction = "";
+                        @can('roles-edit')
+                            straction += "<a href='{{ route('roles.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @endcan
+                        @can('roles-list')
+                            straction +=  "<a href='{{ route('roles.index') }}/" + full.id + "'>View Details</a>";
+                        @endcan
+                        @can('roles-delete')
+                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @endcan
+                        return straction;
                     }
                 }
             ]

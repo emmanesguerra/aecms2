@@ -7,7 +7,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Users Management
+                @can('users-create')
                 <a href="{{ route('users.create') }}" class="float-right">Create New User</a>
+                @endcan
             </div> 
 
             <div class="card-body">
@@ -64,9 +66,17 @@
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
-                        return "<a href='{{ route('users.index') }}/" + full.id + "/edit'>Edit</a> | "
-                                + "<a href='{{ route('users.index') }}/" + full.id + "'>View Details</a> | "
-                                + '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>'
+                        var straction = "";
+                        @can('users-edit')
+                            straction += "<a href='{{ route('users.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @endcan
+                        @can('users-list')
+                            straction +=  "<a href='{{ route('users.index') }}/" + full.id + "'>View Details</a>";
+                        @endcan
+                        @can('users-delete')
+                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @endcan
+                        return straction;
                     }
                 }
             ],

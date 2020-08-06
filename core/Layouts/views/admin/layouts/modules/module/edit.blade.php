@@ -7,7 +7,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Edit Module: {{ $module->module_name }}
+                @can('modules-list')
                 <a href="{{ route('modules.index') }}" class="float-right">Back</a>
+                @endcan
             </div> 
             
             <div class="card-body">
@@ -61,7 +63,9 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
+                        @can('modules-edit')
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        @endcan
                     </div>
                 </div>
                 {!! Form::close() !!}

@@ -148,7 +148,9 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
+                            @can('settings-edit')
                             <input  type="submit" class="btn btn-primary" value="Submit" />
+                            @endcan
                         </div>
                     </div>
                 </form>

@@ -52,6 +52,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Content\ContentController@data')->name('contents.data');
         });
         Route::resource('contents','\Core\Http\Controller\Content\ContentController');
+        
+        Route::prefix('offices')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\Office\OfficeController@data')->name('offices.data');
+        });
+        Route::resource('offices','\Core\Http\Controller\Office\OfficeController');
     });
     
 });

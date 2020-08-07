@@ -33,7 +33,7 @@
             <ul class="admin-menu">
                 <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.contents') === 0) ? 'active' : '' }}" href="{{ route('admin.contents.index') }}"><span>Contents</span><span class='raq'>&raquo;</span></a></li>
                 <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.files') === 0) ? 'active' : '' }}" href="{{ route('admin.files.index') }}"><span>Uploaded Files</span><span class='raq'>&raquo;</span></a></li>
-                <li><a href="/"><span>Office Location</span><span class='raq'>&raquo;</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.offices') === 0) ? 'active' : '' }}" href="{{ route('admin.offices.index') }}"><span>Office Location</span><span class='raq'>&raquo;</span></a></li>
             </ul>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <section class="left-panel">
+    @can(['settings-edit', 'users-list', 'roles-list', 'modules-list', 'pages-list', 'menus-list'])
     <div class="card mb-3">
         <div class="card-header">Ae Menu</div>
 
@@ -25,6 +26,7 @@
             </ul>
         </div>
     </div>
+    @endcan
 
     <div class="card mb-4">
         <div class="card-header">User Menu</div>

@@ -21,7 +21,7 @@ class CreateMenusTable extends Migration
             $table->unsignedInteger('lft');
             $table->unsignedInteger('rgt');
             $table->unsignedInteger('lvl');
-            $table->unsignedInteger('created_by');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
         });
     }

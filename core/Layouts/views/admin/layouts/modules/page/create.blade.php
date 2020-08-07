@@ -57,7 +57,6 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('javascripts') text-danger @enderror" for="javascripts">Javascripts</label>
-                                    {{old('javascripts')}}
                                     <treeselect-form 
                                         v-bind:value="{{ (Session::getOldInput('javascripts')) ? json_encode(Session::getOldInput('javascripts')): json_encode(null) }}"
                                         v-bind:selectoptions="{{ json_encode($scripts) }}"
@@ -71,7 +70,6 @@
                                 </div>
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('css') text-danger @enderror" for="css">Styles</label>
-                                    {{old('css')}}
                                     <treeselect-form 
                                         v-bind:value="{{ (Session::getOldInput('css')) ? json_encode(Session::getOldInput('css')): json_encode(null) }}"
                                         v-bind:selectoptions="{{ json_encode($styles) }}"
@@ -87,7 +85,6 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-5">
                                     <label class="@error('template') text-danger @enderror" for="template">Html Template *</label>
-                                    {{old('template')}}
                                     <treeselect-form 
                                         v-bind:value="{{ (Session::getOldInput('template')) ? json_encode(Session::getOldInput('template')): json_encode(null) }}"
                                         v-bind:selectoptions="{{ json_encode($files) }}"

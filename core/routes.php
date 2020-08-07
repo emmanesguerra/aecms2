@@ -47,6 +47,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/data', '\Core\Http\Controller\UploadedFiles\FileController@data')->name('files.data');
         });
         Route::resource('files','\Core\Http\Controller\UploadedFiles\FileController');
+        
+        Route::prefix('contents')->group(function () {
+            Route::get('/data', '\Core\Http\Controller\Content\ContentController@data')->name('contents.data');
+        });
+        Route::resource('contents','\Core\Http\Controller\Content\ContentController');
     });
     
 });

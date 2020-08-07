@@ -58,11 +58,11 @@ class PermissionTableSeeder extends Seeder
                 'files-edit',
                 'files-delete',
             ],
-            'contact' => [
-                'contact-list',
-                'contact-create',
-                'contact-edit',
-                'contact-delete',
+            'offices' => [
+                'offices-list',
+                'offices-create',
+                'offices-edit',
+                'offices-delete',
             ],
         ];
 

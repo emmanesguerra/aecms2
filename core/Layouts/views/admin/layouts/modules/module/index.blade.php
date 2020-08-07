@@ -27,7 +27,6 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Index Url</th>
-                            <th>Icon</th>
                             <th>Date Updated</th>
                             <th width="5%">Action</th>
                         </tr>
@@ -61,14 +60,6 @@
                 {"data": "module_name"},
                 { width: "20%","data": "description"},
                 {"data": "route_index_url"},
-                {
-                    width: "10%",
-                    bSearchable: false,
-                    bSortable: false,
-                    mRender: function (data, type, full) {
-                        return "<i class='"+full.icon+"' ></i> <i>"+full.icon+"</i>"
-                    }
-                },
                 {"data": "updated_at"},
                 {
                     width: "13%",

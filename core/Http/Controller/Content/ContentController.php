@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Core\Model\Content;
 use Core\Library\DataTables;
+use Core\Http\Requests\UpdateContentRequest;
 
 class ContentController extends Controller
 {
@@ -40,7 +41,7 @@ class ContentController extends Controller
             5 => ['updated_at'],
         ];
         
-        $filteredmodel = Content::with('pages')->select(['id', 'name', 'type', 'updated_at']);
+        $filteredmodel = Content::with('pages')->select(['id', 'name', 'type', 'updated_at'])->where(['class_namespace' => null, 'method_name' => null]);
         
         $modelcnt = $filteredmodel->count();
         
@@ -81,7 +82,11 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        //
+        $content = Content::find($id);
+        
+        $page = $content->pages->first();
+        
+        return redirect($page->url);
     }
 
     /**
@@ -92,7 +97,9 @@ class ContentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $content = Content::find($id);
+        
+        return view('admin.layouts.modules.content.edit')->with(compact('content'));
     }
 
     /**
@@ -102,9 +109,24 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateContentRequest $request, $id)
     {
-        //
+        try
+        {
+            DB::beginTransaction();
+            $input = $request->all();
+
+            $content = Content::find($id);
+            $content->update($input);
+
+            DB::commit();
+            return redirect()->route('admin.contents.index')
+                            ->with('status-success','Content updated successfully');
+            
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**

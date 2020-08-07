@@ -13,7 +13,7 @@ class UpdateContentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class UpdateContentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'html_template' => 'required'
+        ];
+    }
+    /**
+    * Get the error messages for the defined validation rules.
+    *
+    * @return array
+    */
+    public function messages()
+    {
+        return [
+            'html_template.required' => 'Contents are required.'
         ];
     }
 }

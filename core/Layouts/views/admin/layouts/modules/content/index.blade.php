@@ -55,8 +55,14 @@
             "columns": [
                 {"data": "id"},
                 {"data": "name"},
-                {"data": "type"},
                 {
+                    render: function (data, type, full) {
+                        return (full.type == 'P') ? 'Panel': 'Main';
+                    }
+                },
+                {
+                    bSearchable: false,
+                    bSortable: false,
                     render: function (data, type, full) {
                         var page = '';
                         _.each(full.pages, function(data) {
@@ -66,8 +72,6 @@
                     }
                 },
                 {
-                    bSearchable: false,
-                    bSortable: false,
                     "data": "updated_at"},
                 {
                     width: "13%",
@@ -75,11 +79,11 @@
                     bSortable: false,
                     mRender: function (data, type, full) {
                         var straction = "";
-                        @can('modules-edit')
-                            straction += "<a href='{{ route('admin.modules.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @can('contents-edit')
+                            straction += "<a href='{{ route('admin.contents.index') }}/" + full.id + "/edit'>Edit</a> | ";
                         @endcan
-                        @can('modules-list')
-                            straction +=  "<a href='{{ route('admin.modules.index') }}/" + full.id + "'>View Details</a>";
+                        @can('contents-list')
+                            straction +=  "<a href='{{ route('admin.contents.index') }}/" + full.id + "'>View in Page</a>";
                         @endcan
                         return straction;
                     }

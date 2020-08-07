@@ -8,8 +8,8 @@
             </select>
         </div> 
         <tinymce-form  v-if="selected == 'NEW'"
-                       v-bind:model="model"
-                       v-bind:textareaname="textname">
+                       :value="model.html_template"
+                       :textareaname="textname">
         </tinymce-form>
     </div>
 </template>

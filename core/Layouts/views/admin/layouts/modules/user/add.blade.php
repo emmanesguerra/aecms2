@@ -91,10 +91,10 @@
                         </div>
                         <div class="col-sm-12">
                             @can('users-create')
-                            <button data-toggle="modal" data-target="#settingsModal" type="button" class="btn btn-primary">Proceed</button>
+                            <button data-toggle="modal" data-target="#usersModal" type="button" class="btn btn-primary">Proceed</button>
                             @endcan
                         </div>
-                        <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="usersModal" tabindex="-1" role="dialog" aria-labelledby="usersModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">

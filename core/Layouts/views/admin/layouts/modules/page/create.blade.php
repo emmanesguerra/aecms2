@@ -126,8 +126,6 @@
 </style>
 @endsection
 
-@section('javascript')
+@section('javascripttop')
 <script src="{{ asset('tinymce_5.4.1/js/tinymce/tinymce.min.js') }}"></script>
-<script>
-</script>
 @endsection

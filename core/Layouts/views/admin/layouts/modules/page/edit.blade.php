@@ -127,8 +127,10 @@
 
 @endsection
 
-@section('javascript')
+@section('javascripttop')
 <script src="{{ asset('tinymce_5.4.1/js/tinymce/tinymce.min.js') }}"></script>
+@endsection
+@section('javascript')
 <script>
     window.app.panels = {!! json_encode($panels) !!}
 </script>

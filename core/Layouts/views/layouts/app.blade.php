@@ -16,6 +16,7 @@
         <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
         <link href="{{ asset('fontawesome-5.14.0-web/css/all.css') }}" rel="stylesheet">
         @yield('styles')
+        @yield('javascripttop')
     </head>
     <body>
         <div id="app">

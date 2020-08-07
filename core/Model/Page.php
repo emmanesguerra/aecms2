@@ -8,6 +8,11 @@ class Page extends Model
 {
     protected $fillable = ['url', 'title', 'description', 'javascripts', 'css', 'template', 'template_html'];
 
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
+    
     public function getCssAttribute($value)
     {
         if(!empty($value)) {

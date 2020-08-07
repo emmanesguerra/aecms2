@@ -15,4 +15,9 @@ class Module extends Model
     protected $fillable = [
         'module_name', 'description', 'route_index_url', 'created_by', 'updated_by', 'created_at', 'updated_at'
     ];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }

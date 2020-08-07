@@ -11,6 +11,11 @@ class SystemConfig extends Model
     public $incrementing = false;
     
     protected $fillable = ['keyword', 'keyvalue'];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
     
     public static function scopeDefaults($query, $params) {
         

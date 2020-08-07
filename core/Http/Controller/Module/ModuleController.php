@@ -44,7 +44,6 @@ class ModuleController extends Controller
             2 => ['module_name'],
             3 => ['description'],
             4 => ['route_index_url'],
-            5 => ['icon'],
             6 => ['updated_at'],
         ];
         
@@ -53,7 +52,6 @@ class ModuleController extends Controller
                     module_name, 
                     description, 
                     route_index_url, 
-                    icon,
                     updated_at")
             );
         

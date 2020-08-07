@@ -32,15 +32,16 @@ class FileManager
         return;
     }
     
-    public static function ResizeAndSave($file, $width, $newname, $disk, $folder = '')
+    public static function ResizeAndSave($file, $width, $newname, $extension, $size, $disk, $folder = '')
     {
         $manager = new ImageManager(array('driver' => 'imagick'));
 
         $image = $manager->make($file);
         if($image->width() > $width) {
-            self::Resize($image, $width, $newname);
+            self::Resize($image, $width, $extension, $size);
                 
             Storage::disk($disk)->put($folder.$newname, $image);
+            $image->destroy();
         } else {
             Storage::disk($disk)->put($folder.$newname, file_get_contents($file));
         }
@@ -48,12 +49,18 @@ class FileManager
         return;
     }
     
-    public static function Resize(Image $image, $width, $newname)
+    public static function Resize(Image $image, $width, $extension, $size)
     {
+        if($size > 110000) { //110kb
+            $quality = ($extension == 'gif') ? 90: 80;
+        } else {
+            $quality = ($extension == 'gif') ? 90: 40;
+        }
+        
         return  $image->orientate()
                         ->resize($width, null, function($constraint){ 
                             $constraint->upsize();
                             $constraint->aspectRatio();
-                        })->save($newname);
+                        })->encode('jpg', $quality);
     }
 }

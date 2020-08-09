@@ -70,7 +70,7 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.layouts.modules.office.create');
     }
 
     /**

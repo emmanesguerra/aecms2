@@ -1,29 +1,34 @@
 <template>
     <div  class="form-group col-sm-12">
-        <label for="html_template">Content</label>
+        <label for="html_template">{{ label }}</label>
         <Editor :name="textareaname"
                 :value="value"
-                :init="{
-                    toolbar: 'undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist | image ',
-                    height: 400, 
-                    content_css:['../css/templates/bootstrap.min.css', 
-                                 '../css/templates/common.css'],
-                    visual_table_class:'ae-table',
-                    image_advtab: true
-                }"
-                plugins='code print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern help'
+                :init="editorInit"
+                :plugins="plugins"
                 ></Editor>
     </div>
 </template>
 
 <script>
-
     import Editor from '@tinymce/tinymce-vue';
 
     export default {
-        props: ['value', 'textareaname'],
+        props: ['value', 'textareaname', 'label', 'height', 'toolbar', 'plugins', 'showmenu'],
         components: {
             Editor,
+        },
+        computed: {
+            editorInit () {
+                return {
+                    toolbar: this.toolbar,
+                    height: this.height, 
+                    content_css:['../css/templates/bootstrap.min.css', 
+                                 '../css/templates/common.css'],
+                    visual_table_class:'ae-table',
+                    image_advtab: true,
+                    menubar: this.showmenu,
+                };
+            }
         }
     }
 </script>

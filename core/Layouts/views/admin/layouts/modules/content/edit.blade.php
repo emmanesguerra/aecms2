@@ -46,8 +46,13 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-row">
-                            <tinymce-form  v-bind:value="{{ (Session::getOldInput('html_template')) ? json_encode(Session::getOldInput('html_template')): json_encode($content->html_template) }}"
-                                           v-bind:textareaname="{{ json_encode('html_template') }}">
+                            <tinymce-form  :value="{{ (Session::getOldInput('html_template')) ? json_encode(Session::getOldInput('html_template')): json_encode($content->html_template) }}"
+                                           :textareaname="{{ json_encode('html_template') }}"
+                                           :label="{{ json_encode('Content') }}"
+                                           :height="{{ json_encode('400') }}"
+                                           :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist | image ') }}"
+                                           :plugins="{{ json_encode('code print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern help') }}"
+                                           :showmenu="{{ json_encode(true) }}">
                             </tinymce-form>
                             </div>
                         </div>

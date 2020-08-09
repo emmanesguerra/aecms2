@@ -9,7 +9,12 @@
         </div> 
         <tinymce-form  v-if="selected == 'NEW'"
                        :value="model.html_template"
-                       :textareaname="textname">
+                       :textareaname="textname"
+                       :label="editorlabel"
+                       :height="editorheight"
+                       :toolbar="editortoolbar"
+                       :plugins="editorplugins"
+                       :showmenu="editordisplaymenu">
         </tinymce-form>
     </div>
 </template>
@@ -20,7 +25,12 @@
         props: ['model', 'contents'],
         data () {
             return {
-                selected: this.model.selected
+                selected: this.model.selected,
+                editorlabel: "Content",
+                editorheight: 400,
+                editortoolbar: 'undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist | image ',
+                editorplugins: 'code print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern help',
+                editordisplaymenu: true
             }
         },
         computed: {

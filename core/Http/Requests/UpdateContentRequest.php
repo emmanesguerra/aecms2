@@ -3,6 +3,7 @@
 namespace Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateContentRequest extends FormRequest
 {
@@ -13,7 +14,12 @@ class UpdateContentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        try
+        {
+            return Auth::user()->hasPermissionTo('contents-edit', true);
+        } catch (\Exception $ex) {
+            return abort(403, "Action Denied. This account doesn't have authorization to continue this process.");
+        }
     }
 
     /**

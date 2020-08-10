@@ -173,6 +173,9 @@
                         strerror += strerr + "<br />";
                     });
                 });
+                if(error.response.data.message) {
+                    strerror += error.response.data.message ;
+                }
                 $('#error-'+counterid).html(strerror);
             });
         }

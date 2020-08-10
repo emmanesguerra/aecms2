@@ -13,7 +13,12 @@ class UpdatePageRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        try
+        {
+            return Auth::user()->hasPermissionTo('pages-edit', true);
+        } catch (\Exception $ex) {
+            return abort(403, "Action Denied. This account doesn't have authorization to continue this process.");
+        }
     }
 
     /**

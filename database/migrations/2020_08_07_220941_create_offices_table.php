@@ -16,12 +16,12 @@ class CreateOfficesTable extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
             $table->text('address');
-            $table->string('contact_person');
+            $table->string('contact_person')->nullable();
             $table->string('telephone', 100)->nullable();
             $table->string('mobile', 100)->nullable();
             $table->string('email', 100)->nullable();
-            $table->string('marker', 255);
-            $table->text('store_hours');
+            $table->text('marker');
+            $table->text('store_hours')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

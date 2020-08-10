@@ -24,6 +24,7 @@ class UpdateContentRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'required',
             'name' => 'required',
             'html_template' => 'required'
         ];

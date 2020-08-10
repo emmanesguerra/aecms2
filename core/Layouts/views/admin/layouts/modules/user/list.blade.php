@@ -43,11 +43,11 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('DataTables-Bootstrap4/datatables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('DataTables-Bootstrap/datatables.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('javascript')
-<script src="{{ asset('DataTables-Bootstrap4/datatables.min.js') }}"></script>
+<script src="{{ asset('DataTables-Bootstrap/datatables.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         $('#userlists').DataTable({

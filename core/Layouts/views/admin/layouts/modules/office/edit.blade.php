@@ -6,9 +6,9 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Create New Office Location
+                Edit Office Location
                 @can('modules-list')
-                <a href="{{ route('admin.modules.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.offices.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
             
@@ -31,12 +31,13 @@
                 </div>
                 @endif
                 
-                {!! Form::open(array('route' => 'admin.offices.store','method'=>'POST')) !!}
+                {!! Form::model($office, ['method' => 'PATCH','route' => ['admin.offices.update', $office->id]]) !!}
+                {!! Form::hidden('id') !!}
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-10">
                         <div class="col-sm-12">
                             <div class="form-row" id="addressrow">
-                                <tinymce-form  v-bind:value="{{ (Session::getOldInput('address')) ? json_encode(Session::getOldInput('address')): json_encode("") }}"
+                                <tinymce-form  v-bind:value="{{ (Session::getOldInput('address')) ? json_encode(Session::getOldInput('address')): json_encode($office->address) }}"
                                                v-bind:textareaname="{{ json_encode('address') }}"
                                                v-bind:label="{{ json_encode('Address *') }}"
                                                v-bind:height="{{ json_encode('250') }}"
@@ -53,31 +54,31 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-12">
                                     <label class="@error('contact_person') text-danger @enderror" for="contact_person">Contact Person</label>
-                                    <input maxlength="191" type="text" class="form-control ae-input-field @error('contact_person') is-invalid @enderror " name="contact_person" value="{{ old('contact_person') }}" id="contact_person" placeholder="Contact Person"/>
+                                    <input maxlength="191" type="text" class="form-control ae-input-field @error('contact_person') is-invalid @enderror " name="contact_person" value="{{ old('contact_person', $office->contact_person) }}" id="contact_person" placeholder="Contact Person"/>
                                     @error('contact_person') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-4">
                                     <label class="@error('telephone') text-danger @enderror" for="telephone">Telephone</label>
-                                    <input maxlength="100" type="text" class="form-control ae-input-field @error('telephone') is-invalid @enderror " name="telephone" value="{{ old('telephone') }}" id="telephone" placeholder="Telephone"/>
+                                    <input maxlength="100" type="text" class="form-control ae-input-field @error('telephone') is-invalid @enderror " name="telephone" value="{{ old('telephone', $office->telephone) }}" id="telephone" placeholder="Telephone"/>
                                     @error('telephone') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-4">
                                     <label class="@error('mobile') text-danger @enderror" for="mobile">Mobile</label>
-                                    <input maxlength="100" type="text" class="form-control ae-input-field @error('mobile') is-invalid @enderror " name="mobile" value="{{ old('mobile') }}" id="mobile" placeholder="Mobile"/>
+                                    <input maxlength="100" type="text" class="form-control ae-input-field @error('mobile') is-invalid @enderror " name="mobile" value="{{ old('mobile', $office->mobile) }}" id="mobile" placeholder="Mobile"/>
                                     @error('mobile') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-4">
                                     <label class="@error('email') text-danger @enderror" for="email">Email</label>
-                                    <input maxlength="100" type="text" class="form-control ae-input-field @error('email') is-invalid @enderror " name="email" value="{{ old('email') }}" id="email" placeholder="Email"/>
+                                    <input maxlength="100" type="text" class="form-control ae-input-field @error('email') is-invalid @enderror " name="email" value="{{ old('email', $office->email) }}" id="email" placeholder="Email"/>
                                     @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-12">
                                     <label class="@error('marker') text-danger @enderror" for="marker">Google Map Pin *</label>
-                                    <textarea class="form-control ae-input-field @error('marker') is-invalid @enderror " name="marker" id="marker" rows="5"/>{{ old('marker') }}</textarea>
+                                    <textarea class="form-control ae-input-field @error('marker') is-invalid @enderror " name="marker" id="marker" rows="5"/>{{ old('marker', $office->marker) }}</textarea>
                                     @error('marker') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     <br />
                                     <div class="alert alert-info" role="alert">
@@ -94,7 +95,7 @@
                                  </div>
                             </div>
                             <div class="form-row" id="store_hoursrow">
-                                <tinymce-form  :value="{{ (Session::getOldInput('store_hours')) ? json_encode(Session::getOldInput('store_hours')): json_encode("") }}"
+                                <tinymce-form  :value="{{ (Session::getOldInput('store_hours')) ? json_encode(Session::getOldInput('store_hours')): json_encode($office->store_hours) }}"
                                                :textareaname="{{ json_encode('store_hours') }}"
                                                :label="{{ json_encode('Store Hours') }}"
                                                :height="{{ json_encode('200') }}"
@@ -111,7 +112,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        @can('modules-create')
+                        @can('offices-edit')
                         <button type="submit" class="btn btn-primary">Submit</button>
                         @endcan
                     </div>

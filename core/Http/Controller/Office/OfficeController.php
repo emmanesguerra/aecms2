@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Core\Library\DataTables;
 use Core\Model\Office;
+use Core\Http\Requests\StoreOfficeRequest;
+use Core\Http\Requests\UpdateOfficeRequest;
 
 class OfficeController extends Controller
 {
@@ -79,9 +81,17 @@ class OfficeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOfficeRequest $request)
     {
-        //
+        try
+        {
+            Office::create($request->only('address', 'contact_person', 'telephone', 'mobile', 'email', 'marker', 'store_hours'));
+            
+            return redirect()->route('admin.offices.index')->with('status-success', 'Office Location created successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**
@@ -92,7 +102,9 @@ class OfficeController extends Controller
      */
     public function show($id)
     {
-        //
+        $office = Office::find($id);
+        
+        return view('admin.layouts.modules.office.show')->with(compact('office'));
     }
 
     /**
@@ -103,7 +115,9 @@ class OfficeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $office = Office::find($id);
+        
+        return view('admin.layouts.modules.office.edit')->with(compact('office'));
     }
 
     /**
@@ -113,9 +127,20 @@ class OfficeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOfficeRequest $request, $id)
     {
-        //
+        try
+        {
+            $input = $request->all();
+
+            $office = Office::find($id);
+            $office->update($input);
+
+            return redirect()->route('admin.offices.index')->with('status-success','Office Location updated successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Office extends Model
 {
-    protected $fillable = ['address', 'contact_person', 'telephone', 'mobile', 'email', 'marker'];
+    protected $fillable = ['address', 'contact_person', 'telephone', 'mobile', 'email', 'marker', 'store_hours'];
 
     protected function serializeDate(\DateTimeInterface $date)
     {

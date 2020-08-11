@@ -113,7 +113,7 @@ class ModuleController extends Controller
         // strip out all whitespace and convert to lowercase
         $clean = strtolower(preg_replace('/\s*/', '', $string));
         
-        $permissions = ['-list', '-create', '-edit', '-delete'];
+        $permissions = ['-list', '-create', '-edit', '-delete', '-trash', '-restore', '-fdelete'];
         
         foreach($permissions as $permission) {
             Permission::create([

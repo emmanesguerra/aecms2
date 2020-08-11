@@ -31,7 +31,7 @@ class StorePageRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'url' => 'required',
+            'url' => 'required|unique:pages,url',
             'template' => 'required',
             'contents.*.name' => 'sometimes|required',
             'contents.*.selected_panel' => 'sometimes|required',

@@ -12,6 +12,16 @@ class Office extends Model implements Auditable
     
     protected $fillable = ['address', 'contact_person', 'telephone', 'mobile', 'email', 'marker', 'm_width', 'm_height', 'store_hours'];
 
+    /**
+     * {@inheritdoc}
+     */
+    public function generateTags(): array
+    {
+        return [
+            'displayToDashboard'
+        ];
+    }
+    
     protected function serializeDate(\DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

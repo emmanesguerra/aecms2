@@ -26,9 +26,4 @@ class Office extends Model implements Auditable
     {
         return $date->format('Y-m-d H:i:s');
     }
-    
-    public function officehours()
-    {
-        return $this->hasMany(OfficeHour::class);
-    }
 }

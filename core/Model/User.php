@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
-    use Notifiable;
-    use HasRoles;
+    use Notifiable, HasRoles, \OwenIt\Auditing\Auditable, SoftDeletes;
   
     /**
      * The attributes that are mass assignable.
@@ -41,6 +42,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function generateTags(): array
+    {
+        return [
+            'displayToDashboard'
+        ];
+    }
 
     protected function serializeDate(\DateTimeInterface $date)
     {

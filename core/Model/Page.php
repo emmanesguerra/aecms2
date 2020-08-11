@@ -3,9 +3,13 @@
 namespace Core\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Page extends Model
+class Page extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable, SoftDeletes;
+    
     protected $fillable = ['url', 'title', 'description', 'javascripts', 'css', 'template', 'template_html'];
 
     protected function serializeDate(\DateTimeInterface $date)

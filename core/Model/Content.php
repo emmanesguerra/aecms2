@@ -3,9 +3,11 @@
 namespace Core\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Content extends Model
+class Content extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     /**
      * The attributes that are mass assignable.
      *
@@ -14,6 +16,16 @@ class Content extends Model
     protected $fillable = [
         'name', 'html_template', 'type', 'class_namespace', 'method_name', 'created_by', 'updated_by', 'created_at', 'updated_at'
     ];
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function generateTags(): array
+    {
+        return [
+            'displayToDashboard'
+        ];
+    }
 
     protected function serializeDate(\DateTimeInterface $date)
     {

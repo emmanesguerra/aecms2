@@ -97,17 +97,17 @@
                 </div>
             </div>
         </div>
-    </body>
-    <!-- Scripts -->
+        <!-- Scripts -->
 
-    <script src="{{ asset('js/admin/app.js') }}"></script>
-    <script>
-        var showdeletemodal = function (id, text, url) {
-            $('#deletemodalform').attr('action', url)
-            $('#idtobedeleted').html(id);
-            $('#texttobedeleted').html(text);
-            $('#delete-modal').modal('show');
-        }
-    </script>
-    @yield('javascript')
+        <script src="{{ asset('js/admin/app.js') }}"></script>
+        <script>
+            var showdeletemodal = function (id, text, url) {
+                $('#deletemodalform').attr('action', url)
+                $('#idtobedeleted').html(id);
+                $('#texttobedeleted').html(text);
+                $('#delete-modal').modal('show');
+            }
+        </script>
+        @yield('javascript')
+    </body>
 </html>

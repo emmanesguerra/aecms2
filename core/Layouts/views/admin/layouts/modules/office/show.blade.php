@@ -8,11 +8,18 @@
             <div class="card-header">
                 Office Location ID # {{ $office->id }}
                 @can('offices-list')
-                <a href="{{ route('admin.offices.index') }}" class="float-right">Back</a>
+                <a href="{{ url()->previous() }}" class="float-right">Back</a>
                 @endcan
             </div> 
         
             <div class="card-body">
+            
+                @if (session('status-failed'))
+                <div class="alert alert-danger text-left">
+                    {{ session('status-failed') }}
+                </div>
+                @endif
+                
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <dl class="row">
@@ -63,6 +70,17 @@
                             <dt class="col-sm-2">Updated At:</dt>
                             <dd class="col-sm-9">{{ $office->updated_at }}</dd>
                         </dl>
+                        @if($office->deleted_at)
+                        <dl class="row">
+                            <dt class="col-sm-2">Deleted At:</dt>
+                            <dd class="col-sm-9">{{ $office->deleted_at }}</dd>                            
+                        </dl>
+                        
+                        {!! Form::model($office, ['method' => 'POST','route' => ['admin.offices.processrestore', $office->id]]) !!}
+                        <button type="submit" class="btn btn-primary">Restore Record</button>
+                        {!! Form::close() !!}
+                        
+                        @endif
                     </div>
                 </div>
             </div>

@@ -48,9 +48,7 @@ class PermissionTableSeeder extends Seeder
            ],
             'contents' => [
                 'contents-list',
-                'contents-create',
                 'contents-edit',
-                'contents-delete',
             ],
             'files' => [
                 'files-list',
@@ -63,6 +61,9 @@ class PermissionTableSeeder extends Seeder
                 'offices-create',
                 'offices-edit',
                 'offices-delete',
+                'offices-trash',
+                'offices-restore',
+                'offices-fdelete',
             ],
         ];
 

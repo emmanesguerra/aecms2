@@ -55,6 +55,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         Route::prefix('offices')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Office\OfficeController@data')->name('offices.data');
+            Route::get('/trashed', '\Core\Http\Controller\Office\OfficeController@trashed')->name('offices.trashed');
+            Route::get('/restore/{id?}', '\Core\Http\Controller\Office\OfficeController@restore')->name('offices.restore');
+            Route::post('/restore/{id}', '\Core\Http\Controller\Office\OfficeController@processrestore')->name('offices.processrestore');
+            Route::delete('/forcedelete/{id?}', '\Core\Http\Controller\Office\OfficeController@forcedelete')->name('offices.forcedelete');
         });
         Route::resource('offices','\Core\Http\Controller\Office\OfficeController');
     });

@@ -7,19 +7,13 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Office Location Management
-                
-                
-                @can('offices-trash')
-                <a href="{{ route('admin.offices.trashed') }}" class="float-right"> Check Trashed Records</a>
-                @endcan
-                @can('offices-create')
-                <a href="{{ route('admin.offices.create') }}" class="float-right mr-3"> Create New Office Location</a>
+                Trashed Office Locations
+                @can('offices-list')
+                <a href="{{ route('admin.offices.index') }}" class="float-right">Back</a>
                 @endcan
             </div>
             
             <div class="card-body">
-                
                 @if (session('status-success'))
                 <div class="alert alert-success text-left">
                     {{ session('status-success') }}
@@ -64,7 +58,7 @@
             "ajax": {
                 "url": "{{ route('admin.offices.data') }}",
                 "data": {
-                    isTrashed: false
+                    isTrashed: true
                 }
             },
             "columns": [
@@ -80,14 +74,11 @@
                     bSortable: false,
                     mRender: function (data, type, full) {
                         var straction = "";
-                        @can('offices-edit')
-                            straction += "<a href='{{ route('admin.offices.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @can('offices-restore')
+                            straction +=  "<a href='{{ route('admin.offices.restore') }}/" + full.id + "'>View Details</a>";
                         @endcan
-                        @can('offices-list')
-                            straction +=  "<a href='{{ route('admin.offices.index') }}/" + full.id + "'>View Details</a>";
-                        @endcan
-                        @can('offices-delete')
-                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'\', \'{{ route("admin.offices.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @can('offices-fdelete')
+                            straction += ' | <br /> <a href="#" onclick="showdeletemodal(' + full.id + ',\'\', \'{{ route("admin.offices.forcedelete") }}\/' + full.id + '\')" class="text-danger">Delete Permanently</a>';
                         @endcan
                         return straction;
                     }

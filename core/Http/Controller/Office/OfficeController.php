@@ -46,9 +46,13 @@ class OfficeController extends Controller
             6 => ['updated_at'],
         ];
         
-        $filteredmodel = DB::table('offices')
-                ->whereNull('deleted_at')
-                ->select(DB::raw("id, 
+        $filteredmodel = DB::table('offices');
+        if($request->isTrashed == 'true') {
+            $filteredmodel->whereNotNull('deleted_at');
+        } else {
+            $filteredmodel->whereNull('deleted_at');
+        }
+        $filteredmodel->select(DB::raw("id, 
                     address, 
                     telephone, 
                     mobile, 
@@ -155,6 +159,55 @@ class OfficeController extends Controller
             Office::find($id)->delete();
             return redirect()->route('admin.offices.index')
                             ->with('status-success','Office Location deleted successfully');
+        } catch (Exception $ex) {
+            return redirect()->route('admin.offices.index')
+                            ->with('status-failed', $ex->getMessage());
+        }
+    }
+    
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        return view('admin.layouts.modules.office.trashed');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $office = Office::onlyTrashed()->find($id);
+        
+        return view('admin.layouts.modules.office.show')->with(compact('office'));
+    }
+    
+    public function processrestore(Request $request, $id)
+    {
+        try
+        {
+            Office::onlyTrashed()->find($id)->restore();
+            
+            return redirect()->route('admin.offices.index')->with('status-success', 'Office Location ID#'.$id.' restored successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
+    }
+    
+    public function forcedelete($id)
+    {
+        try
+        {
+            Office::onlyTrashed()->find($id)->forceDelete();
+            return redirect()->route('admin.offices.index')
+                            ->with('status-success','Office Location ID#'.$id.' is permanently deleted in the system');
         } catch (Exception $ex) {
             return redirect()->route('admin.offices.index')
                             ->with('status-failed', $ex->getMessage());

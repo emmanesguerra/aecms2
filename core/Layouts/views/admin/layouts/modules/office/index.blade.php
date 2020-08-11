@@ -75,6 +75,9 @@
                         @can('offices-list')
                             straction +=  "<a href='{{ route('admin.offices.index') }}/" + full.id + "'>View Details</a>";
                         @endcan
+                        @can('offices-delete')
+                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'\', \'{{ route("admin.offices.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @endcan
                         return straction;
                     }
                 }

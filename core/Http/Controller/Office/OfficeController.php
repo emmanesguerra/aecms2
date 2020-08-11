@@ -47,6 +47,7 @@ class OfficeController extends Controller
         ];
         
         $filteredmodel = DB::table('offices')
+                ->whereNull('deleted_at')
                 ->select(DB::raw("id, 
                     address, 
                     telephone, 
@@ -149,6 +150,14 @@ class OfficeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            Office::find($id)->delete();
+            return redirect()->route('admin.offices.index')
+                            ->with('status-success','Office Location deleted successfully');
+        } catch (Exception $ex) {
+            return redirect()->route('admin.offices.index')
+                            ->with('status-failed', $ex->getMessage());
+        }
     }
 }

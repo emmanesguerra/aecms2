@@ -32,5 +32,11 @@ class CreateDeveloperUserSeeder extends Seeder
         $role->syncPermissions($permissions);
    
         $user->assignRole([$role->id]);
+        
+        $role1 = Role::create(['name' => 'Admin']);
+   
+        $permissions1 = Permission::whereIn('module', ['contents', 'files', 'offices'])->get()->pluck('id','id');
+  
+        $role1->syncPermissions($permissions1);
     }
 }

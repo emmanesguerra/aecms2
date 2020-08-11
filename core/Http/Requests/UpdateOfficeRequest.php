@@ -3,6 +3,7 @@
 namespace Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateOfficeRequest extends FormRequest
 {
@@ -36,6 +37,8 @@ class UpdateOfficeRequest extends FormRequest
             'mobile' => 'max:100',
             'email' => 'max:100',
             'marker' => 'required',
+            'm_width' => 'required',
+            'm_height' => 'required',
             'store_hours' => '',
         ];
     }

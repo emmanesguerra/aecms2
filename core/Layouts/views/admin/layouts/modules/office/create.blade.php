@@ -79,7 +79,22 @@
                                     <label class="@error('marker') text-danger @enderror" for="marker">Google Map Pin *</label>
                                     <textarea class="form-control ae-input-field @error('marker') is-invalid @enderror " name="marker" id="marker" rows="5"/>{{ old('marker') }}</textarea>
                                     @error('marker') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                    <br />
+                                 </div>
+                            </div>
+                            <div class="form-row">
+                                <div  class="form-group  col-sm-3">
+                                    <div class="form-group  col-sm-12">
+                                        <label class="@error('m_width') text-danger @enderror" for="m_width">Map Width *</label>
+                                        <input maxlength="4" type="text" class="form-control ae-input-field @error('m_width') is-invalid @enderror " name="m_width" value="{{ old('m_width') }}" id="m_width" placeholder="Map Width"/>
+                                        @error('m_width') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                    <div class="form-group  col-sm-12">
+                                        <label class="@error('m_height') text-danger @enderror" for="m_height">Map Height *</label>
+                                        <input maxlength="4" type="text" class="form-control ae-input-field @error('m_height') is-invalid @enderror " name="m_height" value="{{ old('m_height') }}" id="m_height" placeholder="Map Height"/>
+                                        @error('m_height') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
+                                <div  class="form-group  col-sm-9">
                                     <div class="alert alert-info" role="alert">
                                         How to retrieve your google map pin?
                                         <ol>
@@ -91,7 +106,7 @@
                                             <li>Paste the copied html to the textarea above</li>
                                         </ol>
                                     </div>
-                                 </div>
+                                </div>
                             </div>
                             <div class="form-row" id="store_hoursrow">
                                 <tinymce-form  :value="{{ (Session::getOldInput('store_hours')) ? json_encode(Session::getOldInput('store_hours')): json_encode("") }}"

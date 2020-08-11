@@ -85,7 +85,7 @@ class OfficeController extends Controller
     {
         try
         {
-            Office::create($request->only('address', 'contact_person', 'telephone', 'mobile', 'email', 'marker', 'store_hours'));
+            Office::create($request->only('address', 'contact_person', 'telephone', 'mobile', 'email', 'marker', 'm_width', 'm_height', 'store_hours'));
             
             return redirect()->route('admin.offices.index')->with('status-success', 'Office Location created successfully');
             
@@ -131,10 +131,8 @@ class OfficeController extends Controller
     {
         try
         {
-            $input = $request->all();
-
             $office = Office::find($id);
-            $office->update($input);
+            $office->update($request->only('address', 'contact_person', 'telephone', 'mobile', 'email', 'marker', 'm_width', 'm_height', 'store_hours'));
 
             return redirect()->route('admin.offices.index')->with('status-success','Office Location updated successfully');
             

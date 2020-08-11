@@ -46,7 +46,7 @@
                         <dl class="row">
                             <dt class="col-sm-2">Google Map Pin:</dt>
                             <dd class="col-sm-9">
-                                <iframe src="{{ $office->marker }}" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                <iframe src="{{ $office->marker }}" width="{{ $office->m_width }}" height="{{ $office->m_height }}" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                             </dd>
                         </dl>
                         @if($office->store_hours)

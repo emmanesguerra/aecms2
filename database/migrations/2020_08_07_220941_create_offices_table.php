@@ -21,6 +21,8 @@ class CreateOfficesTable extends Migration
             $table->string('mobile', 100)->nullable();
             $table->string('email', 100)->nullable();
             $table->text('marker');
+            $table->string('m_width', 4);
+            $table->string('m_height', 4);
             $table->text('store_hours')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();

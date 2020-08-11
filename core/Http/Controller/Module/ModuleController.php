@@ -10,8 +10,8 @@ use Core\Http\Requests\StoreModuleRequest;
 use Core\Http\Requests\UpdateModuleRequest;
 use Core\Model\Module;
 use Core\Model\Content;
+use Core\Model\Permission;
 use Core\Library\DataTables;
-use Spatie\Permission\Models\Permission;
 
 class ModuleController extends Controller
 {

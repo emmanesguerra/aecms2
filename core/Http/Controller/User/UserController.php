@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Core\Http\Requests\StoreUserRequest;
 use Core\Http\Requests\UpdateUserRequest;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use Core\Model\Role;
+use Core\Model\Permission;
 use Core\Model\User;
 use DB;
 use Core\Library\DataTables;

@@ -4,10 +4,10 @@ namespace Core\Http\Controller\Role;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use DB;
 use Core\Library\DataTables;
+use Core\Model\Role;
+use Core\Model\Permission;
 
 
 class RoleController extends Controller

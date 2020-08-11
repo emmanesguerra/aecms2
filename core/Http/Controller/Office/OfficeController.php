@@ -18,6 +18,9 @@ class OfficeController extends Controller
          $this->middleware('permission:offices-create', ['only' => ['create','store']]);
          $this->middleware('permission:offices-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:offices-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:offices-trash', ['only' => ['trashed']]);
+         $this->middleware('permission:offices-restore', ['only' => ['restore', 'processrestore']]);
+         $this->middleware('permission:offices-fdelete', ['only' => ['forcedelete']]);
     }
     /**
      * Display a listing of the resource.

@@ -184,7 +184,12 @@ return [
         /*
          * Image Providers
          */
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        
+        /*
+         * Laravel-Auditing
+         */
+        OwenIt\Auditing\AuditingServiceProvider::class,
 
     ],
 

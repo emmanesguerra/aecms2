@@ -35,7 +35,8 @@ class CreateDeveloperUserSeeder extends Seeder
         
         $role1 = Role::create(['name' => 'Admin']);
    
-        $permissions1 = Permission::whereIn('module', ['contents', 'files', 'offices'])->get()->pluck('id','id');
+        $permissions1 = Permission::whereIn('module', ['contents', 'files', 'offices'])
+                ->whereNotIn('name', ['offices-trash', 'offices-restore', 'offices-fdelete'])->get()->pluck('id','id');
   
         $role1->syncPermissions($permissions1);
     }

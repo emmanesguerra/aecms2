@@ -13,8 +13,11 @@ class Content extends Model implements Auditable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'html_template', 'type', 'class_namespace', 'method_name', 'created_by', 'updated_by', 'created_at', 'updated_at'
+    protected $fillable = ['name', 'html_template', 'type', 'class_namespace', 'method_name'];
+    
+    protected $auditExclude = [
+        'created_by',
+        'updated_by'
     ];
     
     /**

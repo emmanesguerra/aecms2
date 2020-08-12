@@ -14,8 +14,11 @@ class Module extends Model implements Auditable
      *
      * @var array
      */
-    protected $fillable = [
-        'module_name', 'description', 'route_index_url', 'created_by', 'updated_by', 'created_at', 'updated_at'
+    protected $fillable = ['module_name', 'description', 'route_index_url'];
+    
+    protected $auditExclude = [
+        'created_by',
+        'updated_by'
     ];
 
     protected function serializeDate(\DateTimeInterface $date)

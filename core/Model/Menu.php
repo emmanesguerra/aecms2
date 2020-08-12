@@ -16,6 +16,10 @@ class Menu extends Model implements Auditable
     protected $fillable = [
         'title', 'parent_id', 'page_id', 'lft', 'rgt', 'lvl', 'created_by', 'created_at', 'updated_at'
     ];
+    
+    protected $auditExclude = [
+        'created_by'
+    ];
 
     protected function serializeDate(\DateTimeInterface $date)
     {

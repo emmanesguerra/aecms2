@@ -43,6 +43,13 @@ class User extends Authenticatable implements Auditable
         'email_verified_at' => 'datetime',
     ];
     
+    protected $auditExclude = [
+        'created_by',
+        'updated_by',
+        'current_ul_id',
+        'remember_token'
+    ];
+    
     /**
      * {@inheritdoc}
      */
@@ -52,13 +59,6 @@ class User extends Authenticatable implements Auditable
             'displayToDashboard'
         ];
     }
-    
-    protected $auditExclude = [
-        'created_by',
-        'updated_by',
-        'current_ul_id',
-        'remember_token'
-    ];
 
     protected function serializeDate(\DateTimeInterface $date)
     {

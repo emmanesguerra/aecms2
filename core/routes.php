@@ -35,6 +35,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('pages')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Page\PageController@data')->name('pages.data');
             Route::get('/template', '\Core\Http\Controller\Page\PageController@template')->name('pages.template');
+            Route::get('/trashed', '\Core\Http\Controller\Page\PageController@trashed')->name('pages.trashed');
+            Route::get('/restore/{id?}', '\Core\Http\Controller\Page\PageController@restore')->name('pages.restore');
+            Route::post('/restore/{id}', '\Core\Http\Controller\Page\PageController@processrestore')->name('pages.processrestore');
+            Route::delete('/forcedelete/{id?}', '\Core\Http\Controller\Page\PageController@forcedelete')->name('pages.forcedelete');
         });
         Route::resource('pages','\Core\Http\Controller\Page\PageController');
         

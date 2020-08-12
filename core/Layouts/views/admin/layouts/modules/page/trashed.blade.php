@@ -7,13 +7,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Page Management
+                Trashed Pages
                 
-                @can('offices-trash')
-                <a href="{{ route('admin.pages.trashed') }}" class="float-right"> Check Trashed Records</a>
-                @endcan
-                @can('pages-create')
-                <a href="{{ route('admin.pages.create') }}" class="float-right mr-3"> Create New Page</a>
+                @can('pages-list')
+                <a href="{{ route('admin.pages.index') }}" class="float-right">Back</a>
                 @endcan
             </div>
             
@@ -30,10 +27,10 @@
                             <th>ID</th>
                             <th>Title</th>
                             <th>Url</th>
-                            <th width="30%">Description</th>
+                            <th>Description</th>
                             <th>Template</th>
-                            <th width="10%" class="text-nowrap">Date Updated</th>
-                            <th width="20%">Action</th>
+                            <th class="text-nowrap">Date Updated</th>
+                            <th width="15%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +57,7 @@
             "ajax": {
                 "url": "{{ route('admin.pages.data') }}",
                 "data": {
-                    isTrashed: false
+                    isTrashed: true
                 }
             },
             "columns": [
@@ -71,18 +68,16 @@
                 {"data": "template"},
                 {"data": "updated_at"},
                 {
+                    width: "15%",
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
                         var straction = "";
-                        @can('pages-edit')
-                            straction += "<a href='{{ route('admin.pages.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @can('pages-restore')
+                            straction +=  "<a href='{{ route('admin.pages.restore') }}/" + full.id + "'>View Details</a>";
                         @endcan
-                        @can('pages-list')
-                            straction +=  "<a href='{{ route('admin.pages.index') }}/" + full.id + "'>View Details</a> | ";
-                        @endcan
-                        @can('pages-delete')
-                            straction += '<a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("admin.pages.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @can('pages-fdelete')
+                            straction += '<br /><a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("admin.pages.forcedelete") }}\/' + full.id + '\')" class="text-danger">Delete Permanently</a>';
                         @endcan
                         return straction;
                     }

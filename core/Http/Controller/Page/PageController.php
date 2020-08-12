@@ -44,19 +44,20 @@ class PageController extends Controller
             2 => ['title'],
             3 => ['url'],
             4 => ['description'],
-            5 => ['javascripts'],
-            6 => ['css'],
-            7 => ['template'],
-            8 => ['updated_at'],
+            5 => ['template'],
+            6 => ['updated_at'],
         ];
         
-        $filteredmodel = DB::table('pages')
-                ->select(DB::raw("id, 
+        $filteredmodel = DB::table('pages');
+        if($request->isTrashed == 'true') {
+            $filteredmodel->whereNotNull('deleted_at');
+        } else {
+            $filteredmodel->whereNull('deleted_at');
+        }
+        $filteredmodel->select(DB::raw("id, 
                     title, 
                     url,
                     description, 
-                    javascripts, 
-                    css,
                     template,
                     updated_at")
             );
@@ -152,7 +153,10 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        //
+        $page = Page::find($id);
+        $page->contents;
+        
+        return view('admin.layouts.modules.page.show')->with(compact('page'));
     }
 
     /**
@@ -239,6 +243,57 @@ class PageController extends Controller
                             ->with('status-success','Page deleted successfully');
         } catch (\Exception $ex) {
             return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
+    }
+    
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        return view('admin.layouts.modules.page.trashed');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $page = Page::onlyTrashed()->find($id);
+        $page->contents;
+        
+        return view('admin.layouts.modules.page.show')->with(compact('page'));
+    }
+    
+    public function processrestore(Request $request, $id)
+    {
+        try
+        {
+            Page::onlyTrashed()->find($id)->restore();
+            
+            return redirect()->route('admin.pages.index')->with('status-success', 'Page ID#'.$id.' restored successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
+    }
+    
+    public function forcedelete($id)
+    {
+        try
+        {
+            Page::onlyTrashed()->find($id)->forceDelete();
+            
+            return redirect()->route('admin.pages.index')
+                            ->with('status-success','Page ID#'.$id.' is permanently deleted in the system');
+        } catch (Exception $ex) {
+            return redirect()->route('admin.pages.index')
+                            ->with('status-failed', $ex->getMessage());
         }
     }
 }

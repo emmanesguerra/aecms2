@@ -30,7 +30,7 @@ class StoreModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'module_name' => 'required|max:50',
+            'module_name' => 'required|max:50|unique:modules,module_name',
             'route_index_url' => 'required|max:50'
         ];
     }

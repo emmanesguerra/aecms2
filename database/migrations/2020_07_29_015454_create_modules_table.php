@@ -15,7 +15,7 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string('module_name', 50);
+            $table->string('module_name', 50)->unique();
             $table->text('description')->nullable();
             $table->string('route_index_url', 50);
             $table->unsignedBigInteger('created_by');

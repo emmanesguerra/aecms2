@@ -23,6 +23,8 @@ class CreateMenusTable extends Migration
             $table->unsignedInteger('lvl');
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
+            
+            $table->unique(['title', 'parent_id']);
         });
     }
 

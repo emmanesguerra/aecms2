@@ -25,6 +25,8 @@ Vue.component('tinymce-form', require('./components/TinyMce/Form.vue').default);
 
 Vue.component('page-panel-form', require('./components/Page/Panel.vue').default);
 
+Vue.component('audit-table', require('./components/Audit/Table.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

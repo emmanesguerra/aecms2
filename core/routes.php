@@ -24,6 +24,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/restore/{id}', '\Core\Http\Controller\User\UserController@processrestore')->name('users.processrestore');
             Route::delete('/forcedelete/{id?}', '\Core\Http\Controller\User\UserController@forcedelete')->name('users.forcedelete');
             Route::get('/logs', '\Core\Http\Controller\User\UserLogController@data')->name('users.log.data');
+            Route::get('/changelogs', '\Core\Http\Controller\User\ChangeLogController@data')->name('users.changelog.data');
+            Route::get('/changelogs/values/{id?}', '\Core\Http\Controller\User\ChangeLogController@values')->name('users.changelog.value');
         });
         Route::resource('users','\Core\Http\Controller\User\UserController');
         

@@ -37,13 +37,13 @@
         computed: {
             loopdata () {
                 if(!_.isEmpty(this.info)) {
-                    return (this.info.data.event == 'created') ? this.info.data.new: this.info.data.old;
+                    return (_.includes(['created' , 'restored'], this.info.data.event)) ? this.info.data.new: this.info.data.old;
                 }
                 return [];
             },
             isCreated () {
                 if(!_.isEmpty(this.info)) {
-                    return (this.info.data.event == 'created') ? true: false;
+                    return (_.includes(['created' , 'restored'], this.info.data.event)) ? true: false;
                 }
                 return false;
             }
@@ -57,7 +57,7 @@
             },
             rloopdata (index) {
                 if(!_.isEmpty(this.info)) {
-                    var arr = (this.info.data.event == 'created') ? this.info.data.old: this.info.data.new;
+                    var arr = (_.includes(['created' , 'restored'], this.info.data.event)) ? this.info.data.old: this.info.data.new;
                     return _.get(arr, index);
                 }
                 return "";

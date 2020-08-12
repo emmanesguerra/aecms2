@@ -173,7 +173,7 @@
                 {"data": "auditable_id"},
                 {"data": "created_at"}
             ],
-            "order": [[ 1, "desc" ]]
+            "order": [[ 4, "desc" ]]
         });
     });
 </script>

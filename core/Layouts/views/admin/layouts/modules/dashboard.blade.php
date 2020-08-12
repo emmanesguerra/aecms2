@@ -42,6 +42,13 @@
                         </thead>
                         <tbody>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Email</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -59,14 +66,36 @@
 <script>
     $(document).ready(function () {
         
-        $('#userlogs').DataTable({
+        $('#userlogs tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" class="form-control form-control-sm" placeholder="Search '+title+'" />' );
+        });
+        
+        userlog = $('#userlogs').DataTable({
+            initComplete: function () {
+                // Apply the search
+                this.api().columns().every( function () {
+                    var that = this;
+
+                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );
+            },
+            sDom: 'lrtp',
             processing: true,
+            "serverSide": true,
             "ajax": "{{ route('admin.users.log.data') }}",
             "columns": [
                 {"data": "email"},
                 {"data": "log_in"},
                 {"data": "log_out"}
-            ]
+            ],
+            "order": [[ 1, "desc" ]]
         });
     });
 </script>

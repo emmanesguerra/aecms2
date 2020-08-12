@@ -19,9 +19,9 @@ class UserLogController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['email'],
-            2 => ['log_in'],
-            3 => ['log_out']
+            0 => ['email'],
+            1 => ['log_in'],
+            2 => ['log_out']
         ];
         
         $filteredmodel = DB::table('user_logs')

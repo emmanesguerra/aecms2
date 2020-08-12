@@ -9,7 +9,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
     
     Route::middleware(['auth'])->group(function () {
-        Route::get('/dashboard', '\Core\Http\Controller\AEHomeController@index')->name('home');
+        Route::get('/dashboard', '\Core\Http\Controller\AEHomeController@index')->name('dashboard');
         Route::post('/logout', '\Core\Http\Controller\AELoginController@logout')->name('logout');
 
         Route::prefix('settings')->group(function () {

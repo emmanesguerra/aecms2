@@ -36,7 +36,7 @@ class LogSuccessfulLogin
             
             $user = $event->user;
 
-            $userlog = UserLog::create(['log_in' => \Carbon\Carbon::now(), 'ip_address' => $this->request->ip()]);
+            $userlog = UserLog::create(['log_in' => \Carbon\Carbon::now(), 'ip_address' => $this->request->ip(), 'email' => $user->email]);
 
             if($userlog) {
                 $user->current_ul_id = $userlog->id;

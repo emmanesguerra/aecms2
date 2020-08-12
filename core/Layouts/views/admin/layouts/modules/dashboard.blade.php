@@ -13,9 +13,9 @@
             @endif
 
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <h4>Change Logs</h4>
-                    <table id="userlists" class="table table-striped table-bordered small">
+                    <table id="changelogs" class="table table-striped table-bordered small">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -30,13 +30,14 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-4">
-                    <h4>Timesheet</h4>
-                    <table id="userlists" class="table table-striped table-bordered small">
+                <div class="col-sm-5">
+                    <h4>User Logs</h4>
+                    <table id="userlogs" class="table table-striped table-bordered small">
                         <thead>
                             <tr>
                                 <th>Email</th>
-                                <th>Date Time</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,4 +48,26 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('styles')
+<link href="{{ asset('DataTables-Bootstrap/datatables.min.css') }}" rel="stylesheet">
+@endsection
+
+@section('javascript')
+<script src="{{ asset('DataTables-Bootstrap/datatables.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        
+        $('#userlogs').DataTable({
+            processing: true,
+            "ajax": "{{ route('admin.users.log.data') }}",
+            "columns": [
+                {"data": "email"},
+                {"data": "log_in"},
+                {"data": "log_out"}
+            ]
+        });
+    });
+</script>
 @endsection

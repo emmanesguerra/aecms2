@@ -23,6 +23,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/restore/{id?}', '\Core\Http\Controller\User\UserController@restore')->name('users.restore');
             Route::post('/restore/{id}', '\Core\Http\Controller\User\UserController@processrestore')->name('users.processrestore');
             Route::delete('/forcedelete/{id?}', '\Core\Http\Controller\User\UserController@forcedelete')->name('users.forcedelete');
+            Route::get('/logs', '\Core\Http\Controller\User\UserLogController@data')->name('users.log.data');
         });
         Route::resource('users','\Core\Http\Controller\User\UserController');
         

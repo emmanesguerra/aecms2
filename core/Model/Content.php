@@ -25,9 +25,7 @@ class Content extends Model implements Auditable
      */
     public function generateTags(): array
     {
-        return [
-            'displayToDashboard'
-        ];
+        return (!empty($this->html_template)) ? ['displayToDashboard'] : [];
     }
 
     protected function serializeDate(\DateTimeInterface $date)

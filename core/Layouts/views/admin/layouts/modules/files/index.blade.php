@@ -48,9 +48,14 @@
 <script>
 $(document).ready(function () {
     $('#filelists').DataTable({
-        processing: true,
+        initComplete : function () {
+            return;
+        },
+        serverSide: false,
         "ajax": "{{ route('admin.files.data') }}",
-        "aaSorting": [],
+        dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         "columns": [
             {
                 mRender: function (data, type, full) {

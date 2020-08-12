@@ -20,7 +20,7 @@
                 </div>
                 @endif
             
-                <table id="officelists" class="table table-striped table-bordered small">
+                <table id="officelists" class="datatable table table-striped table-bordered small">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -34,6 +34,17 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Address</th>
+                            <th>Telephone</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Date Updated</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

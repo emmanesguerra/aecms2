@@ -109,5 +109,43 @@
             }
         </script>
         @yield('javascript')
+            
+        <script>
+            $('.datatable tfoot th').each( function () {
+                var title = $(this).text();
+                if(title !== '') {
+                    $(this).html( '<input type="text" class="form-control form-control-sm" placeholder="Search '+title+'" />' );
+                }
+            });
+
+            if($.fn.dataTable) {
+                $.extend( true, $.fn.dataTable.defaults, {
+                    initComplete: function () {
+                        // Apply the search
+                        this.api().columns().every( function () {
+                            var that = this;
+
+                            $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                                if ( that.search() !== this.value ) {
+                                    that
+                                        .search( this.value )
+                                        .draw();
+                                }
+                            } );
+                        } );
+                    },
+                    dom: "<'row'<'col-sm-12 col-md-6'l>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    serverSide: true,
+                    responsive: true,
+                    processing: true,
+                    "columnDefs": [{
+                        "defaultContent": "-",
+                        "targets": "_all"
+                    }]
+                });
+            }
+        </script>
     </body>
 </html>

@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-sm-7">
                     <h4>Change Logs</h4>
-                    <table id="changelogs" class="table table-striped table-bordered small">
+                    <table id="changelogs" class="datatable table table-striped table-bordered small">
                         <thead>
                             <tr>
                                 <th>Email</th>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-sm-5">
                     <h4>User Logs</h4>
-                    <table id="userlogs" class="table table-striped table-bordered small">
+                    <table id="userlogs" class="datatable table table-striped table-bordered small">
                         <thead>
                             <tr>
                                 <th>Email</th>
@@ -99,64 +99,20 @@
         });
     }
     
-    $(document).ready(function () {
-        
-        $('#userlogs tfoot th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" class="form-control form-control-sm" placeholder="Search '+title+'" />' );
-        });
-        
-        $('#changelogs tfoot th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" class="form-control form-control-sm" placeholder="Search '+title+'" />' );
-        });
-        
+    $(document).ready(function () {        
         $('#userlogs').DataTable({
-            initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-
-                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
-            },
-            sDom: 'lrtp',
-            processing: true,
-            "serverSide": true,
             "ajax": "{{ route('admin.users.log.data') }}",
+            "order": [[ 1, "desc" ]],
             "columns": [
                 {"data": "email"},
                 {"data": "log_in"},
                 {"data": "log_out"}
             ],
-            "order": [[ 1, "desc" ]]
         });
         
         $('#changelogs').DataTable({
-            initComplete: function () {
-                // Apply the search
-                this.api().columns().every( function () {
-                    var that = this;
-
-                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
-                        if ( that.search() !== this.value ) {
-                            that
-                                .search( this.value )
-                                .draw();
-                        }
-                    } );
-                } );
-            },
-            sDom: 'lrtip',
-            processing: true,
-            "serverSide": true,
             "ajax": "{{ route('admin.users.changelog.data') }}",
+            "order": [[ 4, "desc" ]],
             "columns": [
                 {"data": "email"},
                 {
@@ -173,7 +129,6 @@
                 {"data": "auditable_id"},
                 {"data": "created_at"}
             ],
-            "order": [[ 4, "desc" ]]
         });
     });
 </script>

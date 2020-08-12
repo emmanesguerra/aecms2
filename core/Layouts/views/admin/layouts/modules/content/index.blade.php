@@ -17,7 +17,7 @@
                 </div>
                 @endif
             
-                <table id="contentslists" class="table table-striped table-bordered small">
+                <table id="contentslists" class="datatable table table-striped table-bordered small">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -30,6 +30,16 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th></th>
+                            <th>Date Updated</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -49,8 +59,6 @@
     $(document).ready(function () {
         
         $('#contentslists').DataTable({
-            responsive: true,
-            processing: true,
             "ajax": "{{ route('admin.contents.data') }}",
             "columns": [
                 {"data": "id"},
@@ -88,12 +96,7 @@
                         return straction;
                     }
                 }
-            ],
-            // to fix error in responsive: true option
-            "columnDefs": [{
-                "defaultContent": "-",
-                "targets": "_all"
-            }]
+            ]
         });
     });
 </script>

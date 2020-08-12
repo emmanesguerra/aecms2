@@ -42,12 +42,12 @@ class UserController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['users.id'],
-            2 => ['users.firstname'],
-            3 => ['users.lastname'],
-            4 => ['users.email'],
-            5 => ['roles.name'],
-            6 => ['users.updated_at'],
+            0 => ['users.id'],
+            1 => ['users.firstname'],
+            2 => ['users.lastname'],
+            3 => ['users.email'],
+            4 => ['roles.name'],
+            5 => ['users.updated_at'],
         ];
         
         $filteredmodel = DB::table('users')

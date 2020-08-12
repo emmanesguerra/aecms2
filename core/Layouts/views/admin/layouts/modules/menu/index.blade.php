@@ -109,6 +109,7 @@
     $(document).ready(function () {
         
         menudtable = $('#menulists').DataTable({
+            serverSide: false,
             processing: true,
             ordering: false,
             paging: false,

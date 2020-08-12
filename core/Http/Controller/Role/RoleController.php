@@ -47,8 +47,8 @@ class RoleController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['id'],
-            2 => ['name'],
+            0 => ['id'],
+            1 => ['name'],
         ];
         
         $filteredmodel = DB::table('roles')

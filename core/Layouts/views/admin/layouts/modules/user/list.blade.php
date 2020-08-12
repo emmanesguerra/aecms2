@@ -24,7 +24,7 @@
                 </div>
                 @endif
                 
-                <table id="userlists" class="table table-striped table-bordered small">
+                <table id="datatablelist" class="datatable table table-striped table-bordered small">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -38,6 +38,17 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th class="text-nowrap">First Name</th>
+                            <th class="text-nowrap">Last Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th class="text-nowrap">Date Updated</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -53,10 +64,8 @@
 @section('javascript')
 <script src="{{ asset('DataTables-Bootstrap/datatables.min.js') }}"></script>
 <script>
-    $(document).ready(function () {
-        $('#userlists').DataTable({
-            responsive: true,
-            processing: true,
+    $(document).ready(function () {        
+        $('#datatablelist').DataTable({
             "ajax": {
                 "url": "{{ route('admin.users.data') }}",
                 "data": {
@@ -88,12 +97,7 @@
                         return straction;
                     }
                 }
-            ],
-            // to fix error in responsive: true option
-            "columnDefs": [{
-                "defaultContent": "-",
-                "targets": "_all"
-            }]
+            ]
         });
     });
 </script>

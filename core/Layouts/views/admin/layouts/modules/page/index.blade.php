@@ -24,7 +24,7 @@
                 </div>
                 @endif
             
-                <table id="pageslists" class="table table-striped table-bordered small">
+                <table id="pageslists" class="datatable table table-striped table-bordered small">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -38,6 +38,17 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Url</th>
+                            <th width="30%">Description</th>
+                            <th>Template</th>
+                            <th width="10%" class="text-nowrap">Date Updated</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -56,7 +67,6 @@
 <script>
     $(document).ready(function () {
         var pagedtable = $('#pageslists').DataTable({
-            processing: true,
             "ajax": {
                 "url": "{{ route('admin.pages.data') }}",
                 "data": {

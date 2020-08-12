@@ -40,12 +40,12 @@ class PageController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['id'],
-            2 => ['title'],
-            3 => ['url'],
-            4 => ['description'],
-            5 => ['template'],
-            6 => ['updated_at'],
+            0 => ['id'],
+            1 => ['title'],
+            2 => ['url'],
+            3 => ['description'],
+            4 => ['template'],
+            5 => ['updated_at'],
         ];
         
         $filteredmodel = DB::table('pages');

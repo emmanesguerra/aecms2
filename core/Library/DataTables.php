@@ -36,7 +36,7 @@ class DataTables
         }
         
         
-        if(!empty($request->order[0]['column'])) {
+        if(is_numeric($request->order[0]['column'])) {
             $model->orderBy($columns[$request->order[0]['column']][0], $request->order[0]['dir']);
         }
         

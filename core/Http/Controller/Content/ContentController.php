@@ -35,10 +35,10 @@ class ContentController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['id'],
-            2 => ['name'],
-            3 => ['type'],
-            5 => ['updated_at'],
+            0 => ['id'],
+            1 => ['name'],
+            2 => ['type'],
+            4 => ['updated_at'],
         ];
         
         $filteredmodel = Content::with('pages')->select(['id', 'name', 'type', 'updated_at'])->where(['class_namespace' => null, 'method_name' => null]);

@@ -40,11 +40,11 @@ class ModuleController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['id'],
-            2 => ['module_name'],
-            3 => ['description'],
-            4 => ['route_index_url'],
-            6 => ['updated_at'],
+            0 => ['id'],
+            1 => ['module_name'],
+            2 => ['description'],
+            3 => ['route_index_url'],
+            4 => ['updated_at'],
         ];
         
         $filteredmodel = DB::table('modules')

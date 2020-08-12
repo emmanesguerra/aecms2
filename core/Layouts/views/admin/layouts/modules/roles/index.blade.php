@@ -20,7 +20,7 @@
                 </div>
                 @endif
             
-                <table id="rolelists" class="table table-striped table-bordered small">
+                <table id="rolelists" class="datatable table table-striped table-bordered small">
                     <thead>
                         <tr>
                             <th width="5%">ID</th>
@@ -30,6 +30,13 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th width="5%">ID</th>
+                            <th width="15%">Name</th>
+                            <th width="5%"></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -46,10 +53,8 @@
 @section('javascript')
 <script src="{{ asset('DataTables-Bootstrap/datatables.min.js') }}"></script>
 <script>
-    $(document).ready(function () {
-        
+    $(document).ready(function () {        
         $('#rolelists').DataTable({
-            processing: true,
             "ajax": "{{ route('admin.roles.data') }}",
             "columns": [
                 {"data": "id"},

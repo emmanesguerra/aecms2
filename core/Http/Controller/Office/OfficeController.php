@@ -41,12 +41,12 @@ class OfficeController extends Controller
     public function data(Request $request)
     {
         $tablecols = [
-            1 => ['id'],
-            2 => ['address'],
-            3 => ['telephone'],
-            4 => ['mobile'],
-            5 => ['email'],
-            6 => ['updated_at'],
+            0 => ['id'],
+            1 => ['address'],
+            2 => ['telephone'],
+            3 => ['mobile'],
+            4 => ['email'],
+            5 => ['updated_at'],
         ];
         
         $filteredmodel = DB::table('offices');

@@ -20,7 +20,7 @@
                 </div>
                 @endif
             
-                <table id="moduleslists" class="table table-striped table-bordered small">
+                <table id="moduleslists" class="datatable table table-striped table-bordered small">
                     <thead>
                         <tr>
                             <th >ID</th>
@@ -33,6 +33,16 @@
                     </thead>
                     <tbody>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th >ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Index Url</th>
+                            <th>Date Updated</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -50,10 +60,7 @@
 <script src="{{ asset('DataTables-Bootstrap/datatables.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-        
         $('#moduleslists').DataTable({
-            responsive: true,
-            processing: true,
             "ajax": "{{ route('admin.modules.data') }}",
             "columns": [
                 {"data": "id"},
@@ -76,12 +83,7 @@
                         return straction;
                     }
                 }
-            ],
-            // to fix error in responsive: true option
-            "columnDefs": [{
-                "defaultContent": "-",
-                "targets": "_all"
-            }]
+            ]
         });
     });
 </script>

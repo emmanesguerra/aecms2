@@ -22,6 +22,9 @@ class PermissionTableSeeder extends Seeder
                'users-create',
                'users-edit',
                'users-delete',
+                'users-trash',
+                'users-restore',
+                'users-fdelete',
            ],
            'roles' => [
                'roles-list',
@@ -39,6 +42,9 @@ class PermissionTableSeeder extends Seeder
                'pages-create',
                'pages-edit',
                'pages-delete',
+                'pages-trash',
+                'pages-restore',
+                'pages-fdelete',
            ],
            'menus' => [
                'menus-list',

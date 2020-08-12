@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 class Authenticate extends Middleware
 {
@@ -15,6 +17,12 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
+            
+            if(strpos(Route::currentRouteName(), 'admin') === 0) {
+                Session::flash('feedback', 'Your login session expires');
+                return route('admin.login');
+            }
+            
             return route('login');
         }
     }

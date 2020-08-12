@@ -19,6 +19,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::prefix('users')->group(function () {
             Route::get('/data', '\Core\Http\Controller\User\UserController@data')->name('users.data');
+            Route::get('/trashed', '\Core\Http\Controller\User\UserController@trashed')->name('users.trashed');
+            Route::get('/restore/{id?}', '\Core\Http\Controller\User\UserController@restore')->name('users.restore');
+            Route::post('/restore/{id}', '\Core\Http\Controller\User\UserController@processrestore')->name('users.processrestore');
+            Route::delete('/forcedelete/{id?}', '\Core\Http\Controller\User\UserController@forcedelete')->name('users.forcedelete');
         });
         Route::resource('users','\Core\Http\Controller\User\UserController');
         

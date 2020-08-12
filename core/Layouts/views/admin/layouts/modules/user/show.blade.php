@@ -8,7 +8,7 @@
             <div class="card-header">
                 Displaying details of {{ $user->firstname }} {{ $user->lastname }}
                 @can('users-list')
-                <a href="{{ route('admin.users.index') }}" class="float-right">Back</a>
+                <a href="{{ url()->previous() }}" class="float-right">Back</a>
                 @endcan
             </div> 
         
@@ -32,14 +32,6 @@
                             <dd class="col-sm-9">{{ $user->email }}</dd>
                         </dl>
                         <dl class="row">
-                            <dt class="col-sm-2">Created At:</dt>
-                            <dd class="col-sm-9">{{ $user->created_at }}</dd>
-                        </dl>
-                        <dl class="row">
-                            <dt class="col-sm-2">Updated At:</dt>
-                            <dd class="col-sm-9">{{ $user->updated_at }}</dd>
-                        </dl>
-                        <dl class="row">
                             <dt class="col-sm-2">Role:</dt>
                             @if(!empty($role))
                             <dd class="col-sm-9">{{ $role->name }}</dd>
@@ -55,6 +47,25 @@
                             @endif
                             </dd>
                         </dl>
+                        <dl class="row">
+                            <dt class="col-sm-2">Created At:</dt>
+                            <dd class="col-sm-9">{{ $user->created_at }}</dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-sm-2">Updated At:</dt>
+                            <dd class="col-sm-9">{{ $user->updated_at }}</dd>
+                        </dl>
+                        @if($user->deleted_at)
+                        <dl class="row">
+                            <dt class="col-sm-2">Deleted At:</dt>
+                            <dd class="col-sm-9">{{ $user->deleted_at }}</dd>                            
+                        </dl>
+                        
+                        {!! Form::model($user, ['method' => 'POST','route' => ['admin.users.processrestore', $user->id]]) !!}
+                        <button type="submit" class="btn btn-primary">Restore Record</button>
+                        {!! Form::close() !!}
+                        
+                        @endif
                     </div>
                 </div>
             </div>

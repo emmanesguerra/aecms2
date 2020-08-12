@@ -6,13 +6,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Users Management
+                Trashed Users
                 
-                @can('users-trash')
-                <a href="{{ route('admin.users.trashed') }}" class="float-right"> Check Trashed Records</a>
-                @endcan
-                @can('users-create')
-                <a href="{{ route('admin.users.create') }}" class="float-right mr-3">Create New User</a>
+                @can('users-list')
+                <a href="{{ route('admin.users.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
 
@@ -60,7 +57,7 @@
             "ajax": {
                 "url": "{{ route('admin.users.data') }}",
                 "data": {
-                    isTrashed: false
+                    isTrashed: true
                 }
             },
             "columns": [
@@ -71,19 +68,16 @@
                 {"data": "name"},
                 {"data": "updated_at"},
                 {
-                    width: "18%",
+                    width: "20%",
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
                         var straction = "";
-                        @can('users-edit')
-                            straction += "<a href='{{ route('admin.users.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @can('users-restore')
+                            straction +=  "<a href='{{ route('admin.users.restore') }}/" + full.id + "'>View Details</a>";
                         @endcan
-                        @can('users-list')
-                            straction +=  "<a href='{{ route('admin.users.index') }}/" + full.id + "'>View Details</a>";
-                        @endcan
-                        @can('users-delete')
-                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("admin.users.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @can('users-fdelete')
+                            straction += '<br /><a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.email + '\', \'{{ route("admin.users.forcedelete") }}\/' + full.id + '\')" class="text-danger">Delete Permanently</a>';
                         @endcan
                         return straction;
                     }

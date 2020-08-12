@@ -52,8 +52,13 @@ class UserController extends Controller
         
         $filteredmodel = DB::table('users')
                 ->leftjoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-                ->leftjoin('roles', 'roles.id', '=', 'model_has_roles.role_id')
-                ->select(DB::raw("users.id, 
+                ->leftjoin('roles', 'roles.id', '=', 'model_has_roles.role_id');
+        if($request->isTrashed == 'true') {
+            $filteredmodel->whereNotNull('users.deleted_at');
+        } else {
+            $filteredmodel->whereNull('users.deleted_at');
+        }
+        $filteredmodel->select(DB::raw("users.id, 
                     users.firstname, 
                     users.lastname, 
                     users.email, 
@@ -187,6 +192,57 @@ class UserController extends Controller
             User::find($id)->delete();
             return redirect()->route('admin.users.index')
                             ->with('status-success','User deleted successfully');
+        } catch (Exception $ex) {
+            return redirect()->route('admin.users.index')
+                            ->with('status-failed', $ex->getMessage());
+        }
+    }
+    
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        return view('admin.layouts.modules.user.trashed');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()->find($id);
+        $user->contents;
+        
+        return view('admin.layouts.modules.user.show')->with(compact('user'));
+    }
+    
+    public function processrestore(Request $request, $id)
+    {
+        try
+        {
+            User::onlyTrashed()->find($id)->restore();
+            
+            return redirect()->route('admin.users.index')->with('status-success', 'User ID#'.$id.' restored successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
+    }
+    
+    public function forcedelete($id)
+    {
+        try
+        {
+            User::onlyTrashed()->find($id)->forceDelete();
+            
+            return redirect()->route('admin.users.index')
+                            ->with('status-success','User ID#'.$id.' is permanently deleted in the system');
         } catch (Exception $ex) {
             return redirect()->route('admin.users.index')
                             ->with('status-failed', $ex->getMessage());

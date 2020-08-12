@@ -11,6 +11,12 @@
                     <form method="POST" action="{{ route('admin.login') }}">
                         @csrf
 
+                        @if (session('feedback'))
+                        <div class="alert alert-danger text-left">
+                            {{ session('feedback') }}
+                        </div>
+                        @endif
+                        
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

@@ -62,32 +62,8 @@
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-12">
                                         <label class="@error('owner') text-danger @enderror" for="owner">Owner</label>
-                                        <input maxlength="191" type="text" class="form-control ae-input-field @error('owner') is-invalid @enderror " name="owner" value="{{ old('owner', $data['model']['owner']) }}" id="owner" placeholder="Owner's name" />
+                                        <input maxlength="100" type="text" class="form-control ae-input-field @error('owner') is-invalid @enderror " name="owner" value="{{ old('owner', $data['model']['owner']) }}" id="owner" placeholder="Owner's name" />
                                         @error('owner') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                    </div>
-                                </div>
-                                <div  class="form-group row mt-3">
-                                    <h4>For SEO purposes</h4>
-                                </div>
-                                <div class="form-row">
-                                    <div  class="form-group  col-sm-12">
-                                        <label class="@error('meta_title') text-danger @enderror" for="meta_title">Default Page Title *</label>
-                                        <input maxlength="191" type="text" class="form-control ae-input-field @error('meta_title') is-invalid @enderror " name="meta_title" value="{{ old('meta_title', $data['model']['meta_title']) }}" id="meta_title" placeholder="Default page title" required/>
-                                        @error('meta_title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div  class="form-group  col-sm-12">
-                                        <label class="@error('meta_keywords') text-danger @enderror" for="meta_keywords">Keywords/Tags</label>
-                                        <input type="text" class="form-control ae-input-field @error('meta_keywords') is-invalid @enderror " name="meta_keywords" value="{{ old('meta_keywords', $data['model']['meta_keywords']) }}" id="meta_keywords" placeholder="Default page keywords" />
-                                        @error('meta_keywords') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div  class="form-group  col-sm-12">
-                                        <label class="@error('meta_description') text-danger @enderror" for="meta_description">Page Description *</label>
-                                        <textarea  class="form-control ae-input-field @error('meta_description') is-invalid @enderror " name="meta_description" id="meta_description" placeholder="Default page description" rows="5" required>{{ old('meta_description', $data['model']['meta_description']) }}</textarea>
-                                        @error('meta_description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                             </div>
@@ -96,53 +72,34 @@
                             <div class="col-sm-12">
 
                                 <div  class="form-group row">
-                                    <h4>Email Settings</h4>
+                                    <h4>Contact Us Emailing Addresses</h4>
                                 </div>
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-12">
-                                        <label class="@error('email_recipients') text-danger @enderror" for="email_recipients">Recipients</label>
-                                        <input type="text" class="form-control ae-input-field @error('email_recipients') is-invalid @enderror " name="email_recipients" value="{{ old('email_recipients', $data['model']['email_recipients']) }}" id="email_recipients" placeholder="Recipient" />
-                                        @error('email_recipients') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                        <label class="@error('email_title') text-danger @enderror" for="email_title">Default Title:</label>
+                                        <input maxlength="50" type="text" class="form-control ae-input-field @error('email_title') is-invalid @enderror " name="email_title" value="{{ old('email_title', $data['model']['email_title']) }}" id="email_title" placeholder="Title" />
+                                        @error('email_title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-12">
-                                        <label class="@error('email_cc') text-danger @enderror" for="email_cc">CCs</label>
+                                        <label class="@error('email_reciever') text-danger @enderror" for="email_reciever">Send To: <span class="small">(comma seperated)</span></label>
+                                        <input type="text" class="form-control ae-input-field @error('email_reciever') is-invalid @enderror " name="email_reciever" value="{{ old('email_reciever', $data['model']['email_reciever']) }}" id="email_reciever" placeholder="Send To" />
+                                        @error('email_reciever') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-12">
+                                        <label class="@error('email_cc') text-danger @enderror" for="email_cc">CCs: <span class="small">(comma seperated)</label>
                                         <input type="text" class="form-control ae-input-field @error('email_cc') is-invalid @enderror " name="email_cc" value="{{ old('email_cc', $data['model']['email_cc']) }}" id="email_cc" placeholder="Cc" />
                                         @error('email_cc') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div  class="form-group  col-sm-12">
-                                        <label class="@error('email_bcc') text-danger @enderror" for="email_bcc">BCCs</label>
+                                        <label class="@error('email_bcc') text-danger @enderror" for="email_bcc">BCCs: <span class="small">(comma seperated)</label>
                                         <input type="text" class="form-control ae-input-field @error('email_bcc') is-invalid @enderror " name="email_bcc" value="{{ old('email_bcc', $data['model']['email_bcc']) }}" id="email_bcc" placeholder="Bcc" />
                                         @error('email_bcc') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                    </div>
-                                </div>
-                                <div  class="form-group row mt-3">
-                                    <h4>Server Settings</h4>
-                                </div>
-                                <div class="form-row">
-                                    <div  class="form-group  col-sm-12">
-                                        <label class="@error('developer') text-danger @enderror" for="developer">Developer</label>
-                                        <input maxlength="191" type="text" class="form-control ae-input-field @error('developer') is-invalid @enderror " name="developer" value="{{ old('developer', $data['model']['developer']) }}" id="developer" placeholder="Developer's name" />
-                                        @error('developer') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div  class="form-group  col-sm-12">
-                                        <label class="@error('timezone') text-danger @enderror" for="timezone">Timezone *</label>
-                                        {{old('timezone')}}
-                                        <treeselect-form 
-                                            v-bind:value="{{ (Session::getOldInput('timezone')) ? json_encode(Session::getOldInput('timezone')): json_encode($data['model']['timezone']) }}"
-                                            v-bind:selectoptions="{{ json_encode($data['timezones']) }}"
-                                            v-bind:haserror="{{ $errors->has('timezone') ? "true": "false" }}"
-                                            v-bind:fieldname="{{ json_encode('timezone') }}"
-                                            v-bind:multiple="{{ json_encode(false) }}"
-                                            v-bind:forpagetemplate="{{ json_encode(false) }}"
-                                            v-bind:forpagetemplateurl="{{ json_encode(null) }}">
-                                        </treeselect-form>
-                                        @error('timezone') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
                             </div>

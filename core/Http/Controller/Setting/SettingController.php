@@ -26,18 +26,12 @@ class SettingController extends Controller
     {
         $data = array();
         
-        $data['timezones'] = DropdownOptions::timezones();
         $data['model'] = [
-            'developer' => SystemConfigLibrary::retrieve('developer'),
             'domain_name' => SystemConfigLibrary::retrieve('domain_name'),
-            'meta_description' => SystemConfigLibrary::retrieve('meta_description'),
-            'meta_keywords' => SystemConfigLibrary::retrieve('meta_keywords'),
-            'tags' => SystemConfigLibrary::retrieve('meta_keywords'),
-            'meta_title' => SystemConfigLibrary::retrieve('meta_title'),
-            'owner' => SystemConfigLibrary::retrieve('owner'),
-            'timezone' => SystemConfigLibrary::retrieve('timezone'),
             'website_name' => SystemConfigLibrary::retrieve('website_name'),
-            'email_recipients' => SystemConfigLibrary::retrieve('email_recipients'),
+            'owner' => SystemConfigLibrary::retrieve('owner'),
+            'email_title' => SystemConfigLibrary::retrieve('email_title'),
+            'email_reciever' => SystemConfigLibrary::retrieve('email_reciever'),
             'email_cc' => SystemConfigLibrary::retrieve('email_cc'),
             'email_bcc' => SystemConfigLibrary::retrieve('email_bcc'),
         ];

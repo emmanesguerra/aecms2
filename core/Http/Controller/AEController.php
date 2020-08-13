@@ -22,10 +22,7 @@ class AEController extends Controller
         
         if($page) {
             
-            $data = array(
-                'css' => $page->css,
-                'js' => $page->javascripts
-            );
+            $data = [];
             
             foreach($page->contents as $panel) {
                 if($panel->html_template) {
@@ -36,76 +33,25 @@ class AEController extends Controller
                     $data[$panel->pivot->tags] = $module->$fnname();
                 }
             }
+        
+            $this->GenerateHeader($page);
             
-            return view('templates.' . str_replace('.blade.php', "", $page->template), $data);
+            echo view('templates.' . str_replace('.blade.php', "", $page->template), $data);
+        
+            $this->GenerateFooter($page);
+            
         } else {
-            echo 'not found';
+            echo 'Page not found';
         }
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    private function GenerateHeader(Page $page)
     {
-        //
+        echo view('header')->with(compact('page'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    
+    private function GenerateFooter(Page $page)
+    {        
+        echo view('footer')->with(compact('page'));
     }
 }

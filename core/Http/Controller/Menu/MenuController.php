@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use Core\Http\Requests\StoreMenuRequest;
 use Core\Model\Content;
 use Core\Model\Menu;
@@ -228,5 +229,26 @@ class MenuController extends Controller
         }
         
         return;
+    }
+    
+    public function navi(Content $content)
+    {
+        try
+        {
+            $title = str_replace(" Nav", "", $content->name);
+            $menu = Menu::where('title' , $title)->select('lft', 'rgt')->first();
+            
+            if($menu) {
+                $menus = Menu::where('lft', '>', $menu->lft)
+                            ->where('rgt', '<', $menu->rgt)
+                            ->with('page')
+                            ->get();
+                
+                return view('layouts.navigation')->with(compact('menus'));
+            }
+            return "";
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+        }
     }
 }

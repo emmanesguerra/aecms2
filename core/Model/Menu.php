@@ -25,4 +25,12 @@ class Menu extends Model implements Auditable
     {
         return $date->format('Y-m-d H:i:s');
     }
+    
+    /**
+     * A content may be assigned to various pages.
+     */
+    public function page()
+    {
+        return $this->hasOne(Page::class, 'id', 'page_id');
+    }
 }

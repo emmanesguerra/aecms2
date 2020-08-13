@@ -28,9 +28,9 @@ class AEController extends Controller
                 if($panel->html_template) {
                     $data[$panel->pivot->tags] = $panel->html_template;
                 } else {
-                    $module = new $panel->module_name;
-                    $fnname = $panel->fn_name;
-                    $data[$panel->pivot->tags] = $module->$fnname();
+                    $module = new $panel->class_namespace;
+                    $fnname = $panel->method_name;
+                    $data[$panel->pivot->tags] = $module->$fnname($panel);
                 }
             }
         
@@ -47,11 +47,11 @@ class AEController extends Controller
     
     private function GenerateHeader(Page $page)
     {
-        echo view('header')->with(compact('page'));
+        echo view('layouts.header')->with(compact('page'));
     }
     
     private function GenerateFooter(Page $page)
     {        
-        echo view('footer')->with(compact('page'));
+        echo view('layouts.footer')->with(compact('page'));
     }
 }

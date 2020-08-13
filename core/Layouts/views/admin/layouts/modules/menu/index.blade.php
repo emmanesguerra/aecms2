@@ -62,7 +62,7 @@
             if(!isNew) {
                 var options = "<option value='0'>Select a page</option>";
                 @foreach ($pages as $page)
-                    options += "<option value='{{$page->id}}'>{{$page->title}}</option>";
+                    options += "<option value='{{$page->id}}'>{{$page->name}}</option>";
                 @endforeach
                 strinput = '<select id="pageid-'+counter+'" class="form-control form-control-sm">'+options+'</select>';
             }

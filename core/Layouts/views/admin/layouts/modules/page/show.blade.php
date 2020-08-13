@@ -23,11 +23,15 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <dl class="row">
+                            <dt class="col-sm-2">Name:</dt>
+                            <dd class="col-sm-9">{!! $page->name !!}</dd>
+                        </dl>
+                        <dl class="row">
                             <dt class="col-sm-2">Title:</dt>
                             <dd class="col-sm-9">{!! $page->title !!}</dd>
                         </dl>
                         <dl class="row">
-                            <dt class="col-sm-2">Url:</dt>
+                            <dt class="col-sm-2">Url Slug:</dt>
                             <dd class="col-sm-9">{{ $page->url }}</dd>
                         </dl>
                         @if($page->description)

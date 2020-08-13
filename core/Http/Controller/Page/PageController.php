@@ -41,7 +41,7 @@ class PageController extends Controller
     {
         $tablecols = [
             0 => ['id'],
-            1 => ['title'],
+            1 => ['name'],
             2 => ['url'],
             3 => ['description'],
             4 => ['template'],
@@ -55,7 +55,7 @@ class PageController extends Controller
             $filteredmodel->whereNull('deleted_at');
         }
         $filteredmodel->select(DB::raw("id, 
-                    title, 
+                    name, 
                     url,
                     description, 
                     template,
@@ -121,7 +121,7 @@ class PageController extends Controller
         {
             DB::beginTransaction();
             
-            $page = Page::create($request->only('title', 'url', 'description', 'javascripts', 'css', 'template'));
+            $page = Page::create($request->only('name', 'title', 'url', 'description', 'javascripts', 'css', 'template'));
             
             if($page) {
                 if($request->has('contents')) {
@@ -203,7 +203,7 @@ class PageController extends Controller
             DB::beginTransaction();
             
             $page = Page::find($id);
-            $page->update($request->only('title', 'description', 'javascripts', 'css', 'template'));
+            $page->update($request->only('name', 'title', 'description', 'javascripts', 'css', 'template'));
             
             if($page) {
                 if($request->has('contents')) {

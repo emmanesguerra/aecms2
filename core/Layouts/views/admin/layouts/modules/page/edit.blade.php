@@ -38,18 +38,25 @@
                         <div class="col-sm-12">
                             <div class="form-row">
                                 <div  class="form-group  col-sm-7">
-                                    <label class="@error('title') text-danger @enderror" for="title">Title *</label>
+                                    <label class="@error('name') text-danger @enderror" for="name">Name * <small>(as page/menu name)</small></label>
+                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('name') is-invalid @enderror " name="name" value="{{ old('name', $page->name) }}" id="name" placeholder="Name" required/>
+                                    @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div  class="form-group  col-sm-7">
+                                    <label class="@error('title') text-danger @enderror" for="title">Title * <small>(as page/meta title)</small></label>
                                     <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title', $page->title) }}" id="title" placeholder="Title" required/>
                                     @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-5">
-                                    <label class="@error('url') text-danger @enderror" for="url">Url *</label>
+                                    <label class="@error('url') text-danger @enderror" for="url">Url Slug *</label>
                                     <span class="form-control ae-input-field">{{ $page->url }}</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-12">
-                                    <label class="@error('description') text-danger @enderror" for="description">Description *</label>
+                                    <label class="@error('description') text-danger @enderror" for="description">Description * <small>(as meta description)</small></label>
                                     <textarea class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" id="description" rows="5" required>{{ old('description', $page->description) }}</textarea>
                                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>

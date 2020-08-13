@@ -10,7 +10,7 @@ class Page extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable, SoftDeletes;
     
-    protected $fillable = ['url', 'title', 'description', 'javascripts', 'css', 'template', 'template_html'];
+    protected $fillable = ['url', 'name', 'title', 'description', 'javascripts', 'css', 'template', 'template_html'];
     
     protected $auditExclude = [
         'created_by',

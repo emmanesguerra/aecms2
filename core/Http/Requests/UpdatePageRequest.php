@@ -31,6 +31,7 @@ class UpdatePageRequest extends FormRequest
     {
         return [
             'id' => 'required',
+            'name' => 'required',
             'title' => 'required',
             'description' => 'required',
             'template' => 'required',

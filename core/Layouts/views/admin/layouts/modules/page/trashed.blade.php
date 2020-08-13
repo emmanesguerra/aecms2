@@ -25,7 +25,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
+                            <th>Name</th>
                             <th>Url</th>
                             <th>Description</th>
                             <th>Template</th>
@@ -38,7 +38,7 @@
                     <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
+                            <th>Name</th>
                             <th>Url</th>
                             <th>Description</th>
                             <th>Template</th>
@@ -72,7 +72,7 @@
             },
             "columns": [
                 {"data": "id"},
-                {"data": "title"},
+                {"data": "name"},
                 {"data": "url"},
                 {"data": "description"},
                 {"data": "template"},

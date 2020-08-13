@@ -30,7 +30,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $pages = \Core\Model\Page::get(['id', 'title']);
+        $pages = \Core\Model\Page::get(['id', 'name']);
         
         return view('admin.layouts.modules.menu.index')->with(compact('pages'));
     }
@@ -103,7 +103,7 @@ class MenuController extends Controller
             }
             $right = $left + 1;
             $page = Page::find($request->pageId);
-            $title = ($page) ? $page->title: $request->nTitle;
+            $title = ($page) ? $page->name: $request->nTitle;
             
             $menu = Menu::create([
                 'title' => $title,

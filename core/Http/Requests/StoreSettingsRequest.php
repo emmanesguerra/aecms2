@@ -32,12 +32,7 @@ class StoreSettingsRequest extends FormRequest
         return [
             'domain_name' => 'required|max:191',
             'website_name' => 'required|max:191',
-            'owner' => 'max:191',
-            'meta_title' => 'required|max:191',
-            'meta_description' => 'required',
-            'meta_keywords' => '',
-            'timezone' => 'required|max:191',
-            'developer' => 'required|max:191'
+            'owner' => 'max:191'
         ];
     }
 }

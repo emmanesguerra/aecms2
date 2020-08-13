@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="form-row">
                                     <div  class="custom-control form-group  col-sm-12">
-                                        <label class="@error('domain_name') text-danger @enderror" for="domain_name">Domain name *</label>
+                                        <label class="@error('domain_name') text-danger @enderror" for="domain_name">Root Domain *</label>
                                         <input maxlength="191" type="text" class="form-control ae-input-field @error('domain_name') is-invalid @enderror " name="domain_name" value="{{ old('domain_name', $data['model']['domain_name']) }}" id="domain_name" placeholder="ex. your.website.com" required/>
                                         @error('domain_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>

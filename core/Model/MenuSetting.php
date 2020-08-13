@@ -10,13 +10,16 @@ class MenuSetting extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     
     protected $primaryKey = 'menu_id';
-    public $incrementing = false;
     
     protected $fillable = [
-        'menu_id', 'main_ul_class', 'main_li_class', 'main_anch_class', 'suc_strt_div', 'suc_end_div', 'suc_strt_list', 'suc_end_list', 'suc_anch_class'
+        'menu_id', 'blck_start', 'blck_end', 'list_dflt', 'list_chld', 
+        'list_end', 'anch_dflt', 'anch_chld',
+        'subblck_start', 'subblck_end', 'sublist_dflt', 'sublist_chld', 'sublist_end', 
+        'subanch_dflt', 'subanch_chld'
     ];
     
     protected $auditExclude = [
-        'created_by'
+        'created_by',
+        'updated_by'
     ];
 }

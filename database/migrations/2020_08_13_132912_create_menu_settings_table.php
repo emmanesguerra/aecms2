@@ -15,14 +15,20 @@ class CreateMenuSettingsTable extends Migration
     {
         Schema::create('menu_settings', function (Blueprint $table) {
             $table->unsignedBigInteger('menu_id')->primary();
-            $table->string('main_ul_class', 100);
-            $table->string('main_li_class', 100);
-            $table->string('main_anch_class', 100);
-            $table->string('suc_strt_div', 150)->nullable();
-            $table->string('suc_end_div', 10)->nullable();
-            $table->string('suc_strt_list', 150)->nullable();
-            $table->string('suc_end_list', 10)->nullable();
-            $table->string('suc_anch_class', 100)->nullable();
+            $table->string('blck_start', 150);
+            $table->string('blck_end', 10);
+            $table->string('list_dflt', 150);
+            $table->string('list_chld', 150);
+            $table->string('list_end', 10);
+            $table->string('anch_dflt', 150);
+            $table->string('anch_chld', 150);
+            $table->string('subblck_start', 150)->nullable();
+            $table->string('subblck_end', 10)->nullable();
+            $table->string('sublist_dflt', 150)->nullable();
+            $table->string('sublist_chld', 150)->nullable();
+            $table->string('sublist_end', 10)->nullable();
+            $table->string('subanch_dflt', 150)->nullable();
+            $table->string('subanch_chld', 150)->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

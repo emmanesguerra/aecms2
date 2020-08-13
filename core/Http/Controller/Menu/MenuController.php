@@ -141,7 +141,20 @@ class MenuController extends Controller
     
     private function createMenuSetting($menu)
     {
-        MenuSetting::create(['menu_id' => $menu->id, 'main_ul_class' => '', 'main_li_class' => '', 'main_anch_class' => '']);
+        if($menu) {
+            if(is_null($menu->page_id)) {
+        
+                MenuSetting::create(['menu_id' => $menu->id, 
+                    'blck_start' => '', 
+                    'blck_end' => '', 
+                    'list_dflt' => '', 
+                    'list_chld' => '', 
+                    'list_end' => '', 
+                    'anch_dflt' => '', 
+                    'anch_chld' => '']);
+                
+            }
+        }
         
         return;
     }
@@ -227,14 +240,20 @@ class MenuController extends Controller
         {
             $settings = MenuSetting::find($id);
             $settings->update($request->only(
-                    'main_ul_class', 
-                    'main_li_class', 
-                    'main_anch_class', 
-                    'suc_strt_div', 
-                    'suc_end_div', 
-                    'suc_strt_list', 
-                    'suc_end_list', 
-                    'suc_anch_class'));
+                    'blck_start', 
+                    'blck_end', 
+                    'list_dflt', 
+                    'list_chld', 
+                    'list_end', 
+                    'anch_dflt', 
+                    'anch_chld',
+                    'subblck_start', 
+                    'subblck_end', 
+                    'sublist_dflt', 
+                    'sublist_chld', 
+                    'sublist_end', 
+                    'subanch_dflt', 
+                    'subanch_chld'));
 
             return redirect()->route('admin.menus.index')
                             ->with('status-success','Menu settings updated successfully');
@@ -249,20 +268,44 @@ class MenuController extends Controller
         try
         {
             $title = str_replace(" Nav", "", $content->name);
-            $menu = Menu::where('title' , $title)->select('lft', 'rgt')->first();
+            $root = Menu::where('title' , $title)->select('lft', 'rgt', 'id')->first();
+            $settings = $root->setting;
             
-            if($menu) {
-                $menus = Menu::where('lft', '>', $menu->lft)
-                            ->where('rgt', '<', $menu->rgt)
-                            ->with('page')
-                            ->orderBy('lft', 'asc')
-                            ->get();
-                
-                return view('layouts.navigation')->with(compact('menus'));
+            if($root) {
+                $html = $this->generateNaviForChildren($root->submenu, $settings, false);
+                return $html;
             }
             return "";
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
         }
+    }
+    
+    private function generateNaviForChildren($submenu, $settings, $isChildren = true) 
+    {
+        $html = ($isChildren) ? $settings->subblck_start: $settings->blck_start;
+                
+        foreach($submenu as $menu) {
+            if(count($menu->submenu) > 0) {
+                $html .= ($isChildren) ? $settings->sublist_chld: $settings->list_chld;
+                $anchor = ($isChildren) ? $settings->subanch_chld: $settings->anch_chld;
+            } else {
+                $html .= ($isChildren) ? $settings->sublist_dflt: $settings->list_dflt;
+                $anchor = ($isChildren) ? $settings->subanch_dflt: $settings->anch_dflt;
+            }
+            
+            $page = $menu->page;
+            $html .= view('layouts.navigation.anchor')->with(compact('anchor', 'page'));
+            
+            if(count($menu->submenu) > 0) {
+                $html .= $this->generateNaviForChildren($menu->submenu, $settings, true);
+            }
+            
+            $html .= ($isChildren) ? $settings->sublist_end: $settings->list_end;
+        }
+        
+        $html .= ($isChildren) ? $settings->subblck_end: $settings->blck_end;
+        
+        return $html;
     }
 }

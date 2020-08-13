@@ -31,14 +31,20 @@ class StoreMenuSettingRequest extends FormRequest
     {
         return [
             'menu_id' => 'required',
-            'main_ul_class' => 'required|max:100',
-            'main_li_class' => 'required|max:100',
-            'main_anch_class' => 'required|max:100',
-            'suc_strt_div' => 'max:150',
-            'suc_end_div' => 'max:10',
-            'suc_strt_list' => 'max:150',
-            'suc_end_list' => 'max:10',
-            'suc_anch_class' => 'max:100'
+            'blck_start' => 'required|max:150', 
+            'blck_end' => 'required|max:10', 
+            'list_dflt' => 'required|max:150', 
+            'list_chld' => 'required|max:150', 
+            'list_end' => 'required|max:10', 
+            'anch_dflt' => 'required|max:150', 
+            'anch_chld' => 'required|max:150',
+            'subblck_start' => 'max:150', 
+            'subblck_end' => 'max:10', 
+            'sublist_dflt' => 'max:150', 
+            'sublist_chld' => 'max:150', 
+            'sublist_end' => 'max:10', 
+            'subanch_dflt' => 'max:150', 
+            'subanch_chld' => 'max:150'
         ];
     }
 }

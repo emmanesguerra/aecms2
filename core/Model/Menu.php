@@ -20,6 +20,10 @@ class Menu extends Model implements Auditable
     protected $auditExclude = [
         'created_by'
     ];
+    
+    protected $with = ['submenu'];
+    
+    protected $hidden = array('created_by', 'updated_by', 'updated_at', 'created_at');
 
     protected function serializeDate(\DateTimeInterface $date)
     {
@@ -40,5 +44,9 @@ class Menu extends Model implements Auditable
     public function setting()
     {
         return $this->hasOne(MenuSetting::class);
+    }
+    
+    public function submenu(){
+        return $this->hasMany('Core\Model\Menu', 'parent_id');
     }
 }

@@ -37,7 +37,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-10">
                         <div class="col-sm-12">
                             <div class="form-row">
-                                <div  class="form-group  col-sm-5">
+                                <div  class="form-group  col-sm-7">
                                     <label class="@error('title') text-danger @enderror" for="title">Title *</label>
                                     <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title', $page->title) }}" id="title" placeholder="Title" required/>
                                     @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
@@ -48,14 +48,27 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div  class="form-group  col-sm-10">
+                                <div  class="form-group  col-sm-12">
                                     <label class="@error('description') text-danger @enderror" for="description">Description</label>
-                                    <input type="text" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" value="{{ old('description', $page->description) }}" id="description" placeholder="Description">
+                                    <textarea class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" id="description" rows="5">{{ old('description', $page->description) }}</textarea>>
                                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div  class="form-group  col-sm-5">
+                                <div  class="form-group  col-sm-4">
+                                    <label class="@error('template') text-danger @enderror" for="template">Html Template *</label>
+                                    <treeselect-form 
+                                        v-bind:value="{{ (Session::getOldInput('template')) ? json_encode(Session::getOldInput('template')): json_encode($page->template) }}"
+                                        v-bind:selectoptions="{{ json_encode($files) }}"
+                                        v-bind:haserror="{{ $errors->has('template') ? "true": "false" }}"
+                                        v-bind:fieldname="{{ json_encode('template') }}"
+                                        v-bind:multiple="{{ json_encode(false) }}"
+                                        v-bind:forpagetemplate="{{ json_encode(true) }}"
+                                        v-bind:forpagetemplateurl="'{!! route('admin.pages.template') !!}'">
+                                    </treeselect-form>
+                                    @error('template') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                </div>
+                                <div  class="form-group  col-sm-4">
                                     <label class="@error('javascripts') text-danger @enderror" for="javascripts">Javascripts</label>
                                     <treeselect-form 
                                         v-bind:value="{{ (Session::getOldInput('javascripts')) ? json_encode(Session::getOldInput('javascripts')): json_encode($page->javascripts) }}"
@@ -68,7 +81,7 @@
                                     </treeselect-form>
                                     @error('javascripts') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
-                                <div  class="form-group  col-sm-5">
+                                <div  class="form-group  col-sm-4">
                                     <label class="@error('css') text-danger @enderror" for="css">Styles</label>
                                     <treeselect-form 
                                         v-bind:value="{{ (Session::getOldInput('css')) ? json_encode(Session::getOldInput('css')): json_encode($page->css) }}"
@@ -80,21 +93,6 @@
                                         v-bind:forpagetemplateurl="{{ json_encode(null) }}">
                                     </treeselect-form>
                                     @error('css') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div  class="form-group  col-sm-5">
-                                    <label class="@error('template') text-danger @enderror" for="template">Html Template *</label>
-                                    <treeselect-form 
-                                        v-bind:value="{{ (Session::getOldInput('template')) ? json_encode(Session::getOldInput('template')): json_encode($page->template) }}"
-                                        v-bind:selectoptions="{{ json_encode($files) }}"
-                                        v-bind:haserror="{{ $errors->has('template') ? "true": "false" }}"
-                                        v-bind:fieldname="{{ json_encode('template') }}"
-                                        v-bind:multiple="{{ json_encode(false) }}"
-                                        v-bind:forpagetemplate="{{ json_encode(true) }}"
-                                        v-bind:forpagetemplateurl="'{!! route('admin.pages.template') !!}'">
-                                    </treeselect-form>
-                                    @error('template') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             

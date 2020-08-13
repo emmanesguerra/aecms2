@@ -26,6 +26,9 @@ use Core\Observers\MenuObserver;
 use Core\Model\Office;
 use Core\Observers\OfficeObserver;
 
+use Core\Model\MenuSetting;
+use Core\Observers\MenuSettingObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -55,5 +58,6 @@ class AppServiceProvider extends ServiceProvider
         Page::observe(PageObserver::class);
         Menu::observe(MenuObserver::class);
         Office::observe(OfficeObserver::class);
+        MenuSetting::observe(MenuSettingObserver::class);
     }
 }

@@ -144,6 +144,12 @@
                                 str += ' | <span onclick="showdeletemodal(' + full.id + ',\'' + full.title + '\', \'{{ route("admin.menus.index") }}\/' + full.id + '\')" class="text-danger"  style="cursor:pointer">Remove Menu</span>'
                             }
                             @endcan
+                            @can('menus-edit')
+                            if(!full.page_id)
+                            {
+                                str += " | <a href='{{ route('admin.menus.settings') }}/" + full.id + "'>Manage Settings</a> ";
+                            }
+                            @endcan
                             return str;
                         }
                     }

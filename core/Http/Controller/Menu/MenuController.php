@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use Core\Http\Requests\StoreMenuRequest;
+use Core\Http\Requests\StoreMenuSettingRequest;
 use Core\Model\Content;
 use Core\Model\Menu;
+use Core\Model\MenuSetting;
 use Core\Model\Page;
 use Core\Library\HierarchicalDB;
 use Core\Library\DataTables;
@@ -20,7 +22,7 @@ class MenuController extends Controller
     {
          $this->middleware('permission:menus-list|menus-create|menus-edit|menus-delete', ['only' => ['index','store']]);
          $this->middleware('permission:menus-create', ['only' => ['create','store']]);
-         $this->middleware('permission:menus-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:menus-edit', ['only' => ['settings','settingsstore']]);
          $this->middleware('permission:menus-delete', ['only' => ['destroy']]);
     }
     /**
@@ -50,6 +52,7 @@ class MenuController extends Controller
         $filteredmodel = DB::table('menus')
                 ->select(DB::raw("title, 
                     parent_id,
+                    page_id,
                     lft,
                     rgt,
                     id,
@@ -65,16 +68,7 @@ class MenuController extends Controller
             'recordsTotal' => ($hasValue)? $data->count(): $modelcnt,
             'recordsFiltered' => ($hasValue)? $totalFiltered: $modelcnt], 200);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -115,6 +109,7 @@ class MenuController extends Controller
             ]);
             
             $this->createContentPanel($menu);
+            $this->createMenuSetting($menu);
             
             DB::commit();
             
@@ -143,40 +138,14 @@ class MenuController extends Controller
         
         return;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    
+    private function createMenuSetting($menu)
     {
-        //
+        MenuSetting::create(['menu_id' => $menu->id, 'main_ul_class' => '', 'main_li_class' => '', 'main_anch_class' => '']);
+        
+        return;
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -231,6 +200,50 @@ class MenuController extends Controller
         return;
     }
     
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function settings($id)
+    {
+        $settings = MenuSetting::find($id);
+        
+        return view('admin.layouts.modules.menu.settings')->with(compact('settings'));
+    }
+    
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function settingsstore(StoreMenuSettingRequest $request, $id)
+    {
+        try
+        {
+            $settings = MenuSetting::find($id);
+            $settings->update($request->only(
+                    'main_ul_class', 
+                    'main_li_class', 
+                    'main_anch_class', 
+                    'suc_strt_div', 
+                    'suc_end_div', 
+                    'suc_strt_list', 
+                    'suc_end_list', 
+                    'suc_anch_class'));
+
+            return redirect()->route('admin.menus.index')
+                            ->with('status-success','Menu settings updated successfully');
+            
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('status-failed', $ex->getMessage());
+        }
+    }
+    
     public function navi(Content $content)
     {
         try
@@ -242,6 +255,7 @@ class MenuController extends Controller
                 $menus = Menu::where('lft', '>', $menu->lft)
                             ->where('rgt', '<', $menu->rgt)
                             ->with('page')
+                            ->orderBy('lft', 'asc')
                             ->get();
                 
                 return view('layouts.navigation')->with(compact('menus'));

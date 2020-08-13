@@ -51,6 +51,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         Route::prefix('menus')->group(function () {
             Route::get('/data', '\Core\Http\Controller\Menu\MenuController@data')->name('menus.data');
+            Route::get('/settings/{id?}', '\Core\Http\Controller\Menu\MenuController@settings')->name('menus.settings');
+            Route::post('/settings/{id}', '\Core\Http\Controller\Menu\MenuController@settingsstore')->name('menus.settings.store');
         });
         Route::resource('menus','\Core\Http\Controller\Menu\MenuController');
         

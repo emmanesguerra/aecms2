@@ -14,7 +14,7 @@ class Menu extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title', 'parent_id', 'page_id', 'lft', 'rgt', 'lvl', 'created_by', 'created_at', 'updated_at'
+        'title', 'parent_id', 'page_id', 'lft', 'rgt', 'lvl'
     ];
     
     protected $auditExclude = [
@@ -32,5 +32,13 @@ class Menu extends Model implements Auditable
     public function page()
     {
         return $this->hasOne(Page::class, 'id', 'page_id');
+    }
+    
+    /**
+     * A content may be assigned to various pages.
+     */
+    public function setting()
+    {
+        return $this->hasOne(MenuSetting::class);
     }
 }

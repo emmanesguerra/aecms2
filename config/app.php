@@ -251,6 +251,10 @@ return [
          * Images
          */
         'Image' => Intervention\Image\Facades\Image::class,
+        /*
+         * AE Helpers
+         */
+        'AEHelpers' => \Core\Helpers\Helpers::class,
     ],
 
 ];

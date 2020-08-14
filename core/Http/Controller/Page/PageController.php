@@ -129,7 +129,11 @@ class PageController extends Controller
                         if(isset($data['selected_panel'])) {
                             $contentId = $data['selected_panel'];
                         } else {
-                            $content = Content::create(['name' => $data['name'], 'html_template' => $data['html_template'], 'type' => ($tags == 'Main') ? 'M': 'P']);
+                            $content = Content::create([
+                                'name' => $data['name'], 
+                                'html_template' => $data['html_template'], 
+                                'container_class' => $data['classname'], 
+                                'type' => ($tags == 'Main') ? 'M': 'P']);
                             $contentId = $content->id;
                         }
                         
@@ -212,7 +216,11 @@ class PageController extends Controller
                         if(isset($data['selected_panel'])) {
                             $contentId = $data['selected_panel'];
                         } else {
-                            $content = Content::create(['name' => $data['name'], 'html_template' => $data['html_template'], 'type' => ($tags == 'Main') ? 'M': 'P']);
+                            $content = Content::create([
+                                'name' => $data['name'], 
+                                'html_template' => $data['html_template'], 
+                                'container_class' => $data['classname'], 
+                                'type' => ($tags == 'Main') ? 'M': 'P']);
                             $contentId = $content->id;
                         }
                         

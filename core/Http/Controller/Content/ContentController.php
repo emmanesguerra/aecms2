@@ -98,8 +98,18 @@ class ContentController extends Controller
     public function edit($id)
     {
         $content = Content::find($id);
+        $page = $content->pages->first();
+        $styles = $this->getRelativePath($page->css);
         
-        return view('admin.layouts.modules.content.edit')->with(compact('content'));
+        return view('admin.layouts.modules.content.edit')->with(compact('content', 'styles'));
+    }
+    
+    private function getRelativePath($styles) 
+    {
+        foreach($styles as $key => $css) {
+            $styles[$key] = asset('css/templates/' . $css);
+        }
+        return $styles;
     }
 
     /**

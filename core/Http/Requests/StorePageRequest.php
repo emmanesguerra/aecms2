@@ -36,6 +36,7 @@ class StorePageRequest extends FormRequest
             'description' => 'required',
             'template' => 'required',
             'contents.*.name' => 'sometimes|required',
+            'contents.*.container_class' => 'sometimes|required',
             'contents.*.selected_panel' => 'sometimes|required',
         ];
     }

@@ -36,6 +36,7 @@ class UpdatePageRequest extends FormRequest
             'description' => 'required',
             'template' => 'required',
             'contents.*.name' => 'required_without:contents.*.selected_panel',
+            'contents.*.container_class' => 'sometimes|required',
             'contents.*.selected_panel' => 'sometimes|required',
         ];
     }

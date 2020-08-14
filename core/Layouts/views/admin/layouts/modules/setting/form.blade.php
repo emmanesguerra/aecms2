@@ -66,6 +66,24 @@
                                         @error('owner') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
+                                
+                                <div  class="form-group row mt-5">
+                                    <h4>Other Settings</h4>
+                                </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-12">
+                                        <label class="@error('office_css') text-danger @enderror" for="office_css">Css style where "Office" data displays</label>
+                                        <input maxlength="100" type="text" class="form-control ae-input-field @error('office_css') is-invalid @enderror " name="office_css" value="{{ old('office_css', $data['model']['office_css']) }}" id="office_css"/>
+                                        @error('office_css') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-12">
+                                        <label class="@error('office_block_class') text-danger @enderror" for="office_block_class">Block class of "Office"</label>
+                                        <input maxlength="100" type="text" class="form-control ae-input-field @error('office_block_class') is-invalid @enderror " name="office_block_class" value="{{ old('office_block_class', $data['model']['office_block_class']) }}" id="office_block_class"/>
+                                        @error('office_block_class') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">

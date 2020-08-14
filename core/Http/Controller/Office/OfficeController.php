@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Core\Library\DataTables;
+use Core\Library\Modules\SystemConfigLibrary;
 use Core\Model\Office;
 use Core\Http\Requests\StoreOfficeRequest;
 use Core\Http\Requests\UpdateOfficeRequest;
@@ -80,7 +81,14 @@ class OfficeController extends Controller
      */
     public function create()
     {
-        return view('admin.layouts.modules.office.create');
+        $bodyClass = SystemConfigLibrary::retrieve('office_block_class');
+        $defaultCss = SystemConfigLibrary::retrieve('office_css');
+        $styles = [];
+        if(\Illuminate\Support\Facades\Storage::disk('css')->exists($defaultCss)) {
+            $styles = [asset('css/templates/' . $defaultCss)];
+        }
+        
+        return view('admin.layouts.modules.office.create')->with(compact('styles', 'bodyClass'));
     }
 
     /**
@@ -123,9 +131,15 @@ class OfficeController extends Controller
      */
     public function edit($id)
     {
+        $bodyClass = SystemConfigLibrary::retrieve('office_block_class');
+        $defaultCss = SystemConfigLibrary::retrieve('office_css');
+        $styles = [];
+        if(\Illuminate\Support\Facades\Storage::disk('css')->exists($defaultCss)) {
+            $styles = [asset('css/templates/' . $defaultCss)];
+        }
         $office = Office::find($id);
         
-        return view('admin.layouts.modules.office.edit')->with(compact('office'));
+        return view('admin.layouts.modules.office.edit')->with(compact('office', 'styles', 'bodyClass'));
     }
 
     /**

@@ -50,8 +50,10 @@
                                            :textareaname="{{ json_encode('html_template') }}"
                                            :label="{{ json_encode('Content') }}"
                                            :height="{{ json_encode('400') }}"
-                                           :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist | image ') }}"
-                                           :plugins="{{ json_encode('code print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists  wordcount imagetools textpattern help') }}"
+                                           :styles="{{ json_encode($styles) }}"
+                                           :bodyclass="{{ json_encode($content->container_class) }}"
+                                           :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist | image | code fullscreen') }}"
+                                           :plugins="{{ json_encode('code print preview autolink fullscreen image link media table insertdatetime advlist lists  wordcount imagetools textpattern help') }}"
                                            :showmenu="{{ json_encode(true) }}">
                             </tinymce-form>
                             </div>

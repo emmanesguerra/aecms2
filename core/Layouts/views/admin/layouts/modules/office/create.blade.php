@@ -36,13 +36,15 @@
                     <div class="col-sm-12 col-md-12 col-lg-10">
                         <div class="col-sm-12">
                             <div class="form-row" id="addressrow">
-                                <tinymce-form  v-bind:value="{{ (Session::getOldInput('address')) ? json_encode(Session::getOldInput('address')): json_encode("") }}"
-                                               v-bind:textareaname="{{ json_encode('address') }}"
-                                               v-bind:label="{{ json_encode('Address *') }}"
-                                               v-bind:height="{{ json_encode('250') }}"
-                                               v-bind:toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | bullist numlist | code preview help') }}"
-                                               v-bind:plugins="{{ json_encode('code preview autolink directionality fullscreen link hr insertdatetime advlist lists  wordcount textpattern help') }}"
-                                               v-bind:showmenu="{{ json_encode(false) }}">
+                                <tinymce-form  :value="{{ (Session::getOldInput('address')) ? json_encode(Session::getOldInput('address')): json_encode("") }}"
+                                               :textareaname="{{ json_encode('address') }}"
+                                               :label="{{ json_encode('Address *') }}"
+                                               :height="{{ json_encode('250') }}"
+                                               :styles="{{ json_encode($styles) }}"
+                                               :bodyclass="{{ json_encode($bodyClass) }}"
+                                               :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | bullist numlist | code preview help') }}"
+                                               :plugins="{{ json_encode('code preview autolink directionality fullscreen link hr insertdatetime advlist lists  wordcount textpattern help') }}"
+                                               :showmenu="{{ json_encode(false) }}">
                                 </tinymce-form>
                                 @error('address')
                                 <div  class="form-group  col-sm-12">
@@ -113,6 +115,8 @@
                                                :textareaname="{{ json_encode('store_hours') }}"
                                                :label="{{ json_encode('Store Hours') }}"
                                                :height="{{ json_encode('200') }}"
+                                               :styles="{{ json_encode($styles) }}"
+                                               :bodyclass="{{ json_encode($bodyClass) }}"
                                                :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | bullist numlist table | code preview help') }}"
                                                :plugins="{{ json_encode('code preview autolink directionality fullscreen link hr insertdatetime advlist lists  wordcount textpattern help table') }}"
                                                :showmenu="{{ json_encode(false) }}">

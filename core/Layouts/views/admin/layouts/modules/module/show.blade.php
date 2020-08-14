@@ -25,7 +25,7 @@
                         </dl>
                         <dl class="row">
                             <dt class="col-sm-2">Route Index Name:</dt>
-                            <dd class="col-sm-9">{{ $module->route_index_url }}</dd>
+                            <dd class="col-sm-9">{{ $module->route_root_name }}</dd>
                         </dl>
                         <dl class="row">
                             <dt class="col-sm-2">Icon:</dt>

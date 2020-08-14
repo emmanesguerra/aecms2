@@ -43,7 +43,7 @@ class ModuleController extends Controller
             0 => ['id'],
             1 => ['module_name'],
             2 => ['description'],
-            3 => ['route_index_url'],
+            3 => ['route_root_name'],
             4 => ['updated_at'],
         ];
         
@@ -51,7 +51,7 @@ class ModuleController extends Controller
                 ->select(DB::raw("id, 
                     module_name, 
                     description, 
-                    route_index_url, 
+                    route_root_name, 
                     updated_at")
             );
         
@@ -87,17 +87,21 @@ class ModuleController extends Controller
         {
             DB::beginTransaction();
             //save to db
-            $module = Module::create($request->only('module_name', 'description', 'route_index_url', 'icon'));
+            $module = Module::create($request->only('module_name', 'description', 'route_root_name', 'icon'));
             
             if($module) {
                 //create permissions
                 $this->CreatePermissions($module->module_name);
 
                 //create controller, model, observer, request and migration
-                $this->GenerateClassFiles($module->module_name);
+                $strCleanName = $this->GenerateClassFiles($module->module_name);
 
                 //create contents
                 $this->CreateContentData($module->module_name, $request);
+                
+                $module->disableAuditing();
+                $module->admin_classnamespace = "\App\Http\Controllers\\" . $strCleanName . "\Admin\\" . $strCleanName . "Controller";
+                $module->save();
             }
             
             DB::commit();
@@ -144,7 +148,7 @@ class ModuleController extends Controller
         
         Artisan::call("make:migration", ['name' => $clean.'_table']);
         
-        return;
+        return $clean;
     }
     
     private function CreateContentData($moduleName, $request)

@@ -14,7 +14,7 @@ class Module extends Model implements Auditable
      *
      * @var array
      */
-    protected $fillable = ['module_name', 'description', 'route_index_url'];
+    protected $fillable = ['module_name', 'description', 'route_root_name'];
     
     protected $auditExclude = [
         'created_by',

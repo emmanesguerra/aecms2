@@ -52,7 +52,7 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-3">
                                     <label>Route Name (index)</label>
-                                    <span type="text" class="form-control ae-input-field text-secondary">{{ $module->route_index_url }}</span>
+                                    <span type="text" class="form-control ae-input-field text-secondary">{{ $module->route_root_name }}</span>
                                 </div>
                             </div>
                         </div>

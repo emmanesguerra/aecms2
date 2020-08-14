@@ -66,7 +66,7 @@
                 {"data": "id"},
                 {"data": "module_name"},
                 { width: "20%","data": "description"},
-                {"data": "route_index_url"},
+                {"data": "route_root_name"},
                 {"data": "updated_at"},
                 {
                     width: "13%",

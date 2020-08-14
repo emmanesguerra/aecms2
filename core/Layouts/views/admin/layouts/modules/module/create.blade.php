@@ -51,9 +51,9 @@
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-3">
-                                    <label class="@error('route_index_url') text-danger @enderror" for="route_index_url">Route Name (index) *</label>
-                                    <input maxlength="50" type="text" class="form-control ae-input-field @error('route_index_url') is-invalid @enderror " name="route_index_url" value="{{ old('route_index_url') }}" id="route_index_url" placeholder="Route Name" required/>
-                                    @error('route_index_url') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    <label class="@error('route_root_name') text-danger @enderror" for="route_root_name">Route Name (index) *</label>
+                                    <input maxlength="50" type="text" class="form-control ae-input-field @error('route_root_name') is-invalid @enderror " name="route_root_name" value="{{ old('route_root_name') }}" id="route_root_name" placeholder="Route Name" required/>
+                                    @error('route_root_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">

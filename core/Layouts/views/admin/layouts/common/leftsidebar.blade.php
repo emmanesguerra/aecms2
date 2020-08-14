@@ -36,6 +36,16 @@
                 <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.contents') === 0) ? 'active' : '' }}" href="{{ route('admin.contents.index') }}"><span>Contents</span><span class='raq'>&raquo;</span></a></li>
                 <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.files') === 0) ? 'active' : '' }}" href="{{ route('admin.files.index') }}"><span>Uploaded Files</span><span class='raq'>&raquo;</span></a></li>
                 <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.offices') === 0) ? 'active' : '' }}" href="{{ route('admin.offices.index') }}"><span>Office Location</span><span class='raq'>&raquo;</span></a></li>
+                
+                
+                @foreach(AEHelpers::getModules() as $modules)
+                    @php
+                        $module = new $modules->admin_classnamespace;
+                    @endphp
+                    @if($module->displayAdmin) 
+                    <li><a class="{{ (strpos(Route::currentRouteName(), $modules->route_root_name) === 0) ? 'active' : '' }}"  href="{{ route($modules->route_root_name .'.index') }}"><span>{{ $modules->module_name }}</span><span class='raq'>&raquo;</span></a></li>
+                    @endif
+                @endforeach
             </ul>
         </div>
     </div>

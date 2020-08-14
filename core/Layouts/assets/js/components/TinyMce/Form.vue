@@ -13,7 +13,7 @@
     import Editor from '@tinymce/tinymce-vue';
 
     export default {
-        props: ['value', 'textareaname', 'label', 'height', 'toolbar', 'plugins', 'showmenu', 'styles', 'bodyclass'],
+        props: ['value', 'textareaname', 'label', 'height', 'toolbar', 'plugins', 'showmenu', 'styles', 'bodyclass', 'imagelists'],
         components: {
             Editor,
         },
@@ -26,7 +26,8 @@
                     visual_table_class:'ae-table',
                     image_advtab: true,
                     menubar: this.showmenu,
-                    body_class: this.bodyclass
+                    body_class: this.bodyclass,
+                    image_list: this.imagelists
                 };
             }
         }

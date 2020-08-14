@@ -20,6 +20,7 @@
                        :plugins="editorplugins"
                        :styles="editorstyles"
                        :bodyclass="editorbodyclass"
+                       :imagelists="editorimagelists"
                        :showmenu="editordisplaymenu">
         </tinymce-form>
     </div>
@@ -36,8 +37,9 @@
                 editorheight: 400,
                 editorstyles: [],
                 editorbodyclass: '',
-                editortoolbar: 'undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist | image ',
-                editorplugins: 'code print preview autolink fullscreen image link media table insertdatetime advlist lists  wordcount imagetools textpattern help',
+                editorimagelists: {},
+                editortoolbar: 'undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | alignleft aligncenter alignright | bullist numlist ',
+                editorplugins: 'code print preview autolink fullscreen link media table insertdatetime advlist lists  wordcount imagetools textpattern help',
                 editordisplaymenu: true
             }
         },

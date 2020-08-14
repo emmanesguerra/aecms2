@@ -43,6 +43,7 @@
                                                :height="{{ json_encode('250') }}"
                                                :styles="{{ json_encode($styles) }}"
                                                :bodyclass="{{ json_encode($bodyClass) }}"
+                                               :imagelists="{{ json_encode([]) }}"
                                                :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | bullist numlist | code preview help') }}"
                                                :plugins="{{ json_encode('code preview autolink directionality fullscreen link hr insertdatetime advlist lists  wordcount textpattern help') }}"
                                                :showmenu="{{ json_encode(false) }}">
@@ -118,6 +119,7 @@
                                                :height="{{ json_encode('200') }}"
                                                :styles="{{ json_encode($styles) }}"
                                                :bodyclass="{{ json_encode($bodyClass) }}"
+                                               :imagelists="{{ json_encode([]) }}"
                                                :toolbar="{{ json_encode('undo redo | styleselect |  fontsizeselect forecolor bold italic underline | link unlink | bullist numlist table | code preview help') }}"
                                                :plugins="{{ json_encode('code preview autolink directionality fullscreen link hr insertdatetime advlist lists  wordcount textpattern help table') }}"
                                                :showmenu="{{ json_encode(false) }}">

@@ -2,6 +2,6 @@
 
 return [
     
-    'init' => true
+    'init' => false
     
 ];

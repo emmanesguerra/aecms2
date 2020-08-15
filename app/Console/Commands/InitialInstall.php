@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Artisan;
+use Core\Jobs\CompileAssets;
 
 class InitialInstall extends Command
 {
@@ -44,34 +45,27 @@ class InitialInstall extends Command
         {
             if(!Config::get('aecms.init'))
             {
-                $this->line('Running migrate');
+                $this->line('Running migrate...');
                 Artisan::call('migrate --path=/Core/database/migrations');
-                $this->info('Migration complete');
+                $this->info('Migration complete!');
                 
-                $this->line('Running seeder');
+                $this->line('Running seeder...');
                 Artisan::call('db:seed');
-                $this->info('Seeder complete');
+                $this->info('Seeder complete!');
+                
+                $this->line('Running compiler...');
+                CompileAssets::dispatch();
+                $this->info('Compiler complete!');
                 
                 $this->updateConfig();
                 
-                Log::info('Installation complete! Goodluck!');
+                Log::info('Installation complete! Goodluck!!');
                 $this->line('');
-                $this->info('Installation complete! Goodluck!');
+                $this->info('Installation complete! Goodluck!!');
                 exit;
-            } else {
-                
-                $this->line('Running migrate');
-                Artisan::call('migrate:rollback --path=/Core/database/migrations');
-                $this->info('Migration complete');
-                
-                $this->updateConfig2();
-                
-                Log::info('Installation complete! Goodluck!');
-                $this->line('');
-                $this->info('Installation complete! Goodluck!');
-            }
+            } 
             
-            Log::warning('Installation complete! Goodluck!');
+            Log::warning('Application already installed!');
             $this->info('Application already installed!');
             exit;
 
@@ -86,27 +80,6 @@ class InitialInstall extends Command
         $file = file_get_contents(config_path('aecms.php'));
 
         $str = preg_replace("/('init)+\W.(=>)+\s+(false)/", "'init' => true" ,$file);
-
-        file_put_contents(config_path('aecms.php'), $str);
-        
-        $this->line('Running config:clear');
-        Artisan::call('config:clear');
-        $this->info('Running config:clear DONE..');
-        
-        $this->line('Running cache:clear');
-        Artisan::call('cache:clear');
-        $this->info('Running cache:clear DONE..');
-        
-        $this->line('Running clear-compiled');
-        Artisan::call('clear-compiled');
-        $this->info('Running clear-compiled DONE..');
-    }
-    
-    private function updateConfig2()
-    {
-        $file = file_get_contents(config_path('aecms.php'));
-
-        $str = preg_replace("/('init)+\W.(=>)+\s+(true)/", "'init' => false" ,$file);
 
         file_put_contents(config_path('aecms.php'), $str);
         

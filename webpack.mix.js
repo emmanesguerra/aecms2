@@ -13,11 +13,6 @@ const mix = require('laravel-mix');
 
 /*
  * CORE Layout
- * 
  */
-//mix.js('core/Layouts/assets/js/app.js', 'public/js/admin')
-//    .sass('core/Layouts/assets/sass/app.scss', 'public/css/admin');
-
-
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('core/Layouts/assets/js/app.js', 'public/js/admin')
+    .sass('core/Layouts/assets/sass/app.scss', 'public/css/admin');

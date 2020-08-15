@@ -15,7 +15,7 @@ class InitialInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'init:aecmsframework';
+    protected $signature = 'init:aecms';
 
     /**
      * The console command description.

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Core\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -43,6 +43,8 @@ class InitialInstall extends Command
     {
         try
         {            
+                $this->line('Running from core');
+                
             if(!Config::get('aecms.init'))
             {
                 $this->line('Running migrate...');

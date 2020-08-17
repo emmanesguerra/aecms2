@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Http\Controller\Setting;
+namespace Core\Http\Controllers\Setting;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

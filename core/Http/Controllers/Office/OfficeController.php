@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Http\Controller\Office;
+namespace Core\Http\Controllers\Office;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

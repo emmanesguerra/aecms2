@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Http\Controller;
+namespace Core\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;

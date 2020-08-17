@@ -40,11 +40,14 @@
                 
                 @foreach(AEHelpers::getModules() as $modules)
                     @php
+                        $clean = strtolower(preg_replace('/\s*/', '', $modules->module_name));
                         $module = new $modules->admin_classnamespace;
                     @endphp
-                    @if($module->displayAdmin) 
-                    <li><a class="{{ (strpos(Route::currentRouteName(), $modules->route_root_name) === 0) ? 'active' : '' }}"  href="{{ route($modules->route_root_name .'.index') }}"><span>{{ $modules->module_name }}</span><span class='raq'>&raquo;</span></a></li>
-                    @endif
+                    @can($clean.'-list')
+                        @if($module->displayAdmin) 
+                        <li><a class="{{ (strpos(Route::currentRouteName(), $modules->route_root_name) === 0) ? 'active' : '' }}"  href="{{ route($modules->route_root_name .'.index') }}"><span>{{ $modules->module_name }}</span><span class='raq'>&raquo;</span></a></li>
+                        @endif
+                    @endcan
                 @endforeach
             </ul>
         </div>

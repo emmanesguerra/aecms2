@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Http\Controller\Module;
+namespace Core\Http\Controllers\Module;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -134,19 +134,17 @@ class ModuleController extends Controller
         $title = \Illuminate\Support\Str::title($string);
         $clean = preg_replace('/\s*/', '', $title);
         
+        Artisan::call("make:model", ['name' => 'Model/'.$clean, '-m' => true]);
+        
         Artisan::call("make:controller", ['name' => $clean.'/'.$clean.'Controller']);
         
-        Artisan::call("make:controller", ['name' => $clean.'/Admin/'.$clean.'Controller']);
+        Artisan::call("make:controller", ['name' => $clean.'/Admin/'.$clean.'Controller',  '--model' => 'Model/'.$clean]);
         
-        Artisan::call("make:model", ['name' => 'Model/'.$clean]);
+        Artisan::call("make:observer", ['name' => $clean.'Observer',  '--model' => 'Model/'.$clean]);
         
-        Artisan::call("make:observer", ['name' => $clean.'Observer']);
+        Artisan::call("make:request", ['name' => 'Post'.$clean.'Request']);
         
-        Artisan::call("make:request", ['name' => 'Store'.$clean.'Request']);
-        
-        Artisan::call("make:request", ['name' => 'Update'.$clean.'Request']);
-        
-        Artisan::call("make:migration", ['name' => $clean.'_table']);
+        Artisan::call("make:request", ['name' => 'Patch'.$clean.'Request']);
         
         return $clean;
     }
@@ -159,7 +157,7 @@ class ModuleController extends Controller
         Content::create([
             "name" => $title . " Main",
             "type" => "M",
-            "class_namespace" => "\App\Http\Controller\\" . $clean . "\\" . $clean . "Controller",
+            "class_namespace" => "\App\Http\Controllers\\" . $clean . "\\" . $clean . "Controller",
             "method_name" => 'main'
         ]);
         
@@ -167,7 +165,7 @@ class ModuleController extends Controller
             Content::create([
                 "name" => $title . " Panel",
                 "type" => "P",
-                "class_namespace" => "\App\Http\Controller\\" . $clean . "\\" . $clean . "Controller",
+                "class_namespace" => "\App\Http\Controllers\\" . $clean . "\\" . $clean . "Controller",
                 "method_name" => 'panel'
             ]);
         }

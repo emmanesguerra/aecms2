@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Http\Controller\Menu;
+namespace Core\Http\Controllers\Menu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -130,7 +130,7 @@ class MenuController extends Controller
                 Content::create([
                     'name' => $menu->title . ' Nav',
                     'type' => 'N',
-                    'class_namespace' => '\Core\Http\Controller\Menu\MenuController',
+                    'class_namespace' => '\Core\Http\Controllers\Menu\MenuController',
                     'method_name' => 'navi'
                 ]);
             }

@@ -17,7 +17,7 @@ class CreateContentsTable extends Migration
             $table->id();
             $table->string('name', 50);
             $table->text('html_template')->nullable();
-            $table->string('container_class', 50);
+            $table->string('container_class', 50)->nullable();
             $table->char('type', 1);
             $table->string('class_namespace', 250)->nullable();
             $table->string('method_name', 50)->nullable();

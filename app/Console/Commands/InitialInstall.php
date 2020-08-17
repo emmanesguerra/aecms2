@@ -42,7 +42,7 @@ class InitialInstall extends Command
     public function handle()
     {
         try
-        {
+        {            
             if(!Config::get('aecms.init'))
             {
                 $this->line('Running migrate...');
@@ -57,13 +57,30 @@ class InitialInstall extends Command
                 CompileAssets::dispatch();
                 $this->info('Compiler complete!');
                 
+                if (!file_exists(public_path('js/templates'))) {
+                    mkdir(public_path('js/templates'));
+                    $this->info('JS templates folder created');
+                }
+                if (!file_exists(public_path('css/templates'))) {
+                    mkdir(public_path('css/templates'));
+                    $this->info('CSS templates folder created');
+                }
+                if (!file_exists(database_path('migrations'))) {
+                    mkdir(database_path('migrations'));
+                    $this->info('database migration folder created');
+                }
+                if (!file_exists(resource_path('views/templates'))) {
+                    mkdir(resource_path('views/templates'));
+                    $this->info('Resource templates folder created');
+                }
+                
                 $this->updateConfig();
                 
                 Log::info('Installation complete! Goodluck!!');
                 $this->line('');
                 $this->info('Installation complete! Goodluck!!');
                 exit;
-            } 
+            }
             
             Log::warning('Application already installed!');
             $this->info('Application already installed!');

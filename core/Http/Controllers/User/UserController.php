@@ -107,7 +107,9 @@ class UserController extends Controller
             return redirect()->route('admin.users.index')->with('status-success', 'User created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 
@@ -175,7 +177,9 @@ class UserController extends Controller
                             ->with('status-success','User updated successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 

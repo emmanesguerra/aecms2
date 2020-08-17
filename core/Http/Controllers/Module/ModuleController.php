@@ -108,7 +108,9 @@ class ModuleController extends Controller
             return redirect()->route('admin.modules.index')->with('status-success', 'Module created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
     
@@ -222,7 +224,9 @@ class ModuleController extends Controller
             
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 

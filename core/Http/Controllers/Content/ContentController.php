@@ -184,7 +184,9 @@ class ContentController extends Controller
             
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 

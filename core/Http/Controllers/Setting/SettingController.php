@@ -69,7 +69,9 @@ class SettingController extends Controller
             return redirect()->back()->with('status-success', 'System settings updated!');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 

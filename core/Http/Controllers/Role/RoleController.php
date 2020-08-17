@@ -103,7 +103,9 @@ class RoleController extends Controller
                             ->with('status-success','Role created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
     /**
@@ -170,7 +172,9 @@ class RoleController extends Controller
                             ->with('status-success','Role updated successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
     /**

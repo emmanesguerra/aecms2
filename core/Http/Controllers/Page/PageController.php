@@ -145,7 +145,9 @@ class PageController extends Controller
             return redirect()->route('admin.pages.index')->with('status-success', 'Page created successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 
@@ -232,7 +234,9 @@ class PageController extends Controller
             return redirect()->route('admin.pages.index')->with('status-success', 'Page updated successfully');
         } catch (\Exception $ex) {
             DB::rollback();
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 

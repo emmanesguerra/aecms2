@@ -106,7 +106,9 @@ class OfficeController extends Controller
             return redirect()->route('admin.offices.index')->with('status-success', 'Office Location created successfully');
             
         } catch (\Exception $ex) {
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 
@@ -159,7 +161,9 @@ class OfficeController extends Controller
             return redirect()->route('admin.offices.index')->with('status-success','Office Location updated successfully');
             
         } catch (\Exception $ex) {
-            return redirect()->back()->with('status-failed', $ex->getMessage());
+            return redirect()->back()
+                    ->with('status-failed', $ex->getMessage())
+                    ->withInput($request->input());
         }
     }
 

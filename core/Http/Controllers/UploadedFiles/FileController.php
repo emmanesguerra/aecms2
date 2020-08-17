@@ -75,6 +75,7 @@ class FileController extends Controller
             $attachments = $request->file('attachments');
             foreach($attachments as $file){                
                 $newname = time() . '_' . strtolower($file->getClientOriginalName());
+                Storage::disk($this->disk)->put($newname, file_get_contents($file));
                 
                 if((extension_loaded('imagick')) && (in_array($file->extension(), ['jpg', 'jpeg', 'png', 'gif']))) {
                     

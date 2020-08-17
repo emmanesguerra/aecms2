@@ -8,7 +8,7 @@
             <div class="card-header">
                 Create New Office Location
                 @can('modules-list')
-                <a href="{{ route('admin.modules.index') }}" class="float-right">Back</a>
+                <a href="{{ route('admin.offices.index') }}" class="float-right">Back</a>
                 @endcan
             </div> 
             

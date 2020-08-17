@@ -1,5 +1,19 @@
 @extends('admin.app')
 
+@section('right-panel')
+<section class="right-panel">
+    <div class="card mb-3">
+        <div class="card-header">Office Location Menu</div>
+        <div class="card-body">
+            <ul class="admin-menu">
+                @can('offices-list')
+                <li><a href="{{ route('admin.offices.index') }}"><span class='raq'>&raquo;</span><span>Office Lists</span></a></li>
+                @endcan
+            </ul>
+        </div>
+    </div>
+</section>
+@endsection
 
 @section('module-content')
 
@@ -8,9 +22,6 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Trashed Office Locations
-                @can('offices-list')
-                <a href="{{ route('admin.offices.index') }}" class="float-right">Back</a>
-                @endcan
             </div>
             
             <div class="card-body">

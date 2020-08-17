@@ -1,5 +1,30 @@
 @extends('admin.app')
 
+@section('right-panel')
+<section class="right-panel">
+    <div class="card mb-3">
+        <div class="card-header">Office Location Menu</div>
+        <div class="card-body">
+            <ul class="admin-menu">
+                @can('offices-create')
+                <li><a href="{{ route('admin.offices.create') }}"><span class='raq'>&raquo;</span><span>Add Record</span></a></li>
+                @endcan
+            </ul>
+        </div>
+    </div>
+    @can('offices-trash')
+    <div class="card mb-3">
+        <div class="card-header">Deleted Records</div>
+        <div class="card-body">
+            <ul class="admin-menu">
+                <li><a href="{{ route('admin.offices.trashed') }}"><span class='raq'>&raquo;</span><span>Check Lists</span></a></li>
+            </ul>
+        </div>
+    </div>
+    @endcan
+</section>
+@endsection
+
 
 @section('module-content')
 
@@ -8,14 +33,6 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Office Location Management
-                
-                
-                @can('offices-trash')
-                <a href="{{ route('admin.offices.trashed') }}" class="float-right"> Check Trashed Records</a>
-                @endcan
-                @can('offices-create')
-                <a href="{{ route('admin.offices.create') }}" class="float-right mr-3"> Create New Office Location</a>
-                @endcan
             </div>
             
             <div class="card-body">

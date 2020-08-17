@@ -27,6 +27,7 @@ nav {
     margin-right: 1%;
 }
 
+.right-panel,
 .left-panel {
     
     float: left;
@@ -83,6 +84,17 @@ nav {
                 }
             }
         }
+    }
+}
+
+.right-panel {
+    float: right !important;
+    margin-left: 15px  !important;
+    margin-right: 0  !important;
+    
+    .raq {
+        float: left !important;
+        padding-right: 5px;
     }
 }
 

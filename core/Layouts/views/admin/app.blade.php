@@ -75,6 +75,8 @@
                 <div class="container">
 
                     @include('admin.layouts.common.leftsidebar')
+                    
+                    @yield('right-panel')
 
                     @yield('module-content')
                 </div>

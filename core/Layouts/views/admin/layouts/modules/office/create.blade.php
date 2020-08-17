@@ -33,7 +33,7 @@
                 
                 {!! Form::open(array('route' => 'admin.offices.store','method'=>'POST')) !!}
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-10">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="col-sm-12">
                             <div class="form-row" id="addressrow">
                                 <tinymce-form  :value="{{ (Session::getOldInput('address')) ? json_encode(Session::getOldInput('address')): json_encode("") }}"

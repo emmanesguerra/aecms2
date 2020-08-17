@@ -32,7 +32,7 @@ class UpdateContentRequest extends FormRequest
         return [
             'id' => 'required',
             'name' => 'required',
-            'html_template' => 'required'
+            'html_template' => 'required|max:65535'
         ];
     }
     /**

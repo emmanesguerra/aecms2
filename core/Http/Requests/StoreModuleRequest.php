@@ -31,6 +31,7 @@ class StoreModuleRequest extends FormRequest
     {
         return [
             'module_name' => 'required|max:50|unique:modules,module_name',
+            'description' => 'max:150',
             'route_root_name' => 'required|max:50'
         ];
     }

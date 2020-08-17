@@ -31,15 +31,15 @@ class UpdateOfficeRequest extends FormRequest
     {
         return [
             'id' => 'required',
-            'address' => 'required',
+            'address' => 'required|max:65535',
             'contact_person' => 'max:191',
             'telephone' => 'max:100',
             'mobile' => 'max:100',
             'email' => 'max:100',
-            'marker' => 'required',
+            'marker' => 'required|max:65535',
             'm_width' => 'required',
             'm_height' => 'required',
-            'store_hours' => '',
+            'store_hours' => 'max:65535',
         ];
     }
 }

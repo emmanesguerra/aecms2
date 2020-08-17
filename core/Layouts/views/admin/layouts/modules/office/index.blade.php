@@ -7,7 +7,7 @@
         <div class="card-body">
             <ul class="admin-menu">
                 @can('offices-create')
-                <li><a href="{{ route('admin.offices.create') }}"><span class='raq'>&raquo;</span><span>Add Record</span></a></li>
+                <li><a href="{{ route('admin.offices.create') }}"><span class='raq'>&raquo;</span><span>Create New Record</span></a></li>
                 @endcan
             </ul>
         </div>
@@ -17,7 +17,7 @@
         <div class="card-header">Deleted Records</div>
         <div class="card-body">
             <ul class="admin-menu">
-                <li><a href="{{ route('admin.offices.trashed') }}"><span class='raq'>&raquo;</span><span>Check Lists</span></a></li>
+                <li><a href="{{ route('admin.offices.trashed') }}"><span class='raq'>&raquo;</span><span>View Lists</span></a></li>
             </ul>
         </div>
     </div>

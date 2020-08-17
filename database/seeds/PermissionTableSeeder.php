@@ -32,6 +32,12 @@ class PermissionTableSeeder extends Seeder
                'roles-edit',
                'roles-delete',
            ],
+           'permissions' => [
+               'permissions-list',
+               'permissions-create',
+               'permissions-edit',
+               'permissions-delete',
+           ],
            'modules' => [
                'modules-list',
                'modules-create',

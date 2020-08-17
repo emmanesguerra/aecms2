@@ -7,7 +7,10 @@
         <div class="card-body">
             <ul class="admin-menu">
                 @can('offices-list')
-                <li><a href="{{ route('admin.offices.index') }}"><span class='raq'>&raquo;</span><span>Office Lists</span></a></li>
+                <li><a href="{{ route('admin.offices.index') }}"><span class='raq'>&raquo;</span><span>View Lists</span></a></li>
+                @endcan
+                @can('offices-create')
+                <li><a href="{{ route('admin.offices.create') }}"><span class='raq'>&raquo;</span><span>Create New Record</span></a></li>
                 @endcan
             </ul>
         </div>

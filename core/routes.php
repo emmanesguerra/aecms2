@@ -34,6 +34,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
         Route::resource('roles','\Core\Http\Controllers\Role\RoleController');
         
+        Route::prefix('permissions')->group(function () {
+            Route::get('/data', '\Core\Http\Controllers\Permission\PermissionController@data')->name('permissions.data');
+        });
+        Route::resource('permissions','\Core\Http\Controllers\Permission\PermissionController');
+        
         Route::prefix('modules')->group(function () {
             Route::get('/data', '\Core\Http\Controllers\Module\ModuleController@data')->name('modules.data');
         });

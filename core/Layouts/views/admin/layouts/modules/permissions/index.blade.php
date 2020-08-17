@@ -7,6 +7,9 @@
         <div class="card-header">Role Menu</div>
         <div class="card-body">
             <ul class="admin-menu">
+                @can('roles-list')
+                <li><a href="{{ route('admin.roles.index') }}"><span class='raq'>&raquo;</span><span>View Lists</span></a></li>
+                @endcan
                 @can('roles-create')
                 <li><a href="{{ route('admin.roles.create') }}"><span class='raq'>&raquo;</span><span>Create New Record</span></a></li>
                 @endcan
@@ -17,10 +20,7 @@
         <div class="card-header">Permissions Menu</div>
         <div class="card-body">
             <ul class="admin-menu">
-                @can('roles-list')
-                <li><a href="{{ route('admin.permissions.index') }}"><span class='raq'>&raquo;</span><span>View Lists</span></a></li>
-                @endcan
-                @can('roles-create')
+                @can('permissions-create')
                 <li><a href="{{ route('admin.permissions.create') }}"><span class='raq'>&raquo;</span><span>Create New Record</span></a></li>
                 @endcan
             </ul>
@@ -35,7 +35,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Role Management
+                Permission Management
             </div>
             
             <div class="card-body">
@@ -50,6 +50,8 @@
                         <tr>
                             <th width="5%">ID</th>
                             <th width="15%">Name</th>
+                            <th width="15%">Module</th>
+                            <th width="15%">Guard Name</th>
                             <th width="5%">Action</th>
                         </tr>
                     </thead>
@@ -59,6 +61,8 @@
                         <tr>
                             <th width="5%">ID</th>
                             <th width="15%">Name</th>
+                            <th width="15%">Module</th>
+                            <th width="15%">Guard Name</th>
                             <th width="5%"></th>
                         </tr>
                     </tfoot>
@@ -80,24 +84,23 @@
 <script>
     $(document).ready(function () {        
         $('#rolelists').DataTable({
-            "ajax": "{{ route('admin.roles.data') }}",
+            "ajax": "{{ route('admin.permissions.data') }}",
             "columns": [
                 {"data": "id"},
                 {"data": "name"},
+                {"data": "module"},
+                {"data": "guard_name"},
                 {
                     width: "5%",
                     bSearchable: false,
                     bSortable: false,
                     mRender: function (data, type, full) {
                         var straction = "";
-                        @can('roles-edit')
-                            straction += "<a href='{{ route('admin.roles.index') }}/" + full.id + "/edit'>Edit</a> | ";
+                        @can('permissions-edit')
+                            straction += "<a href='{{ route('admin.permissions.index') }}/" + full.id + "/edit'>Edit</a>";
                         @endcan
-                        @can('roles-list')
-                            straction +=  "<a href='{{ route('admin.roles.index') }}/" + full.id + "'>View Details</a>";
-                        @endcan
-                        @can('roles-delete')
-                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("admin.roles.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
+                        @can('permissions-delete')
+                            straction += ' | <a href="#" onclick="showdeletemodal(' + full.id + ',\'' + full.name + '\', \'{{ route("admin.permissions.index") }}\/' + full.id + '\')" class="text-danger">Delete</a>';
                         @endcan
                         return straction;
                     }

@@ -63,4 +63,75 @@ class FileManager
                             $constraint->aspectRatio();
                         })->encode('jpg', $quality);
     }
+    
+    public static function GetCSSRelativePath($styles) 
+    {
+        foreach($styles as $key => $css) {
+            $styles[$key] = asset('css/templates/' . $css);
+        }
+        return $styles;
+    }
+    
+    public static function GetJSRelativePath($styles) 
+    {
+        foreach($styles as $key => $css) {
+            $styles[$key] = asset('js/templates/' . $css);
+        }
+        return $styles;
+    }
+    
+    public static function GetImageRelativePath($images, $disk, $year = null, $month = null, $key = null) 
+    {
+        $img = [];
+        $icon = [];
+        $medium = [];
+        $large = [];
+        $path = "";
+        if($year) {
+            $path .= $year."/";
+        }
+        if($month) {
+            $path .= $month."/";
+        }
+        if($key) {
+            $path .= $key."/";
+        }
+        
+        foreach($images as $key => $image) {
+            $img[] = (object) [
+                'title' => $image,
+                'value' => asset("storage/$disk/$path" . $image)
+            ];
+            if(Storage::disk($disk)->exists($path.'icon/'.$image)) {
+                $icon[] =  (object) [
+                    'title' => 'icon-' . $image,
+                    'value' => asset("storage/$disk/$path"."icon/" . $image)
+                ];
+            }
+            if(Storage::disk($disk)->exists($path.'medium/'.$image)) {
+                $medium[] = (object) [
+                    'title' => 'medium-' . $image,
+                    'value' => asset("storage/$disk/$path"."medium/" . $image)
+                ];
+            }
+            if(Storage::disk($disk)->exists($path.'large/'.$image)) {
+                $large[] = (object) [
+                    'title' => 'large-' . $image,
+                    'value' => asset("storage/$disk/$path"."large/" . $image)
+                ];
+            }
+        }
+        
+        if(!empty($icon)) {
+            $img = array_merge($icon, $img);
+        }
+        if(!empty($medium)) {
+            $img = array_merge($medium, $img);
+        }
+        if(!empty($large)) {
+            $img = array_merge($large, $img);
+        }
+        
+        return $img;
+    }
 }

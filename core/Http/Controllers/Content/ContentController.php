@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Core\Model\Content;
 use Core\Library\DataTables;
+use Core\Library\FileManager;
 use Core\Http\Requests\UpdateContentRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -100,65 +101,13 @@ class ContentController extends Controller
     {
         $disk = 'adminuploads';
         $allFiles = Storage::disk($disk)->files();
-        $images = $this->getImageRelativePath($allFiles, $disk);
+        $images = FileManager::getImageRelativePath($allFiles, $disk);
         
         $content = Content::find($id);
         $page = $content->pages->first();
-        $styles = $this->getRelativePath($page->css);
+        $styles = FileManager::getCSSRelativePath($page->css);
         
         return view('admin.layouts.modules.content.edit')->with(compact('content', 'styles', 'images'));
-    }
-    
-    private function getRelativePath($styles) 
-    {
-        foreach($styles as $key => $css) {
-            $styles[$key] = asset('css/templates/' . $css);
-        }
-        return $styles;
-    }
-    
-    private function getImageRelativePath($images, $disk) 
-    {
-        $img = [];
-        $icon = [];
-        $medium = [];
-        $large = [];
-        foreach($images as $key => $image) {
-            $img[] = (object) [
-                'title' => $image,
-                'value' => asset("storage/$disk/" . $image)
-            ];
-            if(Storage::disk($disk)->exists('icon/'.$image)) {
-                $icon[] =  (object) [
-                    'title' => 'icon-' . $image,
-                    'value' => asset("storage/$disk/icon/" . $image)
-                ];
-            }
-            if(Storage::disk($disk)->exists('medium/'.$image)) {
-                $medium[] = (object) [
-                    'title' => 'medium-' . $image,
-                    'value' => asset("storage/$disk/medium/" . $image)
-                ];
-            }
-            if(Storage::disk($disk)->exists('large/'.$image)) {
-                $large[] = (object) [
-                    'title' => 'large-' . $image,
-                    'value' => asset("storage/$disk/large/" . $image)
-                ];
-            }
-        }
-        
-        if(!empty($icon)) {
-            $img = array_merge($icon, $img);
-        }
-        if(!empty($medium)) {
-            $img = array_merge($medium, $img);
-        }
-        if(!empty($large)) {
-            $img = array_merge($large, $img);
-        }
-        
-        return $img;
     }
 
     /**

@@ -27,7 +27,8 @@
                     image_advtab: true,
                     menubar: this.showmenu,
                     body_class: this.bodyclass,
-                    image_list: this.imagelists
+                    image_list: this.imagelists,
+                    relative_urls : false
                 };
             }
         }

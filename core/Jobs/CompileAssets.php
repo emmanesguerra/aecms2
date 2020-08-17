@@ -44,8 +44,8 @@ class CompileAssets implements ShouldQueue
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');";
+mix.js('resources/js/app.js', 'public/js/templates')
+    .sass('resources/sass/app.scss', 'public/css/templates');";
 
         file_put_contents('webpack.mix.js', $str);
     }

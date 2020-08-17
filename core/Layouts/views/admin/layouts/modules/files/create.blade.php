@@ -55,14 +55,14 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('jquery-fancyfileuploader-master/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
+<link href="{{ asset('plugins/jquery-fancyfileuploader-master/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
 @endsection
 
 @section('javascript')
-<script src="{{ asset('jquery-fancyfileuploader-master/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
-<script src="{{ asset('jquery-fancyfileuploader-master/fancy-file-uploader/jquery.fileupload.js') }}"></script>
-<script src="{{ asset('jquery-fancyfileuploader-master/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
-<script src="{{ asset('jquery-fancyfileuploader-master/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
+<script src="{{ asset('plugins/jquery-fancyfileuploader-master/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
+<script src="{{ asset('plugins/jquery-fancyfileuploader-master/fancy-file-uploader/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('plugins/jquery-fancyfileuploader-master/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
+<script src="{{ asset('plugins/jquery-fancyfileuploader-master/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
 <script>
 $(document).ready(function () {
     $('#attachement').FancyFileUpload({

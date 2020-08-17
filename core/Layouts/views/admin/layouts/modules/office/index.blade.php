@@ -61,11 +61,11 @@
 @endsection
 
 @section('styles')
-<link href="{{ asset('DataTables-Bootstrap/datatables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('plugins/DataTables-Bootstrap/datatables.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('javascript')
-<script src="{{ asset('DataTables-Bootstrap/datatables.min.js') }}"></script>
+<script src="{{ asset('plugins/DataTables-Bootstrap/datatables.min.js') }}"></script>
 <script>
     $(document).ready(function () {
         

@@ -101,5 +101,5 @@
 @endsection
 
 @section('javascripttop')
-<script src="{{ asset('tinymce_5.4.1/js/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('plugins/tinymce_5.4.1/js/tinymce/tinymce.min.js') }}"></script>
 @endsection

@@ -10,7 +10,7 @@
         <tbody  v-if="isCreated">
             <tr v-for="str, key in loopdata">
                 <td>{{key}}</td>
-                <td>{{ displaystr(rloopdata.key) }}</td>
+                <td>{{ displaystr(rloopdata(key)) }}</td>
                 <td>{{ displaystr(str) }}</td>
             </tr>   
         </tbody>
@@ -18,7 +18,7 @@
             <tr v-for="str, key in loopdata">
                 <td>{{key}}</td>
                 <td>{{ displaystr(str) }}</td>
-                <td>{{ rloopdata(key) }}</td>
+                <td>{{ displaystr(rloopdata(key)) }}</td>
             </tr>    
         </tbody>
     </table>
@@ -50,8 +50,8 @@
         },
         methods: {
             displaystr(str) {
-                return _.truncate(str, {
-                            'length': 24,
+                return _.truncate(this.striptags(str), {
+                            'length': 45,
                             'separator': /,? +/
                         });
             },
@@ -62,6 +62,14 @@
                 }
                 return "";
             },
+            striptags (str) {
+                if ((str===null) || (str==='') || typeof(str) === 'undefined')
+                    return '';
+                else
+                str = str.toString();
+            
+                return str.replace(/<[^>]*>/g, '');
+            }
         }
         
     }

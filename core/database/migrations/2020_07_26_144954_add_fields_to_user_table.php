@@ -18,6 +18,7 @@ class AddFieldsToUserTable extends Migration
             $table->string('firstname', 50)->after('id');
             $table->string('middlename', 50)->after('firstname')->nullable();
             $table->string('lastname', 50)->after('middlename')->nullable();
+            $table->timestamp('password_chaged_at')->after('password')->nullable();
             $table->unsignedBigInteger('created_by')->after('remember_token');
             $table->unsignedBigInteger('updated_by')->nullable()->after('created_by');
         });

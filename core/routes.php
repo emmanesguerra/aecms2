@@ -7,8 +7,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', '\Core\Http\Controllers\AELoginController@showLoginForm')->name('login');
     Route::post('/login', '\Core\Http\Controllers\AELoginController@login')->name('login.post');
     
+    Route::get('/changepswd', '\Core\Http\Controllers\AEHomeController@showChangePswdForm')->name('changepswd');
+    Route::post('/changepswd', '\Core\Http\Controllers\AEHomeController@changepswd')->name('changepswd.post');
     
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth', 'ischanged'])->group(function () {
         Route::get('/dashboard', '\Core\Http\Controllers\AEHomeController@index')->name('dashboard');
         Route::post('/logout', '\Core\Http\Controllers\AELoginController@logout')->name('logout');
 

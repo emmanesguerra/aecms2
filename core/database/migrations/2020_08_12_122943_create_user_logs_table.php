@@ -22,7 +22,7 @@ class CreateUserLogsTable extends Migration
         });
         
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('current_ul_id')->after('password')->nullable();
+            $table->unsignedBigInteger('current_ul_id')->before('remember_token')->nullable();
         });
     }
 

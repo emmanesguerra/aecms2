@@ -6,9 +6,9 @@
         <div class="card-header">Dashboard</div>
 
         <div class="card-body">
-            @if (session('status'))
+            @if (session('status-success'))
             <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                {{ session('status-success') }}
             </div>
             @endif
 
@@ -65,7 +65,7 @@
 </section>
 
 <div class="modal fade in" id="audit-display-modal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Updates</h4>

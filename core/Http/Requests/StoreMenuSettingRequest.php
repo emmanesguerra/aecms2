@@ -35,6 +35,7 @@ class StoreMenuSettingRequest extends FormRequest
             'blck_end' => 'required|max:10', 
             'list_dflt' => 'required|max:150', 
             'list_chld' => 'required|max:150', 
+            'list_dflt_active' => 'required|max:150',
             'list_end' => 'required|max:10', 
             'anch_dflt' => 'required|max:150', 
             'anch_chld' => 'required|max:150',

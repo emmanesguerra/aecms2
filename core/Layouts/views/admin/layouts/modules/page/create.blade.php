@@ -57,7 +57,7 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-12">
                                     <label class="@error('description') text-danger @enderror" for="description">Description * <small>(as meta description)</small></label>
-                                    <textarea class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" id="description" rows="5" required>{{ old('description') }}</textarea>
+                                    <textarea maxlength="150" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" id="description" rows="5" required>{{ old('description') }}</textarea>
                                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>

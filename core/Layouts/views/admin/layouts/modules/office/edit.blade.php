@@ -81,7 +81,7 @@
                             <div class="form-row">
                                 <div  class="form-group  col-sm-12">
                                     <label class="@error('marker') text-danger @enderror" for="marker">Google Map Pin *</label>
-                                    <textarea class="form-control ae-input-field @error('marker') is-invalid @enderror " name="marker" id="marker" rows="5"/>{{ old('marker', $office->marker) }}</textarea>
+                                    <textarea maxlength="65535" class="form-control ae-input-field @error('marker') is-invalid @enderror " name="marker" id="marker" rows="5"/>{{ old('marker', $office->marker) }}</textarea>
                                     @error('marker') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                  </div>
                             </div>

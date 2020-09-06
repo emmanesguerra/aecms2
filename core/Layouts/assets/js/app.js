@@ -19,8 +19,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('treeselect-form', require('./components/Treeselect/SingleDimensionalArray.vue').default); 
-Vue.component('treeselect-form-multi', require('./components/Treeselect/MultiDimensionalArray.vue').default); 
+Vue.component('treeselect-form', require('./components/Treeselect/SingleDimensionalArray.vue').default);
+Vue.component('treeselect-form-multi', require('./components/Treeselect/MultiDimensionalArray.vue').default);
 Vue.component('tinymce-form', require('./components/TinyMce/Form.vue').default);
 
 Vue.component('page-panel-form', require('./components/Page/Panel.vue').default);
@@ -38,4 +38,25 @@ window.app = new Vue({
     data: {
         panels: []
     },
+});
+
+var ctextareas = $('textarea.ae-input-field');
+//console.log(textareas.attr('maxlength'));
+
+$.each($('textarea.ae-input-field'), function(index, el) {
+    var maxlength = $(el).attr('maxlength');
+    
+    if(maxlength > 0) {
+        var parentfield = $(el).parent();
+        parentfield.css('position', 'relative');
+        var span = $('<span>',{class: "charcount", html: "<strong>0</strong>/"+maxlength+" CHARACTERS"} );
+        parentfield.append(span);
+    
+        $(el).on('keyup', function () {
+            var charlength = $(this).val().length;
+            var parentfield = $(this).parent();
+            var children = parentfield.find('.charcount strong');
+            children.html(charlength);
+        });
+    }
 });

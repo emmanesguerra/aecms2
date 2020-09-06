@@ -32,7 +32,8 @@ class StoreSettingsRequest extends FormRequest
         return [
             'domain_name' => 'required|max:191',
             'website_name' => 'required|max:191',
-            'owner' => 'max:191'
+            'owner' => 'max:191',
+            'default_mailing_addr' => 'required|max:255'
         ];
     }
 }

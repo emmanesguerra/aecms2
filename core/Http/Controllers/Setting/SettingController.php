@@ -30,6 +30,7 @@ class SettingController extends Controller
             'domain_name' => SystemConfigLibrary::retrieve('domain_name'),
             'website_name' => SystemConfigLibrary::retrieve('website_name'),
             'owner' => SystemConfigLibrary::retrieve('owner'),
+            'default_mailing_addr' => SystemConfigLibrary::retrieve('default_mailing_addr'),
             'email_title' => SystemConfigLibrary::retrieve('email_title'),
             'email_reciever' => SystemConfigLibrary::retrieve('email_reciever'),
             'email_cc' => SystemConfigLibrary::retrieve('email_cc'),

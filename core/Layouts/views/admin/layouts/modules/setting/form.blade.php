@@ -66,6 +66,13 @@
                                         @error('owner') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-12">
+                                        <label class="@error('default_mailing_addr') text-danger @enderror" for="default_mailing_addr">Default Mailing Address *</label>
+                                        <input maxlength="100" type="text" class="form-control ae-input-field @error('default_mailing_addr') is-invalid @enderror " name="default_mailing_addr" value="{{ old('default_mailing_addr', $data['model']['default_mailing_addr']) }}" id="default_mailing_addr" placeholder="Owner's name" />
+                                        @error('default_mailing_addr') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
                                 
                                 <div  class="form-group row mt-5">
                                     <h4>Other Settings</h4>

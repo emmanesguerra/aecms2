@@ -144,9 +144,9 @@ class ModuleController extends Controller
         
         Artisan::call("make:observer", ['name' => $clean.'Observer',  '--model' => 'Model/'.$clean]);
         
-        Artisan::call("make:request", ['name' => 'Post'.$clean.'Request']);
+        Artisan::call("make:request", ['name' => $clean.'/StoreRequest']);
         
-        Artisan::call("make:request", ['name' => 'Patch'.$clean.'Request']);
+        Artisan::call("make:request", ['name' => $clean.'/UpdateRequest']);
         
         return $clean;
     }

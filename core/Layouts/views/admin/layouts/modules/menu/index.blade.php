@@ -24,7 +24,8 @@
                     <thead>
                         <tr>
                             <th width="5%">ID</th>
-                            <th>Title</th>
+                            <th width="50%" >Title</th>
+                            <th width="5%">Type</th>
                             <th width="30%">Action</th>
                         </tr>
                     </thead>
@@ -62,7 +63,7 @@
             if(!isNew) {
                 var options = "<option value='0'>Select a page</option>";
                 @foreach ($pages as $page)
-                    options += "<option value='{{$page->id}}'>{{$page->name}}</option>";
+                    options += "<option value='{{$page['id']}}'>{{$page['name']}}</option>";
                 @endforeach
                 strinput = '<select id="pageid-'+counter+'" class="form-control form-control-sm">'+options+'</select>';
             }
@@ -74,6 +75,49 @@
                         '+strtitle + strinput +'\n\
                         <div id="error-'+counter+'" class="col-sm-12 text-danger my-1"></div>\n\
                     </div>',
+                'type': '',
+                'button': '<button onclick="saveRow('+counter+', '+parentid+')" type="button" class="btn btn-sm btn-primary">Save</button>\n\
+                 <button onclick="removeRow(this)" type="button" data-role="help" class="btn btn-sm btn-default">Cancel</button>'}).draw();
+
+            counter++;
+            iscreating = true;
+            
+
+            //move added row to desired index (here the row we clicked on)
+            var index = menudtable.row( $(element).closest('tr') ).index()+1,
+                rowCount = menudtable.data().length-1,
+                insertedRow = menudtable.row(rowCount).data(),
+                tempRow;
+
+            for (var i=rowCount;i>index;i--) {
+                tempRow = menudtable.row(i-1).data();
+                menudtable.row(i).data(tempRow);
+                menudtable.row(i-1).data(insertedRow);
+            }     
+            //refresh the current page
+            menudtable.page(currentPage).draw(true);
+        }
+    }
+    
+    function createNewBlankRow(parentid, lvl, isNew, element) {
+        if(!iscreating) {
+            var currentPage = menudtable.page();
+                        
+            var strtitle = "";
+            for (var i=0;i<lvl;i++) {
+                strtitle += "<i class='fas fa-long-arrow-alt-right'> </i> &nbsp;&nbsp;&nbsp;&nbsp;";
+            }
+            
+            var strinput = '<input maxlength="46" id="ntitle-'+counter+'" type="text" class="form-control form-control-sm" placeholder="Blank Title"/>';
+            
+                        
+            menudtable.row.add({
+                'id': "",
+                'title': '<div class="form-inline">\n\
+                        '+strtitle + strinput +'\n\
+                        <div id="error-'+counter+'" class="col-sm-12 text-danger my-1"></div>\n\
+                    </div>',
+                'type': '',
                 'button': '<button onclick="saveRow('+counter+', '+parentid+')" type="button" class="btn btn-sm btn-primary">Save</button>\n\
                  <button onclick="removeRow(this)" type="button" data-role="help" class="btn btn-sm btn-default">Cancel</button>'}).draw();
 
@@ -128,6 +172,21 @@
                     }
                 },
                 {
+                    render: function (data, type, full) { 
+                        switch(full.type) {
+                            case "P":
+                                return "Page";
+                                break;
+                            case "B":
+                                return "<span style='color: #ccc;'>Blank</span>";
+                                break;
+                            default:
+                                return "Nav Panel"
+                                break;
+                        }
+                    }
+                },
+                {
                     width: "30%",
                     bSearchable: false,
                     bSortable: false,
@@ -138,6 +197,7 @@
                             var str = "";
                             @can('menus-create')
                             str += "<span onclick='createNewRow("+full.id+","+full.lvl +" , false, this)' class='text-primary' style='cursor:pointer'>Add Sub Menu</span>";
+                            str += " | <span onclick='createNewBlankRow("+full.id+","+full.lvl +" , false, this)' class='text-primary' style='cursor:pointer'>Add Blank Link</span>";
                             @endcan
                             @can('menus-delete')
                             if((full.lft + 1) == full.rgt) {
@@ -145,7 +205,7 @@
                             }
                             @endcan
                             @can('menus-edit')
-                            if(!full.page_id)
+                            if(!full.page_id && full.type == 'N')
                             {
                                 str += " | <a href='{{ route('admin.menus.settings') }}/" + full.id + "'>Manage Settings</a> ";
                             }

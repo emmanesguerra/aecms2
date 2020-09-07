@@ -56,7 +56,8 @@ class MenuController extends Controller
                     lft,
                     rgt,
                     id,
-                    lvl")
+                    lvl,
+                    type")
             )->orderBy('lft');
         
         $modelcnt = $filteredmodel->count();
@@ -99,17 +100,30 @@ class MenuController extends Controller
             $page = Page::find($request->pageId);
             $title = ($page) ? $page->name: $request->nTitle;
             
+            if($page) {
+                $type = 'P';
+            } else {
+                if($lvl == 1) {
+                    $type = 'N';
+                } else {
+                    $type = 'B';
+                }
+            }
+            
             $menu = Menu::create([
                 'title' => $title,
                 'parent_id' => $request->parentId,
                 'page_id' => ($request->has('pageId')) ? $request->pageId: null,
                 'lft' => $left,
                 'rgt' => $right,
-                'lvl' => $lvl
+                'lvl' => $lvl,
+                'type' => $type
             ]);
             
-            $this->createContentPanel($menu);
-            $this->createMenuSetting($menu);
+            if($menu->type == 'N') {
+                $this->createContentPanel($menu);
+                $this->createMenuSetting($menu);
+            }
             
             DB::commit();
             
@@ -125,37 +139,27 @@ class MenuController extends Controller
     
     private function createContentPanel($menu)
     {
-        if($menu) {
-            if(is_null($menu->page_id)) {
-                Content::create([
-                    'name' => $menu->title . ' Nav',
-                    'type' => 'N',
-                    'class_namespace' => '\Core\Http\Controllers\Menu\MenuController',
-                    'method_name' => 'navi'
-                ]);
-            }
-        } 
+        Content::create([
+            'name' => $menu->title . ' Nav',
+            'type' => 'N',
+            'class_namespace' => '\Core\Http\Controllers\Menu\MenuController',
+            'method_name' => 'navi'
+        ]);
         
         return;
     }
     
     private function createMenuSetting($menu)
     {
-        if($menu) {
-            if(is_null($menu->page_id)) {
-        
-                MenuSetting::create(['menu_id' => $menu->id, 
-                    'blck_start' => '', 
-                    'blck_end' => '', 
-                    'list_dflt' => '', 
-                    'list_dflt_active' => '', 
-                    'list_chld' => '', 
-                    'list_end' => '', 
-                    'anch_dflt' => '', 
-                    'anch_chld' => '']);
-                
-            }
-        }
+        MenuSetting::create(['menu_id' => $menu->id, 
+            'blck_start' => '', 
+            'blck_end' => '', 
+            'list_dflt' => '', 
+            'list_dflt_active' => '', 
+            'list_chld' => '', 
+            'list_end' => '', 
+            'anch_dflt' => '', 
+            'anch_chld' => '']);
         
         return;
     }
@@ -297,8 +301,12 @@ class MenuController extends Controller
                 if($isChildren) {
                     $html .= $settings->sublist_dflt;
                 } else {
-                    if(in_array(trim($menu->page->url, '/'), $explodedPath)) {
-                        $html .= $settings->list_dflt_active;
+                    if( $menu->type == 'P' ) {
+                        if(in_array(trim($menu->page->url, '/'), $explodedPath)) {
+                            $html .= $settings->list_dflt_active;
+                        } else {
+                            $html .= $settings->list_dflt;
+                        }
                     } else {
                         $html .= $settings->list_dflt;
                     }
@@ -307,7 +315,7 @@ class MenuController extends Controller
             }
             
             $page = $menu->page;
-            $html .= view('layouts.navigation.anchor')->with(compact('anchor', 'page'));
+            $html .= view('layouts.navigation.anchor')->with(compact('anchor', 'page', 'menu'));
             
             if(count($menu->submenu) > 0) {
                 $html .= $this->generateNaviForChildren($menu->submenu, $settings, true);

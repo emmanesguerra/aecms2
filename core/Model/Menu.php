@@ -14,7 +14,7 @@ class Menu extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'title', 'parent_id', 'page_id', 'lft', 'rgt', 'lvl'
+        'title', 'parent_id', 'page_id', 'lft', 'rgt', 'lvl', 'type'
     ];
     
     protected $auditExclude = [

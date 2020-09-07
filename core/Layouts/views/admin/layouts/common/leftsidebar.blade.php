@@ -21,7 +21,7 @@
                 <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.pages') === 0) ? 'active' : '' }}" href="{{ route('admin.pages.index') }}"><span>Pages</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
                 @can('menus-list')
-                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.menus') === 0) ? 'active' : '' }}" href="{{ route('admin.menus.index') }}"><span>Menus</span><span class='raq'>&raquo;</span></a></li>
+                <li><a class="{{ (strpos(Route::currentRouteName(), 'admin.menus') === 0) ? 'active' : '' }}" href="{{ route('admin.menus.index') }}"><span>Navigations</span><span class='raq'>&raquo;</span></a></li>
                 @endcan
             </ul>
         </div>

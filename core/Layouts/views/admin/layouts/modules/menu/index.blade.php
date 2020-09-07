@@ -7,7 +7,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Menus Management
+                Navigation Management
                 @can('menus-create')
                 <span id="addnew" class="float-right text-primary" style="cursor: pointer"> Create Menu</span>
                 @endcan

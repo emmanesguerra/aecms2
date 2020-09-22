@@ -14,5 +14,5 @@ const mix = require('laravel-mix');
 /*
  * CORE Layout
  */
-mix.js('core/Layouts/assets/js/app.js', 'public/js/admin')
+mix.js('core/Layouts/assets/js/app.js', 'public/js/admin').sourceMaps()
     .sass('core/Layouts/assets/sass/app.scss', 'public/css/admin');

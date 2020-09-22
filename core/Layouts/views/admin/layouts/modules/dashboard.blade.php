@@ -13,6 +13,10 @@
             @endif
 
             <div class="row">
+                <div class="col-12 mb-5">
+                    <h4>Page Visit Counter <small>({{ $daycount }} days)</small></h4>
+                    <line-chart :chartlabel="{{ json_encode($label) }}" :chartdata="{{ json_encode($data) }}"/>
+                </div>
                 <div class="col-sm-7">
                     <h4>Change Logs</h4>
                     <table id="changelogs" class="datatable table table-striped table-bordered small">

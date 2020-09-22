@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Core\Model\DailyCounter;
 
 class AEHomeController extends Controller
 {
@@ -26,7 +27,19 @@ class AEHomeController extends Controller
      */
     public function index()
     {
-        return view('admin.layouts.modules.dashboard');
+        $daycount = 30;
+        
+        $dc = DailyCounter::orderBy('date', 'desc')->take($daycount)->get();
+        $sorted = $dc->sort();
+        $label = collect([]);
+        $data = collect([]);
+        $sorted->values()->map(function($d) use(&$label, &$data) {
+            $label->push(date("M d", strtotime($d['date'])));
+            $data->push($d['ctr']);
+            return;
+        });
+        
+        return view('admin.layouts.modules.dashboard')->with(compact('label', 'data', 'daycount'));
     }
     
     public function showChangePswdForm()

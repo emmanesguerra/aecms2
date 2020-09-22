@@ -3,6 +3,7 @@
 namespace Core\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 use Core\Model\Page;
@@ -16,11 +17,11 @@ class AEController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($params = null)
-    {
+    {   
         $dc = DailyCounter::firstOrNew(['date' => date('Y-m-d')]);
         $dc->ctr = ($dc->ctr + 1);
         $dc->save();
-
+            
         $url = array_filter(explode('/', \Request::getPathInfo()));
         
         $page = Page::where('url', '/'. reset($url))->first();
@@ -46,6 +47,8 @@ class AEController extends Controller
             $this->GenerateFooter($page);
             
         } else {
+            Log::info('Missing Pages/Files');
+            Log::info($url);
             abort(404);
         }
     }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Core\Model\Page;
+use Core\Model\DailyCounter;
 
 class AEController extends Controller
 {
@@ -16,6 +17,10 @@ class AEController extends Controller
      */
     public function index($params = null)
     {
+        $dc = DailyCounter::firstOrNew(['date' => date('Y-m-d')]);
+        $dc->ctr = ($dc->ctr + 1);
+        $dc->save();
+
         $url = array_filter(explode('/', \Request::getPathInfo()));
         
         $page = Page::where('url', '/'. reset($url))->first();

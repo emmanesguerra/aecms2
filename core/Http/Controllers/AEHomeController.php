@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Core\Model\DailyCounter;
+use Core\Library\Modules\SystemConfigLibrary;
 
 class AEHomeController extends Controller
 {
@@ -27,7 +28,10 @@ class AEHomeController extends Controller
      */
     public function index()
     {
-        $daycount = 30;
+        $daycount = SystemConfigLibrary::retrieve('dc_days');
+        if(!$daycount) {
+            $daycount = 20;
+        }
         
         $dc = DailyCounter::orderBy('date', 'desc')->take($daycount)->get();
         $sorted = $dc->sort();

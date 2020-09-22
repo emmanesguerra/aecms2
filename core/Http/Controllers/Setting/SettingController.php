@@ -36,7 +36,8 @@ class SettingController extends Controller
             'email_cc' => SystemConfigLibrary::retrieve('email_cc'),
             'email_bcc' => SystemConfigLibrary::retrieve('email_bcc'),
             'office_css' => SystemConfigLibrary::retrieve('office_css'),
-            'office_block_class' => SystemConfigLibrary::retrieve('office_block_class')
+            'office_block_class' => SystemConfigLibrary::retrieve('office_block_class'),
+            'dc_days' => SystemConfigLibrary::retrieve('dc_days'),
         ];
         
         return view('admin.layouts.modules.setting.form')->with(compact('data'));

@@ -91,6 +91,13 @@
                                         @error('office_block_class') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div  class="form-group  col-sm-12">
+                                        <label class="@error('dc_days') text-danger @enderror" for="dc_days">Daily Counter displayed days</label>
+                                        <input maxlength="100" type="text" class="form-control ae-input-field @error('dc_days') is-invalid @enderror " name="dc_days" value="{{ old('dc_days', $data['model']['dc_days']) }}" id="dc_days"/>
+                                        @error('dc_days') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">

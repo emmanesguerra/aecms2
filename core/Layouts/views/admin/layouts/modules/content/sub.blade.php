@@ -7,7 +7,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Main Contents
+                Sub Contents
             </div>
             
             <div class="card-body">
@@ -60,7 +60,7 @@
             "ajax": {
                 "url": "{{ route('admin.contents.data') }}",
                 "data": {
-                    main: true
+                    main: false
                 }
             },
             "columns": [

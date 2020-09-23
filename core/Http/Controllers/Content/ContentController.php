@@ -27,6 +27,16 @@ class ContentController extends Controller
     {
         return view('admin.layouts.modules.content.index');
     }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sub()
+    {
+        return view('admin.layouts.modules.content.sub');
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,11 +49,16 @@ class ContentController extends Controller
         $tablecols = [
             0 => ['id'],
             1 => ['name'],
-            2 => ['type'],
-            4 => ['updated_at'],
+            3 => ['updated_at'],
         ];
         
-        $filteredmodel = Content::with('pages')->select(['id', 'name', 'type', 'updated_at'])->where(['class_namespace' => null, 'method_name' => null]);
+        $filteredmodel = Content::with('pages')->select(['id', 'name', 'updated_at'])->where(['class_namespace' => null, 'method_name' => null]);
+        
+        if($request->main == 'true') {
+            $filteredmodel->where('type', 'M');
+        } else {
+            $filteredmodel->where('type', 'P');
+        }
         
         $modelcnt = $filteredmodel->count();
         
@@ -105,7 +120,12 @@ class ContentController extends Controller
         
         $content = Content::find($id);
         $page = $content->pages->first();
-        $styles = FileManager::getCSSRelativePath($page->css);
+        if($page) {
+            $styles = FileManager::getCSSRelativePath($page->css);
+        } else {
+            $styles = [];
+        }
+        
         
         return view('admin.layouts.modules.content.edit')->with(compact('content', 'styles', 'images'));
     }
@@ -126,9 +146,11 @@ class ContentController extends Controller
 
             $content = Content::find($id);
             $content->update($input);
+            
+            $redirect = ($content->type == 'M') ? 'admin.contents.index': 'admin.contents.sub';
 
             DB::commit();
-            return redirect()->route('admin.contents.index')
+            return redirect()->route($redirect)
                             ->with('status-success','Content updated successfully');
             
         } catch (\Exception $ex) {

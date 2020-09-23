@@ -70,6 +70,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         Route::prefix('contents')->group(function () {
             Route::get('/data', '\Core\Http\Controllers\Content\ContentController@data')->name('contents.data');
+            Route::get('/sub', '\Core\Http\Controllers\Content\ContentController@sub')->name('contents.sub');
         });
         Route::resource('contents','\Core\Http\Controllers\Content\ContentController');
         

@@ -29,7 +29,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Url</th>
+                            <th>Slug</th>
                             <th width="30%">Description</th>
                             <th>Template</th>
                             <th width="10%" class="text-nowrap">Date Updated</th>
@@ -42,7 +42,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Url</th>
+                            <th>Slug</th>
                             <th width="30%">Description</th>
                             <th>Template</th>
                             <th width="10%" class="text-nowrap">Date Updated</th>
@@ -76,8 +76,8 @@
             "columns": [
                 {"data": "id"},
                 {"data": "name"},
-                {"data": "url"},
-                {"data": "description"},
+                {"data": "slug"},
+                {"data": "meta_description"},
                 {"data": "template"},
                 {"data": "updated_at"},
                 {

@@ -24,23 +24,37 @@ class AEController extends Controller
             
         $url = array_filter(explode('/', \Request::getPathInfo()));
         
-        $page = Page::where('url', '/'. reset($url))->first();
+        $page = Page::where('slug', '/'. reset($url))->first();
         
         if($page) {
             
             $data = [];
             
+            $metaTitle = $page->meta_title;
+            $metaDesc = $page->meta_description;
+            
             foreach($page->contents as $panel) {
                 if($panel->html_template) {
                     $data[$panel->pivot->tags] = $panel->html_template;
+                
+                    if($panel->type == 'M') {
+                        $metaTitle = $panel->meta_title;
+                        $metaDesc = $panel->meta_description;
+                    }
                 } else {
                     $module = new $panel->class_namespace;
                     $fnname = $panel->method_name;
-                    $data[$panel->pivot->tags] = $module->$fnname($panel, $url);
+                    $res = $module->$fnname($panel, $url);
+                    $data[$panel->pivot->tags] = $res['content'];
+                
+                    if($panel->type == 'M') {
+                        $metaTitle = $res['meta_title'];
+                        $metaDesc = $res['meta_description'];
+                    }
                 }
             }
         
-            $this->GenerateHeader($page);
+            $this->GenerateHeader($page, $metaTitle, $metaDesc);
             
             echo view('templates.' . str_replace('.blade.php', "", $page->template), $data);
         
@@ -53,9 +67,9 @@ class AEController extends Controller
         }
     }
     
-    private function GenerateHeader(Page $page)
+    private function GenerateHeader(Page $page, $metaTitle, $metaDesc)
     {
-        echo view('layouts.header')->with(compact('page'));
+        echo view('layouts.header')->with(compact('page', 'metaTitle', 'metaDesc'));
     }
     
     private function GenerateFooter(Page $page)

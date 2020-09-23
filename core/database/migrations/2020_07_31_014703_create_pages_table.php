@@ -15,10 +15,10 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('url', '100')->unique();
-            $table->string('title', '50');
+            $table->string('slug', '100')->unique();
+            $table->string('meta_title', '55');
+            $table->string('meta_description', '1500');
             $table->string('name', '50');
-            $table->string('description', '255');
             $table->text('javascripts');
             $table->text('css');
             $table->string('template', '50');
@@ -32,6 +32,7 @@ class CreatePagesTable extends Migration
             $table->unsignedBigInteger('page_id');
             $table->unsignedBigInteger('content_id');
             $table->string('tags');
+            $table->unsignedTinyInteger('sort');
             $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
             $table->primary(['page_id', 'content_id', 'tags'], 'page_has_contents_page_id_content_id_primary');
         });

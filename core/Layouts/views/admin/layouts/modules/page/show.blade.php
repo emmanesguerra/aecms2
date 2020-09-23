@@ -6,7 +6,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Displaying details of {{ $page->title }}
+                Displaying details of {{ $page->meta_title }}
                 @can('pages-list')
                 <a href="{{ url()->previous() }}" class="float-right">Back</a>
                 @endcan
@@ -28,16 +28,16 @@
                         </dl>
                         <dl class="row">
                             <dt class="col-sm-2">Title:</dt>
-                            <dd class="col-sm-9">{!! $page->title !!}</dd>
+                            <dd class="col-sm-9">{!! $page->meta_title !!}</dd>
                         </dl>
                         <dl class="row">
                             <dt class="col-sm-2">Url Slug:</dt>
-                            <dd class="col-sm-9">{{ $page->url }}</dd>
+                            <dd class="col-sm-9">{{ $page->slug }}</dd>
                         </dl>
-                        @if($page->description)
+                        @if($page->meta_description)
                         <dl class="row">
                             <dt class="col-sm-2">Description:</dt>
-                            <dd class="col-sm-9">{{ $page->description }}</dd>
+                            <dd class="col-sm-9">{{ $page->meta_description }}</dd>
                         </dl>
                         @endif
                         <dl class="row">

@@ -44,21 +44,21 @@
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-7">
-                                    <label class="@error('title') text-danger @enderror" for="title">Title * <small>(as page/meta title)</small></label>
-                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('title') is-invalid @enderror " name="title" value="{{ old('title') }}" id="title" placeholder="Title" required/>
-                                    @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    <label class="@error('meta_title') text-danger @enderror" for="meta_title">Title * <small>(as page/meta meta_title)</small></label>
+                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('meta_title') is-invalid @enderror " name="meta_title" value="{{ old('meta_title') }}" id="meta_title" placeholder="Title" required/>
+                                    @error('meta_title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                                 <div  class="form-group  col-sm-5">
-                                    <label class="@error('url') text-danger @enderror" for="url">Url Slug *</label>
-                                    <input minlength="1" maxlength="100" type="text" class="form-control ae-input-field @error('url') is-invalid @enderror " name="url" value="{{ old('url') }}" id="url" placeholder="Slug" required/>
-                                    @error('url') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    <label class="@error('slug') text-danger @enderror" for="slug">Url Slug *</label>
+                                    <input minlength="1" maxlength="100" type="text" class="form-control ae-input-field @error('slug') is-invalid @enderror " name="slug" value="{{ old('slug') }}" id="slug" placeholder="Slug" required/>
+                                    @error('slug') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div  class="form-group  col-sm-12">
-                                    <label class="@error('description') text-danger @enderror" for="description">Description * <small>(as meta description)</small></label>
-                                    <textarea maxlength="150" class="form-control ae-input-field @error('description') is-invalid @enderror " name="description" id="description" rows="5" required>{{ old('description') }}</textarea>
-                                    @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                    <label class="@error('meta_description') text-danger @enderror" for="meta_description">Description * <small>(as meta meta_description)</small></label>
+                                    <textarea maxlength="150" class="form-control ae-input-field @error('meta_description') is-invalid @enderror " name="meta_description" id="meta_description" rows="5" required>{{ old('meta_description') }}</textarea>
+                                    @error('meta_description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                                 </div>
                             </div>
                             <div class="form-row">

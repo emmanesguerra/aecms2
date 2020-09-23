@@ -44,6 +44,26 @@
                                 </div>
                             </div>
                         </div>
+                        @if($content->type == 'M')
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div  class="form-group  col-sm-5">
+                                    <label class="@error('meta_title') text-danger @enderror" for="meta_title">Page Title *</label>
+                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('meta_title') is-invalid @enderror " name="meta_title" value="{{ old('meta_title', $content->meta_title) }}" id="meta_title" placeholder="Page Title" required/>
+                                    @error('meta_title') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div  class="form-group  col-sm-5">
+                                    <label class="@error('meta_description') text-danger @enderror" for="meta_description">Page Description *</label>
+                                    <input minlength="4" maxlength="50" type="text" class="form-control ae-input-field @error('meta_description') is-invalid @enderror " name="meta_description" value="{{ old('meta_description', $content->meta_description) }}" id="meta_description" placeholder="Page Title" required/>
+                                    @error('meta_description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <div class="col-sm-12">
                             <div class="form-row">
                             <tinymce-form  :value="{{ (Session::getOldInput('html_template')) ? json_encode(Session::getOldInput('html_template')): json_encode($content->html_template) }}"

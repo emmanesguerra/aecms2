@@ -31,9 +31,9 @@ class StorePageRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'title' => 'required',
-            'url' => 'required|unique:pages,url',
-            'description' => 'required|max:255',
+            'slug' => 'required|unique:pages,slug',
+            'meta_title' => 'required',
+            'meta_description' => 'required|max:255',
             'template' => 'required',
             'contents.*.name' => 'sometimes|required',
             'contents.*.container_class' => 'sometimes|required',

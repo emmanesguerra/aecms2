@@ -42,8 +42,8 @@ class PageController extends Controller
         $tablecols = [
             0 => ['id'],
             1 => ['name'],
-            2 => ['url'],
-            3 => ['description'],
+            2 => ['slug'],
+            3 => ['meta_description'],
             4 => ['template'],
             5 => ['updated_at'],
         ];
@@ -56,8 +56,8 @@ class PageController extends Controller
         }
         $filteredmodel->select(DB::raw("id, 
                     name, 
-                    url,
-                    description, 
+                    slug,
+                    meta_description, 
                     template,
                     updated_at")
             );
@@ -121,10 +121,17 @@ class PageController extends Controller
         {
             DB::beginTransaction();
             
-            $page = Page::create($request->only('name', 'title', 'url', 'description', 'javascripts', 'css', 'template'));
+            $page = Page::create($request->only('name', 
+                    'meta_title', 
+                    'slug', 
+                    'meta_description', 
+                    'javascripts', 
+                    'css', 
+                    'template'));
             
             if($page) {
                 if($request->has('contents')) {
+                    $ctr = 1;
                     foreach($request->contents as $tags => $data) {
                         if(isset($data['selected_panel'])) {
                             $contentId = $data['selected_panel'];
@@ -133,11 +140,14 @@ class PageController extends Controller
                                 'name' => $data['name'], 
                                 'html_template' => $data['html_template'], 
                                 'container_class' => $data['classname'], 
-                                'type' => ($tags == 'Main') ? 'M': 'P']);
+                                'type' => ($tags == 'Main') ? 'M': 'P', 
+                                'meta_title' => ($tags == 'Main') ? $page->meta_title: null, 
+                                'meta_description' => ($tags == 'Main') ? $page->meta_description: null]);
                             $contentId = $content->id;
                         }
                         
-                        $page->contents()->attach($contentId, ['tags' => $tags]);
+                        $page->contents()->attach($contentId, ['tags' => $tags, 'sort' => $ctr]);
+                        $ctr++;
                     }
                 }
             }
@@ -175,7 +185,8 @@ class PageController extends Controller
     {
         $page = Page::find($id);
         
-        $panels = $page->contents->map(function ($panel) {
+        $contents = $page->contents()->orderBy('page_has_contents.sort', 'asc')->get();
+        $panels = $contents->map(function ($panel) {
             return [
                      'panel' => $panel->pivot->tags,
                      'name' => $panel->id,
@@ -209,11 +220,17 @@ class PageController extends Controller
             DB::beginTransaction();
             
             $page = Page::find($id);
-            $page->update($request->only('name', 'title', 'description', 'javascripts', 'css', 'template'));
+            $page->update($request->only('name', 
+                    'meta_title', 
+                    'meta_description', 
+                    'javascripts', 
+                    'css', 
+                    'template'));
             
             if($page) {
                 if($request->has('contents')) {
                     $page->contents()->detach();
+                    $ctr = 1;
                     foreach($request->contents as $tags => $data) {
                         if(isset($data['selected_panel'])) {
                             $contentId = $data['selected_panel'];
@@ -222,11 +239,14 @@ class PageController extends Controller
                                 'name' => $data['name'], 
                                 'html_template' => $data['html_template'], 
                                 'container_class' => $data['classname'], 
-                                'type' => ($tags == 'Main') ? 'M': 'P']);
+                                'type' => ($tags == 'Main') ? 'M': 'P', 
+                                'meta_title' => ($tags == 'Main') ? $page->meta_title: null, 
+                                'meta_description' => ($tags == 'Main') ? $page->meta_description: null]);
                             $contentId = $content->id;
                         }
                         
-                        $page->contents()->attach($contentId, ['tags' => $tags]);
+                        $page->contents()->attach($contentId, ['tags' => $tags, 'sort' => $ctr]);
+                        $ctr++;
                     }
                 }
             }

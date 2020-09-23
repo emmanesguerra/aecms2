@@ -32,8 +32,8 @@ class UpdatePageRequest extends FormRequest
         return [
             'id' => 'required',
             'name' => 'required',
-            'title' => 'required',
-            'description' => 'required|max:255',
+            'meta_title' => 'required',
+            'meta_description' => 'required|max:255',
             'template' => 'required',
             'contents.*.name' => 'required_without:contents.*.selected_panel',
             'contents.*.container_class' => 'sometimes|required',

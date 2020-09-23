@@ -74,7 +74,7 @@
                     render: function (data, type, full) {
                         var page = '';
                         _.each(full.pages, function(data) {
-                            page += (page == '') ? data.title: ', ' + data.title;
+                            page += (page == '') ? data.name: ', ' + data.name;
                         });
                         return page;
                     }
